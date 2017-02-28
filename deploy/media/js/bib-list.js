@@ -2779,7 +2779,8 @@ var bibtexify = (function($) {
         var chartIdSelector = "#" + this.$pubTable[0].id + "pubchart";
         var pubHeight = $(chartIdSelector).height()/max - 2;
         var styleStr = chartIdSelector +" .year { width: " +
-                        (100.0/yearstats.length) + "%; }" +
+//                        (100.0/yearstats.length) + "%; }" +
+                        "100px; }" +
                         chartIdSelector + " .pub { height: " + pubHeight + "px; }";
         var legendTypes = [];
         var stats2html = function(item) {
