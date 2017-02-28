@@ -70,3 +70,5 @@
 !!python/unicode 'media/scss/_stacked.scss': []
 !!python/unicode 'media/scss/_variables.scss': []
 !!python/unicode 'media/scss/font-awesome.scss': []
+!!python/unicode 'media/sidabras.bib': []
+!!python/unicode 'publications.html': [base.j2, fullwidth.j2, analytics.j2, topbar.j2]

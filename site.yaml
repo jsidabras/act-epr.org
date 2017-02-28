@@ -17,18 +17,12 @@ context:
         google_analytics_id: UA-91383149-1 
         home_url: index.html
         menu:
-            - title: Starter Template
+            - title: Home 
               type: page
               url: index.html
-            - title: Off Canvas
+            - title: Publications 
               type: page
-              url: offcanvas.html
-            - title: Jumbotron
-              type: page
-              url: jumbo.html
-            - title: Blog
-              type: node
-              url: blog
+              url: publications.html
         sidebar:
             - title: One
               url: one.html

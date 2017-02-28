@@ -1,0 +1,25 @@
+---
+title: Home 
+subtitle:  
+description: Landing page for Act-EPR 
+---
+
+{% extends "fullwidth.j2" %}
+
+{% block container %}
+<br />
+<div class="container"><!-- Container -->
+    <div class="row">
+    <div class="col-md-10 footer-widget"><!-- Text Widget -->
+    <table id="pubTable" class="display"></table>
+    </div>
+    <script type="text/javascript" src="/media/js/bib-list.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+                bibtexify("/media/sidabras.bib", "pubTable", {'tweet': ''});
+                    });
+    </script>
+        <br />
+    </div>
+</div>
+{% endblock container %}
