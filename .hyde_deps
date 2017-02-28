@@ -1,3 +1,4 @@
+!!python/unicode '.hyde_deps': []
 !!python/unicode 'blog/atom.xml': [atom.j2]
 !!python/unicode 'blog/excerpts.xml': [atom.j2]
 !!python/unicode 'blog/tags/angry.html': [base.j2, tagged_posts.j2, analytics.j2,
@@ -16,6 +17,7 @@
 !!python/unicode 'media/css/offcanvas.css': []
 !!python/unicode 'media/css/style.css': []
 !!python/unicode 'media/fonts/fontawesome-webfont.svg': []
+!!python/unicode 'media/index.html': []
 !!python/unicode 'media/js/libs/README.md': []
 !!python/unicode 'media/js/libs/affix.js': []
 !!python/unicode 'media/js/libs/alert.js': []
