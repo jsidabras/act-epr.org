@@ -9,6 +9,7 @@
 !!python/unicode 'blog/tags/thoughts.html': [base.j2, tagged_posts.j2, analytics.j2,
   topbar.j2]
 !!python/unicode 'index.html': [base.j2, fullwidth.j2, analytics.j2, topbar.j2]
+!!python/unicode 'media/css/bib-publication-list.css': []
 !!python/unicode 'media/css/bootstrap.css': []
 !!python/unicode 'media/css/bootstrap.min.css': []
 !!python/unicode 'media/css/docs.css': []
