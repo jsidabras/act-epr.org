@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block starthead %}{% endblock starthead %}
+    <meta charset="{{ resource.meta.charset }}">
+    <title>{% block title %}{{ resource.meta.title }}{% endblock %} | {{ site_title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ resource.meta.description }}">
+    <meta name="author" content="{{ resource.meta.author }}">
+
+    {# Le HTML5 shim, for IE6-8 support of HTML elements #}
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    {% block basecss %}
+    <link href="./media/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./media/css/style.css" rel="stylesheet">
+    <link href="{{ media_url('css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ media_url('css/offcanvas.css') }}" rel="stylesheet">
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Nunito:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700' rel='stylesheet' type='text/css'>
+    <link href='./media/css/font-awesome.css' rel="stylesheet" type="text/css">
+    <!-- fonts -->
+    {% endblock basecss %}
+    {% block css %}{% endblock %}
+
+
+
+    {% block favicons %}
+    {# Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references #}
+    <link rel="shortcut icon" href="{{ media_url('img/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ media_url('img/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ media_url('img/appleimgim-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ media_url('img/apple-touch-icon-114x114.png') }}">
+    {% endblock favicons %}
+
+    {% block headjs %}
+    {% endblock headjs %}
+
+    {% block endhead %}{% endblock endhead %}
+    {% block analytics %}
+    {% include "analytics.j2" %}
+    {% endblock analytics %}
+  </head>
+
+  <body class="{{ resource.meta.id if resource.meta.id else resource.slug }}">
+
+    {% block body %}
+    <!-- start main wrapper -->
+        <div id="header"><!-- start main header -->
+            <div class="top-line">&nbsp;</div>
+                <div class="top"><!-- top -->
+                    <div class="container">
+                        <div class="media-top-right">
+                            <ul class="media-top clearfix">
+                                <li class="item"><a href="https://www.linkedin.com/in/jason-sidabras-596466b6" target="blank"    ><i class="fa fa-linkedin"></i></a></li>
+                                <li class="item"><a href="https://scholar.google.com/citations?user=pbXGcaoAAAAJ" target="bla    nk"><i class="fa fa-google"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div><!-- top -->
+                <div class="container"><!-- container -->
+                    <div class="row">
+                        <div class="col-md-4"><!-- logo -->
+                            <a href="index.html" title="Job Board" rel="home">
+                                <img class="main-logo" src="./media/img/placeholder.png" alt="Act-EPR" />
+                            </a>
+                        </div><!-- logo -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 main-nav"><!-- Main Navigation -->
+                            <a id="touch-menu" class="mobile-menu" href="#"><i class="fa fa-bars fa-2x"></i></a>
+                            <nav>
+                                <ul class="menu">
+                                    <li><a href="index.html">HOME</a></li>
+                                    <li><a  href="#">WORK PACKAGES</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">WP1 Micro-Helix Resonators</a></li>
+                                            <li><a href="#">WP2 Technology Advancements</a></li>
+                                            <li><a href="#">WP3 Biological Research</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a  href="#">PUBLICATIONS</a></li>
+                                    <li><a  href="#">ABOUT</a></li>
+                                </ul>
+                            </nav>
+                        </div><!-- Main Navigation -->
+                        <div class="clearfix"></div>
+                    </div>
+                </div><!-- container -->
+            </div><!-- end main header -->
+            <br />
+            <div class="container"><!-- Container -->
+                <div class="row">
+                    <div class="container" id="top">
+      {% block container %}
+
+      {% endblock container %}
+            
+                </div> <!-- /row-->
+            </div> <!-- /container -->
+
+    {% endblock body %}
+
+    <div id="footer"><!-- Footer -->
+        <div class="container"><!-- Container -->
+            <div class="row">
+                <div class="col-md-5 footer-widget"><!-- Text Widget -->
+                    <h6 class="widget-title">Acknowledgements</h6>
+                        <div class="textwidget">
+                            <a href="http://ec.europa.eu/research/participants/portal/desktop/en/home.html">
+                              <img src="./media/img/logo_EUh2020_horizontal.png" />
+                            </a>
+                            <br /><br />
+                            <a href="https://cec.mpg.de/home/">
+                              <img src="./media/img/csm_mpi-logo.png" />
+                            </a>
+                        </div>
+
+                </div><!-- Text Widget -->
+
+                <div class="col-md-3 footer-widget"><!-- Recent Tweet Widget -->
+                    <h6 class="widget-title">Links of Interest</h6>
+                    <div class="recent-twitt">
+                    <p>
+                        Link #1
+                    </p>
+                    <p>
+                        Link #2
+                    </p>
+                </div>
+            </div><!-- Recent Tweet Widget -->
+
+            <div class="col-md-3 footer-widget"><!-- News Leter Widget -->
+                <h6 class="widget-title">Singn For news Letter</h6>
+                <div class="textwidget">
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus</p>
+                </div>
+            </div><!-- News Leter Widget -->
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="footer-credits"><!-- Footer credits -->
+            2017 &copy; Jason W. Sidabras
+        </div><!-- Footer credits -->
+    </div><!-- Container -->
+</div><!-- Footer -->
+
+</div><!-- end main wrapper -->
+    {% block js %}
+    {# Javascript at the bottom for fast page loading #}
+    {% block jquery %}
+    {# Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ media_url('js/libs/jquery-1.10.1.min.js') }}">\x3C/script>')</script>
+    {% endblock jquery %}
+
+    {% block bootstrap_scripts %}
+    <script src="{{ media_url('js/libs/bootstrap.min.js') }}"></script>
+    {% endblock bootstrap_scripts %}
+
+    {% block scripts %}
+    {% endblock scripts %}
+
+
+    <!--[if lt IE 7 ]>
+      <script src="{{ media_url('js/libs/dd_belatedpng.js') }}"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+    {% endblock js %}
+  </body>
+</html>
