@@ -21,6 +21,7 @@
 !!python/unicode 'media/css/style.css': []
 !!python/unicode 'media/fonts/academicons.svg': []
 !!python/unicode 'media/fonts/fontawesome-webfont.svg': []
+!!python/unicode 'media/img/.hyde_deps': []
 !!python/unicode 'media/index.html': []
 !!python/unicode 'media/js/libs/README.md': []
 !!python/unicode 'media/js/libs/affix.js': []
