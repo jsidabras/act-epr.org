@@ -129,7 +129,7 @@ hr{
 
 .top-line{
 	width:100%;
-	border-top:3px solid #8cddcd;
+	border-top:3px solid #50c1b6;
 	height:0;
 }
 .top{
@@ -163,7 +163,7 @@ hr{
 	color:#c0c2c2;
 }
 .media-top .item a:hover{
-	color:#1abc9c;
+	color:#50c1b6;
 }
 .media-top-2 .btn-blue,.media-top-2 .btn-green{
 	margin-top:5px;
@@ -245,7 +245,7 @@ nav{
 	left: 0px;
 	background: #ffffff;
 	border-bottom:3px solid #dcdcdc;
-	border-top:1px solid #1abc9c;
+	border-top:1px solid  #50c1b6;
 }
 
 .menu ul li {
@@ -292,7 +292,7 @@ nav{
 }
 
 .mobile-menu:hover{
-	color:#565656;
+	color: #50c1b6;
 	text-decoration:none;
 }
 

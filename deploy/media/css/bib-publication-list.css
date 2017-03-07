@@ -6,12 +6,12 @@ span.undefined { color:red; }
 .yearlabel { position: absolute; bottom: -20px; text-align: center; width: 100%; font-size: smaller;}
 .pub { border: 1px solid white; background-color: #eee; }
 .inproceedings { background-color: #ccf; }
-.article { background-color: #beb; }
+.article { background-color: #50c1b6; }
 .inbook { background-color: #eaa; }
 .phdthesis { background-color: #999; }
 .patent { background-color: #999; }
 .conference { background-color: #6CF; }
-.proceedings { background-color: #f6c; }
+.proceedings { background-color: #f0ce42; }
 .unpublished { background-color: #eae; }
 .mastersthesis { background-color: #eea; }
 .techreport { background-color: #b77; }
