@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://julien.danjou.info">
+  <title>
+    jd:/dev/blog  </title>
+    <link href="https://julien.danjou.info/blog/index.xml" rel="self" />
+  
+    <link href="https://julien.danjou.info/blog/"/>
+  
+    
+  <updated>2017-03-11T15:55:33Z</updated>
+
+  <id>https://julien.danjou.info/blog/index.xml</id>
+
+      <entry>
+    <title type="html">Python never gives up: the tenacity library</title>
+    <author><name>Jason W. Sidabras</name></author>
+    <link href="https://julien.danjou.info/blog/2017/python-tenacity"/>
+    <link rel="alternate" type="text/html" href="https://julien.danjou.info/blog/2017/python-tenacity"/>
+    <updated>2017-03-02T15:01:00Z</updated>
+    <published>2017-03-02T15:01:00Z</published>
+    <id>https://julien.danjou.info/blog/2017/python-tenacity</id>
+        <category term="Python" label="Python" />
+    
+    <content type="html">
+                  &lt;p&gt;A couple of years ago,
+I
+&lt;a href=&#34;https://julien.danjou.info/blog/2015/python-retrying&#34;&gt;wrote about the Python &lt;em&gt;retrying&lt;/em&gt; library&lt;/a&gt;.
+This library was designed to retry the execution of a task when a failure
+occurred.&lt;/p&gt;
+&lt;p&gt;I started to spread usage of this library in various projects, such
+as &lt;a href=&#34;http://gnocchi.xyz&#34;&gt;Gnocchi&lt;/a&gt;, these last years. Unfortunately, it started
+to get very hard to contribute and send patches to the upstream &lt;em&gt;retrying&lt;/em&gt;
+project. I spent several months trying to work with the original author. But
+after a while, I had to come to the conclusion that I would be unable to fix
+bugs and enhance it at the pace I would like to. Therefore, I had to take a
+difficult decision and decided to fork the library.&lt;/p&gt;
+&lt;h1&gt;Here comes &lt;em&gt;tenacity&lt;/em&gt;&lt;/h1&gt;
+&lt;p&gt;I picked a new name and rewrote parts of the API of &lt;em&gt;retrying&lt;/em&gt; that were not
+working correctly or were too complicated. I also fixed bugs with the help of
+Joshua, and named this new library &lt;em&gt;tenacity&lt;/em&gt;. It works in the same manner as
+&lt;em&gt;retrying&lt;/em&gt; does, except that it is written in a more functional way and offers
+some nifty new features.&lt;/p&gt;
+&lt;h1&gt;Basic usage&lt;/h1&gt;
+&lt;p&gt;The basic usage is to use it as a decorator:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tenacity&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;nd&#34;&gt;@tenacity.retry&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;do_something_and_retry_on_any_exception&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;&lt;br /&gt;    &lt;span class=&#34;k&#34;&gt;pass&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+This will make the function &lt;code&gt;do_something_and_retry_on_any_exception&lt;/code&gt; be called
+over and over again until it stops raising an exception. It would have been
+hard to design anything simpler. Obviously, this is a pretty rare case, as one
+usually wants to e.g. wait some time between retries. For that, &lt;em&gt;tenacity&lt;/em&gt;
+offers a large panel of waiting methods:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tenacity&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;nd&#34;&gt;@tenacity.retry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait_fixed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;do_something_and_retry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;&lt;br /&gt;    &lt;span class=&#34;n&#34;&gt;do_something&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+Or a simple exponential back-off method can be used instead:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tenacity&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;nd&#34;&gt;@tenacity.retry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait_exponential&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;do_something_and_retry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;&lt;br /&gt;    &lt;span class=&#34;n&#34;&gt;do_something&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h1&gt;Combination&lt;/h1&gt;
+&lt;p&gt;What is especially interesting with &lt;em&gt;tenacity&lt;/em&gt;, is that you can easily combine
+several methods. For example, you can combine &lt;code&gt;tenacity.wait.wait_random&lt;/code&gt; with
+&lt;code&gt;tenacity.wait.wait_fixed&lt;/code&gt; to wait a number of seconds defined in an interval:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tenacity&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;nd&#34;&gt;@tenacity.retry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait_fixed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;wait&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait_random&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;do_something_and_retry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;&lt;br /&gt;    &lt;span class=&#34;n&#34;&gt;do_something&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+This will make the function being retried wait randomly between 10 and 13
+seconds before trying again.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;tenacity&lt;/em&gt; offers more customization, such as retrying on some exceptions only.
+You can retry every second to execute the function only if the exception raised
+by &lt;code&gt;do_something&lt;/code&gt; is an instance of &lt;code&gt;IOError&lt;/code&gt;, e.g. a network communication
+error.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tenacity&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;nd&#34;&gt;@tenacity.retry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait_fixed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;br /&gt;                &lt;span class=&#34;n&#34;&gt;retry&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;retry_if_exception_type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;ne&#34;&gt;IOError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;do_something_and_retry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;&lt;br /&gt;    &lt;span class=&#34;n&#34;&gt;do_something&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+You can combine several condition easily by using the &lt;code&gt;|&lt;/code&gt; or &lt;code&gt;&amp;amp;&lt;/code&gt; binary
+operators. They are used to make the code retry if an &lt;code&gt;IOError&lt;/code&gt; exception is
+raised, or if no result is returned. Also, a stop condition is added with the
+&lt;code&gt;stop&lt;/code&gt; keyword arguments. It allows to specify a condition unrelated to the
+function result of exception to stop, such as a number of attemps or a delay.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tenacity&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;nd&#34;&gt;@tenacity.retry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait_fixed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;br /&gt;                &lt;span class=&#34;n&#34;&gt;stop&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stop_after_delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;60&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;br /&gt;                &lt;span class=&#34;n&#34;&gt;retry&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;retry_if_exception_type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;ne&#34;&gt;IOError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;br /&gt;                       &lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;retry_if_result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;lambda&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;do_something_and_retry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;&lt;br /&gt;    &lt;span class=&#34;n&#34;&gt;do_something&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+The functional approach of &lt;em&gt;tenacity&lt;/em&gt; makes it easy and clean to combine a lot
+of condition for various use cases with simple binary operators.&lt;/p&gt;
+&lt;h1&gt;Standalone usage&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;tenacity&lt;/em&gt; can also be used without decorator by using the object &lt;code&gt;Retrying&lt;/code&gt;,
+that implements its main behaviour, and usig its &lt;code&gt;call&lt;/code&gt; method. This allows to
+call any function with different retry conditions, or to retry any piece of
+code that do not use the decorator at all – like code from an external library.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tenacity&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Retrying&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;br /&gt;    &lt;span class=&#34;n&#34;&gt;wait&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;wait_fixed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;br /&gt;    &lt;span class=&#34;n&#34;&gt;retry&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tenacity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;retry_if_exception_type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;ne&#34;&gt;IOError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;call&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;do_something&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+This also allows you to re-use that object without creating one new each time,
+saving some memory!&lt;/p&gt;
+&lt;p&gt;I hope you&#39;ll like it and will find it some use. Feel free to fork it, report
+bug or ask for new features on &lt;a href=&#34;https://github.com/jd/tenacity&#34;&gt;its GitHub&lt;/a&gt;!&lt;/p&gt;      
+          </content>
+  </entry>
+    <entry>
+    <title type="html">Scalable metrics storage: Gnocchi on Amazon Web Services</title>
+    <author><name>Jason W. Sidabras</name></author>
+    <link href="https://julien.danjou.info/blog/2017/metrics-on-amazon-with-gnocchi-s3-driver"/>
+    <link rel="alternate" type="text/html" href="https://julien.danjou.info/blog/2017/metrics-on-amazon-with-gnocchi-s3-driver"/>
+    <updated>2017-02-22T10:30:02Z</updated>
+    <published>2017-02-22T10:30:02Z</published>
+    <id>https://julien.danjou.info/blog/2017/metrics-on-amazon-with-gnocchi-s3-driver</id>
+        <category term="Amazon Web Services" label="Amazon Web Services" />
+        <category term="Gnocchi" label="Gnocchi" />
+    
+    <content type="html">
+                  &lt;p&gt;As I wrote a few weeks ago in
+my &lt;a href=&#34;/blog/2017/gnocchi-3.1-release&#34;&gt;post about Gnocchi 3.1 being released&lt;/a&gt;, one
+of the new feature available in this version it
+the &lt;a href=&#34;https://aws.amazon.com/s3/&#34;&gt;S3&lt;/a&gt; driver. Today I would like to show you how
+easy it is to use it and store millions of metrics into the simple, durable and
+massively scalable object storage provided
+by &lt;a href=&#34;https://aws.amazon.com/&#34;&gt;Amazon Web Services&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Installation&lt;/h1&gt;
+&lt;p&gt;The installation of Gnocchi for this use case is not different than
+the
+&lt;a href=&#34;http://gnocchi.xyz/install.html&#34;&gt;standard installation procedure described in the documentation&lt;/a&gt;.
+Simply install Gnocchi from &lt;a href=&#34;http://pypi.python.org&#34;&gt;PyPI&lt;/a&gt; using the following
+command:&lt;/p&gt;
+&lt;pre&gt;
+$ pip install gnocchi[s3,postgresql] gnocchiclient
+&lt;/pre&gt;
+
+&lt;p&gt;This will install Gnocchi with the dependencies for the S3 and PostgreSQL
+drivers and the command-line interface to talk with Gnocchi.&lt;/p&gt;
+&lt;h1&gt;Configuring Amazon RDS&lt;/h1&gt;
+&lt;p&gt;Since you need a SQL database for the indexer, the easiest way to get started
+is to create a database on &lt;a href=&#34;https://console.aws.amazon.com/rds/&#34;&gt;Amazon RDS&lt;/a&gt;.
+You can create a managed &lt;a href=&#34;http://postgresql.org&#34;&gt;PostgreSQL&lt;/a&gt; database instance
+in just a few clicks.&lt;/p&gt;
+&lt;p&gt;Once you&#39;re on the homepage
+of &lt;a href=&#34;https://console.aws.amazon.com/rds/&#34;&gt;Amazon RDS&lt;/a&gt;, pick PostgreSQL as a
+database:&lt;/p&gt;
+&lt;figure class=&#34;illustration center&#34;&gt;
+  &lt;img src=&#34;/media/images/blog/2017/gnocchi-rds-postgresql.png&#34;&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;You can then configure your PostgreSQL instance: I&#39;ve picked a dev/test
+instance with the basic options available within the RDS Free Tier, but you can
+pick whatever you think is needed for your production use. Set a username and a
+password and note them for later: we&#39;ll need them to configure Gnocchi.&lt;/p&gt;
+&lt;figure class=&#34;illustration center&#34;&gt;
+  &lt;img src=&#34;/media/images/blog/2017/gnocchi-rds-postgresql-conf.png&#34;&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The next step is to configure the database in details. Just set the database
+name to &#34;gnocchi&#34; and leave the other options to their default values (I&#39;m
+lazy).&lt;/p&gt;
+&lt;figure class=&#34;illustration center&#34;&gt;
+  &lt;img src=&#34;/media/images/blog/2017/gnocchi-rds-postgresql-details.png&#34;&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;After a few minutes, your instance should be created and running. Note down the
+endpoint. In this case, my instance is
+&lt;code&gt;gnocchi.cywagbaxpert.us-east-1.rds.amazonaws.com&lt;/code&gt;.&lt;/p&gt;
+&lt;figure class=&#34;illustration center&#34;&gt;
+  &lt;img src=&#34;/media/images/blog/2017/gnocchi-rds-postgresql-running.png&#34;&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Configuring Gnocchi for S3 access&lt;/h1&gt;
+&lt;p&gt;In order to give Gnocchi an access to S3, you need to create access keys. The
+easiest way to create them is to go
+to &lt;a href=&#34;https://console.aws.amazon.com/iam&#34;&gt;IAM&lt;/a&gt; in your AWS console, pick a user
+with S3 access and click on the big gray button named &#34;Create access key&#34;.&lt;/p&gt;
+&lt;figure class=&#34;illustration center&#34;&gt;
+  &lt;img src=&#34;/media/images/blog/2017/gnocchi-iam-create-keys.png&#34;&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Once you do that, you&#39;ll get the &lt;em&gt;access key id&lt;/em&gt; and &lt;em&gt;secret access key&lt;/em&gt;. Note
+them down, we will need these later.&lt;/p&gt;
+&lt;figure class=&#34;illustration center&#34;&gt;
+  &lt;img src=&#34;/media/images/blog/2017/gnocchi-iam-get-keys.png&#34;&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Creating &lt;code&gt;gnocchi.conf&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;Now is time to create the &lt;code&gt;gnocchi.conf&lt;/code&gt; file. You can place it in
+&lt;code&gt;/etc/gnocchi&lt;/code&gt; if you want to deploy it system-wide, or in any other directory
+and add the &lt;code&gt;--config-file&lt;/code&gt; option to each Gnocchi command..&lt;/p&gt;
+&lt;p&gt;Here are the values that you should retrieve and write in the configuration file:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;indexer.url&lt;/code&gt;: the PostgreSQL RDS instance endpoint and credentials (see above) to set into&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;storage.s3_endpoint_url&lt;/code&gt;: the S3 endpoint URL – that depends on the region you want
+  to use and
+  &lt;a href=&#34;http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region&#34;&gt;they are listed here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;storage.s3_region_name&lt;/code&gt;: the S3 region name matching the endpoint you
+  picked.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;storage.s3_access_key_id&lt;/code&gt; and &lt;code&gt;storage.s3_secret_acess_key&lt;/code&gt;: your AWS access
+  key id and secret access key.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Your &lt;code&gt;gnocchi.conf&lt;/code&gt; file should then look like that:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;[indexer]&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;postgresql://gnocchi:gn0cch1rul3z@gnocchi.cywagbaxpert.us-east-1.rds.amazonaws.com:5432/gnocchi&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;[storage]&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;driver&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;s3&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;s3_endpoint_url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;https://s3-eu-west-1.amazonaws.com&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;s3_region_name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;eu-west-1&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;s3_access_key_id&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;lt;you access key id&amp;gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;s3_secret_access_key&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;lt;your secret access key&amp;gt;&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+Once that&#39;s done, you can run &lt;code&gt;gnocchi-upgrade&lt;/code&gt; in order to initialize Gnocchi
+indexer (PostgreSQL) and storage (S3):&lt;/p&gt;
+&lt;pre&gt;
+$ gnocchi-upgrade --config-file gnocchi.conf
+2017-02-07 15:35:52.491 3660 INFO gnocchi.cli [-] Upgrading indexer &lt;gnocchi.indexer.sqlalchemy.SQLAlchemyIndexer object at 0x108221950&gt;
+2017-02-07 15:36:04.127 3660 INFO gnocchi.cli [-] Upgrading storage &lt;gnocchi.storage.s3.S3Storage object at 0x10ca943d0&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Then you can run the API endpoint using the test endpoint &lt;code&gt;gnocchi-api&lt;/code&gt; and
+specifying its default port 8041:&lt;/p&gt;
+&lt;pre&gt;
+$ gnocchi-api --port 8041 -- --config-file gnocchi.conf
+2017-02-07 15:53:06.823 6290 INFO gnocchi.rest.app [-] WSGI config used: /Users/jd/Source/gnocchi/gnocchi/rest/api-paste.ini
+********************************************************************************
+STARTING test server gnocchi.rest.app.build_wsgi_app
+Available at http://127.0.0.1:8041/
+DANGER! For testing only, do not use in production
+********************************************************************************
+&lt;/pre&gt;
+
+&lt;p&gt;The best way to run Gnocchi API is to
+use
+&lt;a href=&#34;http://gnocchi.xyz/master/running.html#running-api-as-a-wsgi-application&#34;&gt;uwsgi as documented&lt;/a&gt;,
+but in this case, using the testing daemon &lt;code&gt;gnocchi-api&lt;/code&gt; is good enough.&lt;/p&gt;
+&lt;p&gt;Finally, in another terminal, you can start the &lt;code&gt;gnocchi-metricd&lt;/code&gt; daemon that
+will process metrics in background:&lt;/p&gt;
+&lt;pre&gt;
+$ gnocchi-metricd --config-file gnocchi.conf
+2017-02-07 15:52:41.416 6262 INFO gnocchi.cli [-] 0 measurements bundles across 0 metrics wait to be processed.
+&lt;/pre&gt;
+
+&lt;p&gt;Once everything is running, you can use Gnocchi&#39;s client to query it and check
+that everything is OK. The backlog should be empty at this stage, obviously.&lt;/p&gt;
+&lt;pre&gt;
+$ gnocchi status
++-----------------------------------------------------+-------+
+| Field                                               | Value |
++-----------------------------------------------------+-------+
+| storage/number of metric having measures to process | 0     |
+| storage/total number of measures to process         | 0     |
++-----------------------------------------------------+-------+
+&lt;/pre&gt;
+
+&lt;p&gt;Gnocchi is ready to be used! &lt;/p&gt;
+&lt;pre&gt;
+$ # Create a generic resource &#34;foobar&#34; with a metric named &#34;visitor&#34;
+$ gnocchi resource create foobar -n visitor
++-----------------------+-----------------------------------------------+
+| Field                 | Value                                         |
++-----------------------+-----------------------------------------------+
+| created_by_project_id |                                               |
+| created_by_user_id    | admin                                         |
+| creator               | admin                                         |
+| ended_at              | None                                          |
+| id                    | b4d568e4-7af1-5aec-ac3f-9c09fa3685a9          |
+| metrics               | visitor: 05f45876-1a69-4a64-8575-03eea5b79407 |
+| original_resource_id  | foobar                                        |
+| project_id            | None                                          |
+| revision_end          | None                                          |
+| revision_start        | 2017-02-07T14:54:54.417447+00:00              |
+| started_at            | 2017-02-07T14:54:54.417414+00:00              |
+| type                  | generic                                       |
+| user_id               | None                                          |
++-----------------------+-----------------------------------------------+
+
+# Send the number of visitor at 2 different timestamps
+$ gnocchi measures add --resource-id foobar -m 2017-02-07T15:56@23 visitor
+$ gnocchi measures add --resource-id foobar -m 2017-02-07T15:57@42 visitor
+
+# Check the average number of visitor
+# (the --refresh option is given to be sure the measure are processed)
+$ gnocchi measures show --resource-id foobar visitor --refresh
++---------------------------+-------------+-------+
+| timestamp                 | granularity | value |
++---------------------------+-------------+-------+
+| 2017-02-07T15:55:00+00:00 |       300.0 |  32.5 |
++---------------------------+-------------+-------+
+
+# Now shows the minimum number of visitor
+$ gnocchi measures show --aggregation min --resource-id foobar visitor
++---------------------------+-------------+-------+
+| timestamp                 | granularity | value |
++---------------------------+-------------+-------+
+| 2017-02-07T15:55:00+00:00 |       300.0 |  23.0 |
++---------------------------+-------------+-------+
+&lt;/pre&gt;
+
+&lt;p&gt;And voilà! You&#39;re ready to store millions of metrics and measures on your
+Amazon Web Services cloud platform. I hope you&#39;ll enjoy it and feel free to ask
+any question in the comment section or by reaching me directly!&lt;/p&gt;      
+          </content>
+  </entry>
+    <entry>
+    <title type="html">Sending your collectd metrics to Gnocchi</title>
+    <author><name>Jason W. Sidabras</name></author>
+    <link href="https://julien.danjou.info/blog/2017/gnocchi-collectd-setup"/>
+    <link rel="alternate" type="text/html" href="https://julien.danjou.info/blog/2017/gnocchi-collectd-setup"/>
+    <updated>2017-02-16T08:53:12Z</updated>
+    <published>2017-02-16T08:53:12Z</published>
+    <id>https://julien.danjou.info/blog/2017/gnocchi-collectd-setup</id>
+        <category term="Gnocchi" label="Gnocchi" />
+        <category term="collectd" label="Collectd" />
+        <category term="Grafana" label="Grafana" />
+    
+    <content type="html">
+                  &lt;p&gt;Knowing that &lt;a href=&#34;http://collectd.org/&#34;&gt;collectd&lt;/a&gt; is a daemon that collects system
+and applications metrics and that &lt;a href=&#34;http://gnocchi.xyz&#34;&gt;Gnocchi&lt;/a&gt; is a scalable
+timeseries database, it sounds like a good idea to combine them together.
+&lt;em&gt;Cheery on the cake&lt;/em&gt;: you can easily draw charts using &lt;a href=&#34;http://grafana.org&#34;&gt;Grafana&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;While it&#39;s true that Gnocchi is well integrated
+with &lt;a href=&#34;http://openstack.org&#34;&gt;OpenStack&lt;/a&gt;, as it comes from this ecosystem, it
+actually works standalone by default. Starting with the 3.1 version, it is now
+easy to send metrics to &lt;em&gt;Gnocchi&lt;/em&gt; using &lt;em&gt;collectd&lt;/em&gt;.&lt;/p&gt;
+&lt;h1&gt;Installation&lt;/h1&gt;
+&lt;p&gt;What we&#39;ll need to install to accomplish this task is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;collectd&lt;/li&gt;
+&lt;li&gt;Gnocchi&lt;/li&gt;
+&lt;li&gt;collectd-gnocchi&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;How you install them does not really matter. If they are packaged by your
+operating system, go ahead. For Gnocchi and collectd-gnocchi, you can also use
+&lt;em&gt;pip&lt;/em&gt;:&lt;/p&gt;
+&lt;pre&gt;
+# pip install gnocchi[file,postgresql]
+[…]
+Successfully installed gnocchi-3.1.0
+# pip install collectd-gnocchi
+Collecting collectd-gnocchi
+  Using cached collectd-gnocchi-1.0.1.tar.gz
+[…]
+Installing collected packages: collectd-gnocchi
+  Running setup.py install for collectd-gnocchi ... done
+Successfully installed collectd-gnocchi-1.0.1
+&lt;/pre&gt;
+
+&lt;p&gt;The detailed installation procedure for Gnocchi
+is &lt;a href=&#34;http://gnocchi.xyz/install.html#id1&#34;&gt;detailed in the documentation&lt;/a&gt;. It
+among other things explains which flavors are available – here I picked
+PostgreSQL and the file driver to store the metrics.&lt;/p&gt;
+&lt;h1&gt;Configuration&lt;/h1&gt;
+&lt;h2&gt;Gnocchi&lt;/h2&gt;
+&lt;p&gt;Gnocchi is simple to configure and is
+again &lt;a href=&#34;http://gnocchi.xyz/configuration.html&#34;&gt;documented&lt;/a&gt;. The default
+configuration file is &lt;code&gt;/etc/gnocchi/gnocchi.conf&lt;/code&gt; – you can generate it with
+&lt;code&gt;gnocchi-config-generator&lt;/code&gt; if needed. However, it also possible to specify
+another configuration file by appending the &lt;code&gt;--config-file&lt;/code&gt; option to any
+command line&lt;/p&gt;
+&lt;p&gt;In Gnocchi&#39;s configuration file, you need to set the &lt;code&gt;indexer.url&lt;/code&gt;
+configuration option to point an existing PostgreSQL database and set
+&lt;code&gt;storage.file_basepath&lt;/code&gt; to an existing directory to store your metrics (the
+default is &lt;code&gt;/var/lib/gnocchi&lt;/code&gt;). That gives something like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;[indexer]&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;postgresql://root:p4assw0rd@localhost/gnocchi&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;[storage]&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;file_basepath&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;/var/lib/gnocchi&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+Once done, just run the &lt;code&gt;gnocchi-upgrade&lt;/code&gt; command to initialize the index and
+storage.&lt;/p&gt;
+&lt;h2&gt;collectd&lt;/h2&gt;
+&lt;p&gt;Collectd provides a default configuration file that loads a bunch of plugin by
+default, that will meter all sort of metrics on your computer. You can check
+the &lt;a href=&#34;http://collectd.org/documentation.shtml&#34;&gt;documentation&lt;/a&gt; online to see how
+to disable or enable plugins.&lt;/p&gt;
+&lt;p&gt;As the &lt;em&gt;collectd-gnocchi&lt;/em&gt; plugin is written in Python, you&#39;ll need to enable
+the Python plugin and load the &lt;em&gt;collectd-gnocchi&lt;/em&gt; module:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;LoadPlugin&lt;/span&gt; python&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;Plugin&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;&lt;br /&gt;  &lt;span class=&#34;nb&#34;&gt;Import&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;collectd_gnocchi&amp;quot;&lt;/span&gt;&lt;br /&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;Module&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;collectd_gnocchi&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;&lt;br /&gt;      &lt;span class=&#34;nb&#34;&gt;endpoint&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;http://localhost:8041&amp;quot;&lt;/span&gt;&lt;br /&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/Module&amp;gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/Plugin&amp;gt;&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+That is enough to enable the storage of metrics in Gnocchi.&lt;/p&gt;
+&lt;h1&gt;Running the daemons&lt;/h1&gt;
+&lt;p&gt;Once everything is configured, you can launch &lt;code&gt;gnocchi-metricd&lt;/code&gt; and the
+&lt;code&gt;gnocchi-api&lt;/code&gt; daemon:&lt;/p&gt;
+&lt;pre&gt;
+$ gnocchi-metricd
+2017-01-26 15:22:49.018 15971 INFO gnocchi.cli [-] 0 measurements bundles
+across 0 metrics wait to be processed.
+[…]
+# In another terminal
+$ gnocchi-api --port 8041
+[…]
+STARTING test server gnocchi.rest.app.build_wsgi_app
+Available at http://127.0.0.1:8041/
+[…]
+&lt;/pre&gt;
+
+&lt;p&gt;It&#39;s not recommended to run Gnocchi using Gnocchi API
+(as
+&lt;a href=&#34;http://gnocchi.xyz/running.html#running-as-a-wsgi-application&#34;&gt;written in the documentation&lt;/a&gt;):
+using &lt;a href=&#34;https://uwsgi-docs.readthedocs.io/&#34;&gt;uwsgi&lt;/a&gt; is a better option. However
+for rapid testing, the &lt;code&gt;gnocchi-api&lt;/code&gt; daemon is good enough.&lt;/p&gt;
+&lt;p&gt;Once that&#39;s done, you can start &lt;code&gt;collectd&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;
+$ collectd
+# Or to run in foreground with a different configuration file:
+# $ collectd -C collectd.conf -f
+&lt;/pre&gt;
+
+&lt;p&gt;If you have any problem launchding &lt;em&gt;colllectd&lt;/em&gt;, check syslog for more
+information: there might be an issue loading a module or plugin.&lt;/p&gt;
+&lt;p&gt;If no error are printed, then everythin&#39;s working fine and you soon should see
+&lt;em&gt;gnocchi-api&lt;/em&gt; printing some requests such as:&lt;/p&gt;
+&lt;pre&gt;
+127.0.0.1 - - [26/Jan/2017 15:27:03] &#34;POST /v1/resource/collectd HTTP/1.1&#34; 409 113
+127.0.0.1 - - [26/Jan/2017 15:27:03] &#34;POST /v1/batch/resources/metrics/measures?create_metrics=True HTTP/1.1&#34; 400 91
+&lt;/pre&gt;
+
+&lt;h1&gt;Enjoying the result&lt;/h1&gt;
+&lt;p&gt;Once everything runs, you can access your newly created resources and metric by
+using the &lt;a href=&#34;http://pypi.python.org/pypi/gnocchiclient&#34;&gt;gnocchiclient&lt;/a&gt;. It should
+have been installed as a dependency of &lt;em&gt;collectd_gnocchi&lt;/em&gt;, but you can also
+install it manually using &lt;code&gt;pip install gnocchiclient&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you need to specify a different endpoint you can use the &lt;code&gt;--endpoint&lt;/code&gt; option
+(which default to http://localhost:8041). Do not hesitate to check the &lt;code&gt;--help&lt;/code&gt;
+option for more information.&lt;/p&gt;
+&lt;pre&gt;
+$ gnocchi resource list --details
++---------------+----------+------------+---------+----------------------+---------------+----------+----------------+--------------+---------+-----------+
+| id            | type     | project_id | user_id | original_resource_id | started_at    | ended_at | revision_start | revision_end | creator | host      |
++---------------+----------+------------+---------+----------------------+---------------+----------+----------------+--------------+---------+-----------+
+| dd245138-00c7 | collectd | None       | None    | dd245138-00c7-5bdc-  | 2017-01-26T14 | None     | 2017-01-26T14: | None         | admin   | localhost |
+| -5bdc-94f8-26 |          |            |         | 94f8-263e236812f7    | :21:02.297466 |          | 21:02.297483+0 |              |         |           |
+| 3e236812f7    |          |            |         |                      | +00:00        |          | 0:00           |              |         |           |
++---------------+----------+------------+---------+----------------------+---------------+----------+----------------+--------------+---------+-----------+
+$ gnocchi resource show collectd:localhost
++-----------------------+-----------------------------------------------------------------------+
+| Field                 | Value                                                                 |
++-----------------------+-----------------------------------------------------------------------+
+| created_by_project_id |                                                                       |
+| created_by_user_id    | admin                                                                 |
+| creator               | admin                                                                 |
+| ended_at              | None                                                                  |
+| host                  | localhost                                                             |
+| id                    | dd245138-00c7-5bdc-94f8-263e236812f7                                  |
+| metrics               | interface-en0@if_errors-0: 5d60f224-2e9e-4247-b415-64d567cf5866       |
+|                       | interface-en0@if_errors-1: 1df8b08b-555a-4cab-9186-f9b79a814b03       |
+|                       | interface-en0@if_octets-0: 491b7517-7219-4a04-bdb6-934d3bacb482       |
+|                       | interface-en0@if_octets-1: 8b5264b8-03f3-4aba-a7f8-3cd4b559e162       |
+|                       | interface-en0@if_packets-0: 12efc12b-2538-45e7-aa66-f8b9960b5fa3      |
+|                       | interface-en0@if_packets-1: 39377ff7-06e8-454a-a22a-942c8f2bca56      |
+|                       | interface-en1@if_errors-0: c3c7e9fc-f486-4d0c-9d36-55cea855596a       |
+|                       | interface-en1@if_errors-1: a90f1bec-3a60-4f58-a1d1-b3c09dce4359       |
+|                       | interface-en1@if_octets-0: c1ee8c75-95bf-4096-8055-8c0c4ec8cd47       |
+|                       | interface-en1@if_octets-1: cbb90a94-e133-4deb-ac10-3f37770e32f0       |
+|                       | interface-en1@if_packets-0: ac93b1b9-da71-4876-96aa-76067b35c6c9      |
+|                       | interface-en1@if_packets-1: 2f8528b2-12ae-4c4d-bec7-8cc987e7487b      |
+|                       | interface-en2@if_errors-0: ddcf7203-4c49-400b-9320-9d3e0a63c6d5       |
+|                       | interface-en2@if_errors-1: b249ea42-01ad-4742-9452-2c834010df71       |
+|                       | interface-en2@if_octets-0: 8c23013a-604e-40bf-a07a-e2dc4fc5cbd7       |
+|                       | interface-en2@if_octets-1: 806c1452-0607-4b56-b184-c4ffd48f52c0       |
+|                       | interface-en2@if_packets-0: c5bc6103-6313-4b8b-997d-01930d1d8af4      |
+|                       | interface-en2@if_packets-1: 478ae87e-e56b-44e4-83b0-ed28d99ed280      |
+|                       | load@load-0: 5db2248d-2dca-401e-b2e2-bbaee23b623e                     |
+|                       | load@load-1: 6f74ac93-78fd-4a74-a47e-d2add487a30f                     |
+|                       | load@load-2: 1897aca1-356e-4791-907f-512e516992b5                     |
+|                       | memory@memory-active-0: 83944a85-9c84-4fe4-b471-1a6cf8dce858          |
+|                       | memory@memory-free-0: 0ccc7cfa-26a5-4441-a15f-9ebb2aa82c6d            |
+|                       | memory@memory-inactive-0: 63736026-94c4-47c5-8d6f-a9d89d65025b        |
+|                       | memory@memory-wired-0: b7217fd6-2cdc-4efd-b1a8-a1edd52eaa2e           |
+| original_resource_id  | dd245138-00c7-5bdc-94f8-263e236812f7                                  |
+| project_id            | None                                                                  |
+| revision_end          | None                                                                  |
+| revision_start        | 2017-01-26T14:21:02.297483+00:00                                      |
+| started_at            | 2017-01-26T14:21:02.297466+00:00                                      |
+| type                  | collectd                                                              |
+| user_id               | None                                                                  |
++-----------------------+-----------------------------------------------------------------------+
+% gnocchi metric show -r collectd:localhost load@load-0
++------------------------------------+-----------------------------------------------------------------------+
+| Field                              | Value                                                                 |
++------------------------------------+-----------------------------------------------------------------------+
+| archive_policy/aggregation_methods | min, std, sum, median, mean, 95pct, count, max                        |
+| archive_policy/back_window         | 0                                                                     |
+| archive_policy/definition          | - timespan: 1:00:00, granularity: 0:05:00, points: 12                 |
+|                                    | - timespan: 1 day, 0:00:00, granularity: 1:00:00, points: 24          |
+|                                    | - timespan: 30 days, 0:00:00, granularity: 1 day, 0:00:00, points: 30 |
+| archive_policy/name                | low                                                                   |
+| created_by_project_id              |                                                                       |
+| created_by_user_id                 | admin                                                                 |
+| creator                            | admin                                                                 |
+| id                                 | 5db2248d-2dca-401e-b2e2-bbaee23b623e                                  |
+| name                               | load@load-0                                                           |
+| resource/created_by_project_id     |                                                                       |
+| resource/created_by_user_id        | admin                                                                 |
+| resource/creator                   | admin                                                                 |
+| resource/ended_at                  | None                                                                  |
+| resource/id                        | dd245138-00c7-5bdc-94f8-263e236812f7                                  |
+| resource/original_resource_id      | dd245138-00c7-5bdc-94f8-263e236812f7                                  |
+| resource/project_id                | None                                                                  |
+| resource/revision_end              | None                                                                  |
+| resource/revision_start            | 2017-01-26T14:21:02.297483+00:00                                      |
+| resource/started_at                | 2017-01-26T14:21:02.297466+00:00                                      |
+| resource/type                      | collectd                                                              |
+| resource/user_id                   | None                                                                  |
+| unit                               | None                                                                  |
++------------------------------------+-----------------------------------------------------------------------+
+$ gnocchi measures show -r collectd:localhost load@load-0
++---------------------------+-------------+--------------------+
+| timestamp                 | granularity |              value |
++---------------------------+-------------+--------------------+
+| 2017-01-26T00:00:00+00:00 |     86400.0 | 3.2705004391254193 |
+| 2017-01-26T15:00:00+00:00 |      3600.0 | 3.2705004391254193 |
+| 2017-01-26T15:00:00+00:00 |       300.0 | 2.6022800611413044 |
+| 2017-01-26T15:05:00+00:00 |       300.0 |  3.561742940080275 |
+| 2017-01-26T15:10:00+00:00 |       300.0 | 2.5605337960379466 |
+| 2017-01-26T15:15:00+00:00 |       300.0 |  3.837517851142473 |
+| 2017-01-26T15:20:00+00:00 |       300.0 | 3.9625948392427883 |
+| 2017-01-26T15:25:00+00:00 |       300.0 | 3.2690042162698414 |
++---------------------------+-------------+--------------------+
+&lt;/pre&gt;
+
+&lt;p&gt;As you can see, the command line works smoothly and can show you any kind of
+metric reported by &lt;em&gt;collectd&lt;/em&gt;. In this case, it was just running on my laptop,
+but you can imagine it&#39;s easy enough to poll thousands of hosts with &lt;em&gt;collectd&lt;/em&gt;
+and &lt;em&gt;Gnocchi&lt;/em&gt;.&lt;/p&gt;
+&lt;h1&gt;Bonus: charting with Grafana&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;http://grafana.org&#34;&gt;Grafana&lt;/a&gt;, a charting software, has a plugin for &lt;em&gt;Gnocchi&lt;/em&gt;
+as &lt;a href=&#34;http://gnocchi.xyz/grafana.html&#34;&gt;detailed in the documentation&lt;/a&gt;. Once
+installed, you can just configure &lt;em&gt;Grafana&lt;/em&gt; to point to &lt;em&gt;Gnocchi&lt;/em&gt; this way:&lt;/p&gt;
+&lt;figure class=&#34;illustration center&#34;&gt;
+  &lt;img src=&#34;/media/images/blog/2017/grafana-config-screen-gnocchi.png&#34;&gt;
+  &lt;/a&gt;
+  &lt;figcaption&gt;Grafana configuration screen&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;You can then create a new dashboard by filling the forms as you wish. See this
+other screenshot for a nice example:&lt;/p&gt;
+&lt;figure class=&#34;illustration center&#34;&gt;
+  &lt;img src=&#34;/media/images/blog/2017/grafana-gnocchi-load.png&#34;&gt;
+  &lt;/a&gt;
+  &lt;figcaption&gt;Charts of my laptop&#39;s load average&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I hope everything is clear and easy enough. If you have any question, feel free
+to write something in the comment section!&lt;/p&gt;      
+          </content>
+  </entry>
+    <entry>
+    <title type="html">FOSDEM 2017, recap</title>
+    <author><name>Jason W. Sidabras</name></author>
+    <link href="https://julien.danjou.info/blog/2017/fosdem-recap"/>
+    <link rel="alternate" type="text/html" href="https://julien.danjou.info/blog/2017/fosdem-recap"/>
+    <updated>2017-02-06T10:54:00Z</updated>
+    <published>2017-02-06T10:54:00Z</published>
+    <id>https://julien.danjou.info/blog/2017/fosdem-recap</id>
+        <category term="FOSDEM" label="Fosdem" />
+        <category term="Gnocchi" label="Gnocchi" />
+        <category term="Python" label="Python" />
+    
+    <content type="html">
+                  &lt;p&gt;&lt;img src=&#34;/media/images/fosdem.png&#34;
+    class=&#34;illustration pull-right&#34;
+    style=&#34;max-width: 20%;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Last week-end, I was in Brussels, Belgium for the 2017 edition of
+the &lt;a href=&#34;http://fosdem.org&#34;&gt;FOSDEM&lt;/a&gt;, one of the greatest open source developer
+conference.&lt;/p&gt;
+&lt;p&gt;This year, I decided to propose a talk about &lt;a href=&#34;http://gnocchi.xyz&#34;&gt;Gnocchi&lt;/a&gt;
+which was accepted in
+the &lt;a href=&#34;https://fosdem.org/2017/schedule/track/python/&#34;&gt;Python devroom&lt;/a&gt;. The track
+was very wlell organized (thanks to &lt;a href=&#34;https://wirtel.be/&#34;&gt;Stéphane Wirtel&lt;/a&gt;) and
+I was able to present Gnocchi to a room full of Python developers!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/media/images/blog/2017/fosdem-gnocchi-talk.jpg&#34;
+    class=&#34;illustration center&#34;
+    style=&#34;max-width: 75%;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I&#39;ve explained why we created Gnocchi and how we did it, and finally briefly
+explained how to use it with the command-line interface or in a Python
+application using the &lt;a href=&#34;http://gnocchi.xyz/gnocchiclient&#34;&gt;SDK&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can
+check
+&lt;a href=&#34;/talks/storing-metrics-at-scale-with-gnocchi-fosdem-2017.pdf&#34;&gt;the slides&lt;/a&gt;
+and &lt;a href=&#34;https://video.fosdem.org/2017/UD2.120/storing_metrics_gnocchi.mp4&#34;&gt;the video of the talk&lt;/a&gt;.&lt;/p&gt;
+&lt;video class=&#34;illustration&#34; controls&gt;
+&lt;source src=&#34;https://video.fosdem.org/2017/UD2.120/storing_metrics_gnocchi.mp4&#34;&gt;
+&lt;/video&gt;      
+          </content>
+  </entry>
+    <entry>
+    <title type="html">Gnocchi 3.1 unleashed</title>
+    <author><name>Jason W. Sidabras</name></author>
+    <link href="https://julien.danjou.info/blog/2017/gnocchi-3.1-release"/>
+    <link rel="alternate" type="text/html" href="https://julien.danjou.info/blog/2017/gnocchi-3.1-release"/>
+    <updated>2017-02-02T20:34:00Z</updated>
+    <published>2017-02-02T20:34:00Z</published>
+    <id>https://julien.danjou.info/blog/2017/gnocchi-3.1-release</id>
+        <category term="Gnocchi" label="Gnocchi" />
+        <category term="OpenStack" label="Openstack" />
+    
+    <content type="html">
+                  &lt;p&gt;It&#39;s always difficult to know when to release, and we really wanted to do it
+earlier. But it seems that each week more awesome work was being done
+in &lt;a href=&#34;http://gnocchi.xyz&#34;&gt;Gnocchi&lt;/a&gt;, so we kept delaying it while having no
+pressure to push it out.&lt;/p&gt;
+&lt;figure class=&#34;pull-right illustration&#34; style=&#34;width: 30%&#34;&gt;
+&lt;blockquote class=&#34;center instagram-media&#34; data-instgrm-version=&#34;7&#34; style=&#34; background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);&#34;&gt;&lt;div style=&#34;padding:8px;&#34;&gt; &lt;div style=&#34; background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;&#34;&gt; &lt;div style=&#34; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;&#34;&gt;&lt;/div&gt;&lt;/div&gt;&lt;p style=&#34; color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;&#34;&gt;&lt;a href=&#34;https://www.instagram.com/p/BPkZny9DRE8/&#34; style=&#34; color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;&#34; target=&#34;_blank&#34;&gt;A photo posted by Julien Danjou (@juldanjou)&lt;/a&gt; on &lt;time style=&#34; font-family:Arial,sans-serif; font-size:14px; line-height:17px;&#34; datetime=&#34;2017-01-22T13:43:42+00:00&#34;&gt;Jan 22, 2017 at 5:43am PST&lt;/time&gt;&lt;/p&gt;&lt;/div&gt;&lt;/blockquote&gt;
+&lt;script async defer src=&#34;//platform.instagram.com/en_US/embeds.js&#34;&gt;&lt;/script&gt;
+&lt;figcaption&gt;I&#39;ve made my own gnocchis to celebrate!&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;But now that the OpenStack cycle is finishing, even Gnocchi does not strictly
+follow it, it seemed to be a good time to cut the leash and leave this release
+be.&lt;/p&gt;
+&lt;p&gt;There are again some major new changes coming from 3.0. The previous version
+3.0 was tagged in October and had 90 changes merged from 13 authors since 2.2.
+This 3.1 version have 200 changes merged from 24 different authors. This is a
+great improvement of our contributor base and our rate of change – even if our
+delay to merge is very low. Once again, we pushed usage of release notes to
+document user visible changes,
+and &lt;a href=&#34;http://gnocchi.xyz/releasenotes/3.1.html&#34;&gt;they can be read online&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Therefore, I am going to summary quickly the major changes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The REST API authentication mechanism has been modularized. It&#39;s now simple
+  to provide any authentication mechanism for Gnocchi as a plugin. The default
+  is now a HTTP basic authentication mechanism that does not implement any kind
+  of enforcement.
+  The &lt;a href=&#34;(http://docs.openstack.org/developer/keystone/)&#34;&gt;Keystone&lt;/a&gt;
+  authentication is still available, obviously.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Batching has been improved and can now create metrics on the fly, reducing
+  the latency needed when pushing measures to non-existing metrics. This is
+  leveraged by the &lt;a href=&#34;https://github.com/jd/collectd-gnocchi&#34;&gt;collectd-gnoccchi&lt;/a&gt;
+  plugin for example.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The performance of Carbonara based backend has been largely improved. This
+  is not really listed as a change as it&#39;s not user-visible, but an amazing
+  work of profiling and rewriting code from &lt;a href=&#34;http://pandas.pydata.org/&#34;&gt;Pandas&lt;/a&gt;
+  to &lt;a href=&#34;http://www.numpy.org/&#34;&gt;NumPy&lt;/a&gt; has been done. While Pandas is very
+  developer-friendly and generic, using NumPy directly offers way more
+  performance and should decrease &lt;code&gt;gnocchi-metricd&lt;/code&gt; CPU usage by a large
+  factor.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The storage has been split into two parts: the storage of incoming new
+  measures to be processed, and the storage and archival of aggregated metrics.
+  This allows to use e.g. file to store new measures being sent, and once
+  processed store them into e.g. Ceph. Before that change, all the new measures
+  had to go into Ceph. While there&#39;s no specific driver yet for incoming
+  measures, it&#39;s easy to envision a driver for systems
+  like &lt;a href=&#34;https://redis.io&#34;&gt;Redis&lt;/a&gt; or &lt;a href=&#34;https://memcached.org&#34;&gt;Memcached&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A new &lt;a href=&#34;https://aws.amazon.com/s3/&#34;&gt;Amazon S3&lt;/a&gt; driver has been merged. It
+  works in the same way than the file
+  or &lt;a href=&#34;http://docs.openstack.org/developer/swift/&#34;&gt;OpenStack Swift&lt;/a&gt; drivers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;pull-right illustration&#34; style=&#34;width: 25%;&#34;&gt;
+  &lt;img src=&#34;/media/images/gnocchi-logo.jpg&#34;&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I will write more about some of these new features in the upcoming weeks, as
+they are very interesting for Gnocchi&#39;s users.&lt;/p&gt;
+&lt;p&gt;We are planning to run a scalability test and benchmarks using
+the &lt;a href=&#34;http://scalelab.redhat.com/&#34;&gt;ScaleLab&lt;/a&gt; in a few weeks if everything goes
+as planned. I will obviously share the result here, but we also submitted a
+talk for the
+next
+&lt;a href=&#34;https://www.openstack.org/summit/boston-2017/&#34;&gt;OpenStack Summit in Boston&lt;/a&gt; to
+present the results of our scalability and performance tests – hoping the
+session will be accepted.&lt;/p&gt;
+&lt;p&gt;I will also be talking about
+Gnocchi
+&lt;a href=&#34;https://fosdem.org/2017/schedule/event/storing_metrics_gnocchi/&#34;&gt;this Sunday at FOSDEM&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We don&#39;t have a very determined roadmap for Gnocchi during the next weeks. Sure
+we do have a few ideas on what we want to implement, but we are also very
+easily influenced by the requests of our user: therefore feel free to ask for
+anything!&lt;/p&gt;      
+          </content>
+  </entry>
+    <entry>
+    <title type="html">&lt;em&gt;Scaling Python&lt;/em&gt; is on its way</title>
+    <author><name>Jason W. Sidabras</name></author>
+    <link href="https://julien.danjou.info/blog/2017/announcing-scaling-python"/>
+    <link rel="alternate" type="text/html" href="https://julien.danjou.info/blog/2017/announcing-scaling-python"/>
+    <updated>2017-01-16T16:00:00Z</updated>
+    <published>2017-01-16T16:00:00Z</published>
+    <id>https://julien.danjou.info/blog/2017/announcing-scaling-python</id>
+        <category term="Python" label="Python" />
+        <category term="Books" label="Books" />
+    
+    <content type="html">
+                  &lt;p&gt;My day-to-day activities are still evolving around
+the &lt;a href=&#34;http://python.org&#34;&gt;Python&lt;/a&gt; programming language, as I continue working on
+the &lt;a href=&#34;http://openstack.org&#34;&gt;OpenStack&lt;/a&gt; project as part of my job
+at &lt;a href=&#34;http://redhat.com&#34;&gt;Red Hat&lt;/a&gt;. OpenStack is still the biggest Python project
+out there, and attract a lot of Python hackers.&lt;/p&gt;
+&lt;p&gt;Those last few years, however, things have taken a different turn for me when I
+made the choice with my team to rework the telemetry stack architecture. We
+decided to make a point of making it scale way beyond what has been done in the
+project so far.&lt;/p&gt;
+&lt;figure class=&#34;illustration pull-right&#34; style=&#34;width: 30%;&#34;&gt;
+  &lt;a href=&#34;https://scaling-python.com&#34;&gt;
+  &lt;img src=&#34;https://scaling-python.com/img/the-hacker-guide-to-scaling-python.png&#34;&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I started to dig into a lot of different fields around Python. Topics you don&#39;t
+often look at when writing a simple and straight-forward application. It turns
+out that writing scalable applications in Python is not impossible, nor that
+difficult. There are a few hiccups to avoid, and various tools that can help,
+but it really is possible – without switching to another whole language,
+framework, or exotic tool set.&lt;/p&gt;
+&lt;p&gt;Working on those projects seemed to me like a good opportunity to share with
+the rest of the world what I learned. Therefore, I decided to share my most
+recent knowledge addition around distributed and scalable Python application in
+a new book,
+entitled &lt;a href=&#34;https://scaling-python.com&#34;&gt;The Hacker&#39;s Guide to Scaling Python&lt;/a&gt; (or
+&lt;em&gt;Scaling Python&lt;/em&gt;, in short). The book should be released in a few months –
+fingers crossed.&lt;/p&gt;
+&lt;p&gt;And as the book is still a work-in-progress, I&#39;ll be happy to hear any remark,
+subject, interrogation or topic idea you might have or any particular angle you
+would like me to take in this book (reply in
+the &lt;a href=&#34;#disqus_thread&#34;&gt;comments section&lt;/a&gt; or shoot me
+an &lt;a href=&#34;mailto:julien@danjou.info&#34;&gt;email&lt;/a&gt;). And if you&#39;d like to get be kept
+updated on this book advancement, you can subscribe in the following form or
+from the &lt;a href=&#34;https://scaling-python.com&#34;&gt;book homepage&lt;/a&gt;.&lt;/p&gt;
+&lt;script async id=&#34;_ck_119473&#34; src=&#34;https://forms.convertkit.com/119473?v=6&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;The adventure of working on my previous
+book, &lt;a href=&#34;https://thehackerguidetopython.com&#34;&gt;The Hacker&#39;s Guide to Python&lt;/a&gt;, has
+been so tremendous and the feedback so great, that I&#39;m looking forward
+releasing this new book later this year!&lt;/p&gt;      
+          </content>
+  </entry>
+    <entry>
+    <title type="html">Packaging Python software with pbr</title>
+    <author><name>Jason W. Sidabras</name></author>
+    <link href="https://julien.danjou.info/blog/2017/packaging-python-with-pbr"/>
+    <link rel="alternate" type="text/html" href="https://julien.danjou.info/blog/2017/packaging-python-with-pbr"/>
+    <updated>2017-01-02T16:00:12Z</updated>
+    <published>2017-01-02T16:00:12Z</published>
+    <id>https://julien.danjou.info/blog/2017/packaging-python-with-pbr</id>
+        <category term="Python" label="Python" />
+        <category term="pbr" label="Pbr" />
+    
+    <content type="html">
+                  &lt;p&gt;Packaging Python has been a painful experience for long. The history of the
+various distribution that Python offered along the years is really bumpy, and
+both the user and developer experience has been pretty bad.&lt;/p&gt;
+&lt;p&gt;Fortunately, things improved a lot in the recent years, with the reconciliation
+of &lt;em&gt;&lt;a href=&#34;https://setuptools.readthedocs.io&#34;&gt;setuptools&lt;/a&gt;&lt;/em&gt; and &lt;em&gt;distribute&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Though in the context of the &lt;a href=&#34;http://openstack.org&#34;&gt;OpenStack&lt;/a&gt; project, a
+solution on top of &lt;em&gt;setuptools&lt;/em&gt; has been already started a while back. Its
+usage is now spread across a whole range of software and libraries.&lt;/p&gt;
+&lt;p&gt;This project is called &lt;em&gt;&lt;a href=&#34;http://docs.openstack.org/developer/pbr/&#34;&gt;pbr&lt;/a&gt;&lt;/em&gt;, for
+&lt;em&gt;Python Build Reasonableness&lt;/em&gt;. Don&#39;t be afraid by the OpenStack colored themed
+of the documentation – it is a bad habit of OpenStack folks to not advertise
+their tooling in an agnostic fashion. The tool has no dependency with the cloud
+platform, and can be used painlessly with any package.&lt;/p&gt;
+&lt;h1&gt;How it works&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;pbr&lt;/em&gt; takes inspiration from &lt;em&gt;distutils2&lt;/em&gt; (a now abandoned project) and uses a
+&lt;code&gt;setup.cfg&lt;/code&gt; file to describe the packager&#39;s intents. This is how a &lt;code&gt;setup.py&lt;/code&gt;
+using &lt;em&gt;pbr&lt;/em&gt; looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;setuptools&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;n&#34;&gt;setuptools&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setup_requires&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;pbr&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pbr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+Two lines of code – it&#39;s that simple. The actual metadata that the setup
+requires is stored in &lt;code&gt;setup.cfg&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;[metadata]&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;foobar&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;author&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;Dave Null&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;author-email&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;foobar@example.org&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;summary&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;Package doing nifty stuff&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;license&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;MIT&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;description-file&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    README.rst&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;home-page&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;http://pypi.python.org/pypi/foobar&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;requires-python&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;gt;=2.6&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;classifier&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    Development Status :: 4 - Beta&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    Environment :: Console&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    Intended Audience :: Developers&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    Intended Audience :: Information Technology&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    License :: OSI Approved :: Apache Software License&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    Operating System :: OS Independent&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    Programming Language :: Python&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;span class=&#34;k&#34;&gt;[files]&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;packages&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    foobar&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+This syntax is way easier to write and read than the standard &lt;code&gt;setup.py&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;pbr&lt;/em&gt; also offers other features such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;automatic dependency installation based on &lt;code&gt;requirements.txt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;automatic documentation building and generation using Sphinx&lt;/li&gt;
+&lt;li&gt;automatic generation of &lt;code&gt;AUTHORS&lt;/code&gt; and &lt;code&gt;ChangeLog&lt;/code&gt; files based on &lt;em&gt;git&lt;/em&gt; history&lt;/li&gt;
+&lt;li&gt;automatic creation of the list of files to include using &lt;em&gt;git&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;version management based on &lt;em&gt;git&lt;/em&gt; tags&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All of this comes with little to no effort on your part.&lt;/p&gt;
+&lt;h1&gt;Using flavors&lt;/h1&gt;
+&lt;p&gt;One of the feature that I use a lot, is the definition of flavors. It&#39;s not
+tied particularly to &lt;em&gt;pbr&lt;/em&gt; – it&#39;s actually provided by &lt;em&gt;setuptools&lt;/em&gt; and &lt;em&gt;pip&lt;/em&gt;
+themselves – but &lt;em&gt;pbr&lt;/em&gt; &lt;code&gt;setup.cfg&lt;/code&gt; file makes it easy to use.&lt;/p&gt;
+&lt;p&gt;When distributing a software, it&#39;s common to have different drivers for it. For
+example, your project could support both PostgreSQL or MySQL – but nobody is
+going to use both at the same time. The usual trick to make it work is to add
+the needed library to the requirements list (e.g. &lt;code&gt;requirements.txt&lt;/code&gt;). The
+upside is that the software will work directly with either RDBMS, but the
+downside is that this will install both libraries, whereas only one is needed.
+Using flavors, you can specify different scenarios:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;[extras]&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;postgresql&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    psycopg2&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;na&#34;&gt;mysql&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&#34;s&#34;&gt;    pymysql&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+When installing your package, the user can then just pick the right flavor by
+using &lt;em&gt;&lt;a href=&#34;https://pip.pypa.io/&#34;&gt;pip&lt;/a&gt;&lt;/em&gt; to install the package:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install foobar&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;postgresql&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+This will install &lt;em&gt;foobar&lt;/em&gt;, all its dependencies listed in &lt;code&gt;requirements.txt&lt;/code&gt;,
+plus whatever dependencies are listed in the &lt;code&gt;[extras]&lt;/code&gt; section of &lt;code&gt;setup.cfg&lt;/code&gt;
+matching the flavor. You can also combine several flavors, e.g.:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install foobar&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;postgresql,mysql&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;br /&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;
+would install both flavors.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;pbr&lt;/em&gt; is well-maintained and in very active development, so if you have any
+plans to distribute your software, you should seriously consider including
+&lt;em&gt;pbr&lt;/em&gt; in those plans.&lt;/p&gt;      
+          </content>
+  </entry>
+  
+
+
+</feed>

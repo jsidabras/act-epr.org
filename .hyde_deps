@@ -1,81 +1,836 @@
-!!python/unicode '.hyde_deps': []
+!!python/unicode '.hyde_deps': [!!python/unicode 'base.j2']
+!!python/unicode 'blarg/2017/gnocchi-3.1-release': [blog.j2, base.j2, analytics.j2]
+!!python/unicode 'blarg/2017/index.html': [blog.j2, base.j2, analytics.j2]
+!!python/unicode 'blarg/2017/python-tenacity': [blog.j2, base.j2, analytics.j2]
+!!python/unicode 'blarg/index.html': [blog-list.j2, base2.j2]
+!!python/unicode 'blog/2007/ewmh-and-xrandr': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2007/index.html': [!!python/unicode 'blog/2007/kicking-out-web-spammers-with-dnsbl',
+  !!python/unicode 'blog.j2', !!python/unicode 'blog/2007/ewmh-and-xrandr', !!python/unicode 'blog-list.j2',
+  !!python/unicode 'base.j2', !!python/unicode 'base2.j2']
+!!python/unicode 'blog/2007/kicking-out-web-spammers-with-dnsbl': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2008/atl1e-support-in-2.6.26-1': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2008/index.html': [!!python/unicode 'blog.j2', !!python/unicode 'blog/2008/atl1e-support-in-2.6.26-1',
+  !!python/unicode 'blog/2008/unexpected-varmon-new-release', !!python/unicode 'blog/2008/rants-about-lua',
+  !!python/unicode 'blog/2008/the-eggtray-problem', !!python/unicode 'blog/2008/security-bug-found-in-imlib2',
+  !!python/unicode 'blog-list.j2', !!python/unicode 'base.j2', !!python/unicode 'base2.j2']
+!!python/unicode 'blog/2008/rants-about-lua': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2008/security-bug-found-in-imlib2': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2008/the-eggtray-problem': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2008/unexpected-varmon-new-release': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2009/courier-to-dovecot-migration': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2009/index.html': [!!python/unicode 'blog.j2', !!python/unicode 'blog/2009/todo-list-management',
+  !!python/unicode 'blog/2009/teething-troubles', !!python/unicode 'blog/2009/courier-to-dovecot-migration',
+  !!python/unicode 'blog/2009/openoffice-better-as-a-pager', !!python/unicode 'blog/2009/various-news',
+  !!python/unicode 'blog-list.j2', !!python/unicode 'blog/2009/python-cairo-and-xcb-support',
+  !!python/unicode 'base.j2', !!python/unicode 'blog/2009/taking-the-other-direction',
+  !!python/unicode 'blog/2009/upgrading-to-dovecot-1.2-hello-sieve', !!python/unicode 'base2.j2',
+  !!python/unicode 'blog/2009/startup-notification-ported-to-XCB']
+!!python/unicode 'blog/2009/openoffice-better-as-a-pager': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2009/python-cairo-and-xcb-support': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2009/startup-notification-ported-to-XCB': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2009/taking-the-other-direction': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2009/teething-troubles': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2009/todo-list-management': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2009/upgrading-to-dovecot-1.2-hello-sieve': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2009/various-news': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/announcing-erc-track-score': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/announcing-muse-blog': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/announcing-rainbow-mode': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/color-contrast-correction': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/desktop-notification-support-for-Emacs': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/elisp-color-manipulation-routines': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/emacs-and-offlineimap': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/emacs-google-maps-bbdb': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/emacs-org-whatever': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/enhancing-emacs-mouse-avoidance': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/entering-the-emacs-world': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/gnus-gravatar-support': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/gnus-news-is-good-news': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/google-maps-for-emacs-moving-caching-home': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/google-maps.el': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/icon-category-support-in-org-mode': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/index.html': [!!python/unicode 'blog/2010/desktop-notification-support-for-Emacs',
+  !!python/unicode 'blog/2010/announcing-muse-blog', !!python/unicode 'blog/2010/entering-the-emacs-world',
+  !!python/unicode 'blog/2010/org-mode-and-holidays', !!python/unicode 'blog/2010/why-notmuch-is-not-much-good',
+  !!python/unicode 'blog/2010/emacs-google-maps-bbdb', !!python/unicode 'blog/2010/google-maps-for-emacs-moving-caching-home',
+  !!python/unicode 'blog/2010/making-startup-notification-XCB-native', !!python/unicode 'blog/2010/announcing-rainbow-mode',
+  !!python/unicode 'base.j2', !!python/unicode 'blog/2010/gnus-gravatar-support',
+  !!python/unicode 'blog/2010/no-more-dashes-in-emacs24-mode-line', !!python/unicode 'blog.j2',
+  !!python/unicode 'blog/2010/google-maps.el', !!python/unicode 'blog/2010/transparent-gif-support-in-emacs24',
+  !!python/unicode 'blog/2010/update-on-rainbow-mode', !!python/unicode 'blog/2010/gnus-news-is-good-news',
+  !!python/unicode 'blog/2010/icon-category-support-in-org-mode', !!python/unicode 'blog/2010/updating-muse-el-in-Debian',
+  !!python/unicode 'blog/2010/enhancing-emacs-mouse-avoidance', !!python/unicode 'blog/2010/porting-dbus-on-xcb',
+  !!python/unicode 'base2.j2', !!python/unicode 'blog/2010/thoughts-and-rambling-on-the-X-protocol',
+  !!python/unicode 'blog/2010/announcing-erc-track-score', !!python/unicode 'blog-list.j2',
+  !!python/unicode 'blog/2010/emacs-org-whatever', !!python/unicode 'blog/2010/emacs-and-offlineimap',
+  !!python/unicode 'blog/2010/elisp-color-manipulation-routines', !!python/unicode 'blog/2010/color-contrast-correction']
+!!python/unicode 'blog/2010/making-startup-notification-XCB-native': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/no-more-dashes-in-emacs24-mode-line': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/org-mode-and-holidays': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/porting-dbus-on-xcb': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/thoughts-and-rambling-on-the-X-protocol': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/transparent-gif-support-in-emacs24': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/update-on-rainbow-mode': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/updating-muse-el-in-Debian': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2010/why-notmuch-is-not-much-good': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/Emacs-snapshot-Ubuntu-packages': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/announcing-org-contacts': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/code-fontification-with-gnus-and-orgmode': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/emacs-snapshot-debian-packages': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/google-contacts-for-emacs': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/handling-my-music-collection-with-git-annex': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/index.html': [!!python/unicode 'blog/2011/Emacs-snapshot-Ubuntu-packages',
+  !!python/unicode 'blog/2011/python-sets-comparisons', !!python/unicode 'blog/2011/using-advanced-filter-with-mod_authnz_ldap',
+  !!python/unicode 'blog/2011/why-not-lua', !!python/unicode 'blog/2011/oauth-2.0-for-emacs',
+  !!python/unicode 'blog/2011/announcing-org-contacts', !!python/unicode 'base2.j2',
+  !!python/unicode 'blog/2011/second-orgcamp-paris', !!python/unicode 'blog/2011/naquadah-theme-for-Emacs',
+  !!python/unicode 'base.j2', !!python/unicode 'blog/2011/orgcamp-paris-2011-review',
+  !!python/unicode 'blog.j2', !!python/unicode 'blog/2011/my-openstack-work', !!python/unicode 'blog/2011/code-fontification-with-gnus-and-orgmode',
+  !!python/unicode 'blog/2011/org-contacts-now-part-of-org-contrib', !!python/unicode 'blog/2011/google-contacts-for-emacs',
+  !!python/unicode 'blog/2011/lua-workshop-at-Fabelier-tmplab', !!python/unicode 'blog/2011/handling-my-music-collection-with-git-annex',
+  !!python/unicode 'blog/2011/python-notify-with-gtk-stock-icon', !!python/unicode 'blog-list.j2',
+  !!python/unicode 'blog/2011/orgcamp-2011', !!python/unicode 'blog/2011/my-latest-contributions-to-the-emacs-world',
+  !!python/unicode 'blog/2011/quitting-my-job', !!python/unicode 'blog/2011/emacs-snapshot-debian-packages',
+  !!python/unicode 'blog/2011/new-job-new-blog']
+!!python/unicode 'blog/2011/lua-workshop-at-Fabelier-tmplab': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/my-latest-contributions-to-the-emacs-world': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/my-openstack-work': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/naquadah-theme-for-Emacs': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/new-job-new-blog': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/oauth-2.0-for-emacs': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/org-contacts-now-part-of-org-contrib': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/orgcamp-2011': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/orgcamp-paris-2011-review': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/python-notify-with-gtk-stock-icon': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/python-sets-comparisons': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/quitting-my-job': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/second-orgcamp-paris': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/using-advanced-filter-with-mod_authnz_ldap': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2011/why-not-lua': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/ceilometer-0.1-released': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/ceilometer-bug-squash-day-1': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/emacs-configuration-published': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/erc-notifications': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/gnus-notifications': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/google-calendar-pynotify': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/index.html': [!!python/unicode 'blog/2012/google-calendar-pynotify',
+  !!python/unicode 'blog/2012/ceilometer-bug-squash-day-1', !!python/unicode 'blog/2012/openstack-france-meetup-2',
+  !!python/unicode 'base2.j2', !!python/unicode 'blog/2012/ceilometer-0.1-released',
+  !!python/unicode 'blog/2012/erc-notifications', !!python/unicode 'blog/2012/openstack-metering-ceilometer',
+  !!python/unicode 'blog/2012/pymunincli-0.1', !!python/unicode 'base.j2', !!python/unicode 'blog/2012/ten-years-as-a-debian-developer',
+  !!python/unicode 'blog.j2', !!python/unicode 'blog/2012/openstack-swift-consistency-analysis',
+  !!python/unicode 'blog/2012/emacs-configuration-published', !!python/unicode 'blog/2012/twitter-bootstrap-tabs-bookmark',
+  !!python/unicode 'blog/2012/logitech-unifying-upower', !!python/unicode 'blog/2012/making-the-jump',
+  !!python/unicode 'blog/2012/logitech-k750-linux-support', !!python/unicode 'blog/2012/xpyb-1.3',
+  !!python/unicode 'blog/2012/sony-vaio-SVZ13-linux', !!python/unicode 'blog-list.j2',
+  !!python/unicode 'blog/2012/openstack-synaps-exploration', !!python/unicode 'blog/2012/mod_defensible-1.5',
+  !!python/unicode 'blog/2012/gnus-notifications']
+!!python/unicode 'blog/2012/logitech-k750-linux-support': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/logitech-unifying-upower': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/making-the-jump': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/mod_defensible-1.5': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/openstack-france-meetup-2': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/openstack-metering-ceilometer': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/openstack-swift-consistency-analysis': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/openstack-synaps-exploration': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/pymunincli-0.1': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/sony-vaio-SVZ13-linux': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/ten-years-as-a-debian-developer': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/twitter-bootstrap-tabs-bookmark': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2012/xpyb-1.3': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/announcing-the-hacker-guide-to-python': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/ceilometer-bug-squash-day-2': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/cl-irc-async': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/cl-postmodern-dao-json': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/cloud-init-utils-debian': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/extending-swift-with-a-middleware-clamav': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/going-to-fosdem': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/guide-python-static-class-abstract-methods': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/index.html': [!!python/unicode 'blog/2013/openstack-ceilometer-havana-3-milestone-released',
+  !!python/unicode 'blog/2013/openstack-climate-capacity-leasing', !!python/unicode 'blog/2013/going-to-fosdem',
+  !!python/unicode 'blog/2013/openstack-ceilometer-heat-graduated', !!python/unicode 'blog/2013/rant-about-github-pull-request-workflow-implementation',
+  !!python/unicode 'blog/2013/python-3.4-single-dispatch-generic-function', !!python/unicode 'blog/2013/guide-python-static-class-abstract-methods',
+  !!python/unicode 'blog/2013/openstack-summit-icehouse-ceilometer', !!python/unicode 'base.j2',
+  !!python/unicode 'blog/2013/announcing-the-hacker-guide-to-python', !!python/unicode 'blog/2013/openstack-summit-havana-ceilometer',
+  !!python/unicode 'blog/2013/cl-postmodern-dao-json', !!python/unicode 'blog.j2',
+  !!python/unicode 'blog/2013/openstack-ceilometer-havana-2-milestone-released', !!python/unicode 'blog/2013/cl-irc-async',
+  !!python/unicode 'blog/2013/ceilometer-bug-squash-day-2', !!python/unicode 'base2.j2',
+  !!python/unicode 'blog/2013/cloud-init-utils-debian', !!python/unicode 'blog/2013/openstack-ceilometer-havana-1-milestone-released',
+  !!python/unicode 'blog/2013/extending-swift-with-a-middleware-clamav', !!python/unicode 'blog-list.j2',
+  !!python/unicode 'blog/2013/lisp-python-hy', !!python/unicode 'blog/2013/lisp-and-openstack-with-cl-openstack-client']
+!!python/unicode 'blog/2013/lisp-and-openstack-with-cl-openstack-client': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/lisp-python-hy': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/openstack-ceilometer-havana-1-milestone-released': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/openstack-ceilometer-havana-2-milestone-released': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/openstack-ceilometer-havana-3-milestone-released': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/openstack-ceilometer-heat-graduated': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/openstack-climate-capacity-leasing': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/openstack-summit-havana-ceilometer': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/openstack-summit-icehouse-ceilometer': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/python-3.4-single-dispatch-generic-function': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2013/rant-about-github-pull-request-workflow-implementation': [
+  !!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2014/a-b-testing-with-apache': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2014/db-integration-testing-strategies-python': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2014/index.html': [!!python/unicode 'blog.j2', !!python/unicode 'base2.j2',
+  !!python/unicode 'blog/2014/db-integration-testing-strategies-python', !!python/unicode 'blog/2014/openstack-ceilometer-icehouse-2-milestone-released',
+  !!python/unicode 'blog/2014/openstack-summit-juno-ceilometer', !!python/unicode 'blog/2014/python-distributed-membership-lock-with-tooz',
+  !!python/unicode 'blog-list.j2', !!python/unicode 'blog/2014/openstack-ceilometer-the-gnocchi-experiment',
+  !!python/unicode 'base.j2', !!python/unicode 'blog/2014/a-b-testing-with-apache',
+  !!python/unicode 'blog/2014/python-bad-practice-concrete-case', !!python/unicode 'blog/2014/tracking-openstack-contributions-in-github',
+  !!python/unicode 'blog/2014/making-of-the-hacker-guide-to-python', !!python/unicode 'blog/2014/the-hacker-guide-to-python-has-been-released']
+!!python/unicode 'blog/2014/making-of-the-hacker-guide-to-python': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2014/openstack-ceilometer-icehouse-2-milestone-released': [
+  !!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2014/openstack-ceilometer-the-gnocchi-experiment': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2014/openstack-summit-juno-ceilometer': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2014/python-bad-practice-concrete-case': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2014/python-distributed-membership-lock-with-tooz': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2014/the-hacker-guide-to-python-has-been-released': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2014/tracking-openstack-contributions-in-github': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/announcing-lwn2pocket': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/ceilometer-gnocchi-aodh-liberty-progress': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/gnocchi-1.3.0-released': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/gnocchi-benchmarks': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/guide-to-python-profiling-cprofile-concrete-case-carbonara': [
+  !!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/index.html': [!!python/unicode 'blog/2015/openstack-summit-liberty-vancouver-ceilometer-gnocchi',
+  !!python/unicode 'blog/2015/python-retrying', !!python/unicode 'blog/2015/python-and-timezones',
+  !!python/unicode 'blog/2015/the-hacker-guide-to-python-second-edition', !!python/unicode 'blog/2015/openstack-gnocchi-grafana',
+  !!python/unicode 'blog/2015/openstack-summit-mitaka-tokyo-telemetry', !!python/unicode 'blog/2015/interview-software-tests-in-python',
+  !!python/unicode 'blog/2015/python-ast-checking-method-declaration', !!python/unicode 'base.j2',
+  !!python/unicode 'blog/2015/guide-to-python-profiling-cprofile-concrete-case-carbonara',
+  !!python/unicode 'blog.j2', !!python/unicode 'blog/2015/announcing-lwn2pocket',
+  !!python/unicode 'blog/2015/openstack-france-paris-meetup-gnocchi-talk', !!python/unicode 'blog/2015/gnocchi-benchmarks',
+  !!python/unicode 'blog/2015/gnocchi-1.3.0-released', !!python/unicode 'base2.j2',
+  !!python/unicode 'blog/2015/python-schema-validation-voluptuous', !!python/unicode 'blog-list.j2',
+  !!python/unicode 'blog/2015/ceilometer-gnocchi-aodh-liberty-progress', !!python/unicode 'blog/2015/openstack-gnocchi-first-release',
+  !!python/unicode 'blog/2015/interview-journal-du-hacker']
+!!python/unicode 'blog/2015/interview-journal-du-hacker': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/interview-software-tests-in-python': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/openstack-france-paris-meetup-gnocchi-talk': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/openstack-gnocchi-first-release': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/openstack-gnocchi-grafana': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/openstack-summit-liberty-vancouver-ceilometer-gnocchi': [
+  !!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/openstack-summit-mitaka-tokyo-telemetry': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/python-and-timezones': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/python-ast-checking-method-declaration': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/python-retrying': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/python-schema-validation-voluptuous': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2015/the-hacker-guide-to-python-second-edition': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/asciidoc-book-toolchain-released': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/fosdem-recap': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/foss-projects-management-bad-practice': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/gnocchi-2.0-release': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/gnocchi-2.1-release': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/gnocchi-3.0-release': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/gnocchi-carbonara-timeseries-compression': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/index.html': [!!python/unicode 'blog/2016/the-hacker-guide-to-python-third-edition',
+  !!python/unicode 'blog/2016/python-sqlalchemy-from-decimal-to-timestamp', !!python/unicode 'blog/2016/gnocchi-3.0-release',
+  !!python/unicode 'blog/2016/opensource-upstream-team-agile', !!python/unicode 'blog/2016/openstack-summit-newton-austin-telemetry',
+  !!python/unicode 'blog/2016/python-exceptions-guide', !!python/unicode 'blog/2016/retrospective-openstack-telemetry-newton',
+  !!python/unicode 'blog/2016/gnocchi-carbonara-timeseries-compression', !!python/unicode 'blog/2016/pifpaf-a-tool-to-run-daemon-briefly',
+  !!python/unicode 'blog/2016/fosdem-recap', !!python/unicode 'base.j2', !!python/unicode 'blog.j2',
+  !!python/unicode 'blog/2016/gnocchi-2.0-release', !!python/unicode 'blog/2016/gnocchi-2.1-release',
+  !!python/unicode 'blog/2016/foss-projects-management-bad-practice', !!python/unicode 'blog/2016/openstack-schizophrenia',
+  !!python/unicode 'base2.j2', !!python/unicode 'blog/2016/paris-monitoring-6-gnocchi',
+  !!python/unicode 'blog-list.j2', !!python/unicode 'blog/2016/openstack-summit-ocata-barcelona-review',
+  !!python/unicode 'blog/2016/asciidoc-book-toolchain-released']
+!!python/unicode 'blog/2016/opensource-upstream-team-agile': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/openstack-schizophrenia': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/openstack-summit-newton-austin-telemetry': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/openstack-summit-ocata-barcelona-review': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/paris-monitoring-6-gnocchi': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/pifpaf-a-tool-to-run-daemon-briefly': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/python-exceptions-guide': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/python-sqlalchemy-from-decimal-to-timestamp': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/retrospective-openstack-telemetry-newton': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2016/the-hacker-guide-to-python-third-edition': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/announcing-act-epr': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/announcing-scaling-python': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/fosdem-recap': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/gnocchi-3.1-release': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/gnocchi-collectd-setup': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/index.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'blog/2017/announcing-act-epr',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/metrics-on-amazon-with-gnocchi-s3-driver': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/packaging-python-with-pbr': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/python-tenacity': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
 !!python/unicode 'blog/atom.xml': [atom.j2]
 !!python/unicode 'blog/excerpts.xml': [atom.j2]
+!!python/unicode 'blog/index.html': [!!python/unicode 'blog.j2', !!python/unicode 'blog/2017/announcing-act-epr',
+  !!python/unicode 'base.j2', !!python/unicode 'blog-list.j2']
+!!python/unicode 'blog/index.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2']
+!!python/unicode 'blog/tags/Alembic.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Alembic.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Amazon Web Services.html': [!!python/unicode 'blog-list.j2',
+  !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Amazon Web Services.xml': [!!python/unicode 'xml.j2',
+  !!python/unicode 'macros.j2', !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Aodh.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Aodh.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Apache HTTP Server.html': [!!python/unicode 'blog-list.j2',
+  !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Apache HTTP Server.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/AsciiDoc.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/AsciiDoc.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/BBDB.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/BBDB.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Books.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Books.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Bootstrap.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Bootstrap.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/CVE.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/CVE.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Cairo.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Cairo.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Ceilometer.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Ceilometer.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/ClamAV.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/ClamAV.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Climate.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Climate.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/CloudKitty.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/CloudKitty.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Common Lisp.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Common Lisp.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Cython.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Cython.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/D-Bus.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/D-Bus.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/DNSBL.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/DNSBL.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Debian.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Debian.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Dovecot.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Dovecot.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/ERC.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/ERC.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/EWMH.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/EWMH.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Emacs.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Emacs.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/FOSDEM.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/FOSDEM.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Freedesktop.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Freedesktop.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/GIF.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/GIF.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/GTK+.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/GTK+.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/GTK.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/GTK.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Gerrit.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Gerrit.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Git.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Git.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/GitHub.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/GitHub.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Gnocchi.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Gnocchi.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Gnus.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Gnus.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Google Calendar.html': [!!python/unicode 'blog-list.j2',
+  !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Google Calendar.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Google Contacts.html': [!!python/unicode 'blog-list.j2',
+  !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Google Contacts.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Google Maps.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Google Maps.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Google Weather.html': [!!python/unicode 'blog-list.j2',
+  !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Google Weather.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Grafana.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Grafana.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Gravatar.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Gravatar.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Guile.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Guile.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Heat.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Heat.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Hy.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Hy.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Hydrogenase.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Hydrogenase.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/IMAP.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/IMAP.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/IRC.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/IRC.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Imlib.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Imlib.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/JSON.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/JSON.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Javascript.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Javascript.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/LDAP.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/LDAP.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/LWN.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/LWN.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Linux.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Linux.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Lisp.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Lisp.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Logitech.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Logitech.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Lua.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Lua.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Mail.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Mail.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Meetup.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Meetup.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Monitoring.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Monitoring.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Munin.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Munin.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/MySQL.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/MySQL.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/OAuth.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/OAuth.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Open Source.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Open Source.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/OpenStack.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/OpenStack.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Org.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Org.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Pifpaf.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Pifpaf.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Pocket.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Pocket.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/PostgreSQL.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/PostgreSQL.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Postmodern.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Postmodern.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Python.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Python.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Red Hat.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Red Hat.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/SQLAlchemy.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/SQLAlchemy.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Security.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Security.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Sieve.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Sieve.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Swift.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Swift.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Synaps.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Synaps.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/TDD.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/TDD.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Tooz.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Tooz.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/TuxFamily.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/TuxFamily.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/UPower.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/UPower.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/USB.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/USB.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Ubuntu.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Ubuntu.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/VHFFS.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/VHFFS.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Whisper.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Whisper.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Work.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Work.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/X11.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/X11.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/XCB.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/XCB.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Xen.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Xen.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/angry.html': [base.j2, tagged_posts.j2, analytics.j2,
   topbar.j2]
+!!python/unicode 'blog/tags/awesome.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/awesome.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/cl-async.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/cl-async.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/cl-irc.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/cl-irc.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/cl-json.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/cl-json.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/collectd.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/collectd.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/happy.html': [base.j2, tagged_posts.j2, analytics.j2,
   topbar.j2]
+!!python/unicode 'blog/tags/mod_defensible.html': [!!python/unicode 'blog-list.j2',
+  !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/mod_defensible.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/pbr.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/pbr.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/sad.html': [base.j2, tagged_posts.j2, analytics.j2, topbar.j2]
+!!python/unicode 'blog/tags/startup-notification.html': [!!python/unicode 'blog-list.j2',
+  !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/startup-notification.xml': [!!python/unicode 'xml.j2',
+  !!python/unicode 'macros.j2', !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/thoughts.html': [base.j2, tagged_posts.j2, analytics.j2,
   topbar.j2]
-!!python/unicode 'index.html': [base.j2, fullwidth.j2, analytics.j2, topbar.j2]
-!!python/unicode 'media/css/academicons.css': []
-!!python/unicode 'media/css/academicons.min.css': []
-!!python/unicode 'media/css/bib-publication-list.css': []
+!!python/unicode 'blog/tags/xpyb.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/xpyb.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'index.html': [!!python/unicode 'base.j2']
+!!python/unicode 'media/.hyde_deps': []
+!!python/unicode 'media/css/academicons.css': [base.j2, analytics.j2]
+!!python/unicode 'media/css/academicons.min.css': [base.j2, analytics.j2]
+!!python/unicode 'media/css/bib-publication-list.css': [base.j2, analytics.j2]
 !!python/unicode 'media/css/bootstrap.css': []
-!!python/unicode 'media/css/bootstrap.min.css': []
-!!python/unicode 'media/css/docs.css': []
-!!python/unicode 'media/css/font-awesome.css': []
-!!python/unicode 'media/css/font-awesome.min.css': []
-!!python/unicode 'media/css/offcanvas.css': []
-!!python/unicode 'media/css/style.css': []
-!!python/unicode 'media/fonts/academicons.svg': []
-!!python/unicode 'media/fonts/fontawesome-webfont.svg': []
-!!python/unicode 'media/img/.hyde_deps': []
-!!python/unicode 'media/index.html': []
-!!python/unicode 'media/js/libs/README.md': []
-!!python/unicode 'media/js/libs/affix.js': []
-!!python/unicode 'media/js/libs/alert.js': []
-!!python/unicode 'media/js/libs/application.js': []
+!!python/unicode 'media/css/bootstrap.min.css': [base.j2, analytics.j2]
+!!python/unicode 'media/css/docs.css': [base.j2, analytics.j2]
+!!python/unicode 'media/css/font-awesome.css': [base.j2, analytics.j2]
+!!python/unicode 'media/css/font-awesome.min.css': [base.j2, analytics.j2]
+!!python/unicode 'media/css/offcanvas.css': [base.j2, analytics.j2]
+!!python/unicode 'media/css/style.css': [base.j2, analytics.j2]
+!!python/unicode 'media/fonts/academicons.svg': [base.j2, analytics.j2]
+!!python/unicode 'media/fonts/fontawesome-webfont.svg': [base.j2, analytics.j2]
+!!python/unicode 'media/img/.hyde_deps': [base.j2, analytics.j2]
+!!python/unicode 'media/index.html': [base.j2, analytics.j2]
+!!python/unicode 'media/js/BibTex-0.1.2.js': []
+!!python/unicode 'media/js/bib-list.js': []
+!!python/unicode 'media/js/bootstrap-tab-bookmark.js': []
+!!python/unicode 'media/js/custom.min.js': []
+!!python/unicode 'media/js/libs/README.md': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/affix.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/alert.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/application.js': [base.j2, analytics.j2]
 !!python/unicode 'media/js/libs/bootstrap.js': []
-!!python/unicode 'media/js/libs/bootstrap.min.js': []
-!!python/unicode 'media/js/libs/button.js': []
-!!python/unicode 'media/js/libs/carousel.js': []
-!!python/unicode 'media/js/libs/collapse.js': []
-!!python/unicode 'media/js/libs/customizer.js': []
-!!python/unicode 'media/js/libs/dropdown.js': []
-!!python/unicode 'media/js/libs/google-code-prettify/prettify.css': []
-!!python/unicode 'media/js/libs/google-code-prettify/prettify.js': []
-!!python/unicode 'media/js/libs/holder/holder.js': []
-!!python/unicode 'media/js/libs/html5shiv.js': []
-!!python/unicode 'media/js/libs/jquery.bbq.min.js': []
-!!python/unicode 'media/js/libs/jquery.js': []
-!!python/unicode 'media/js/libs/jszip.js': []
-!!python/unicode 'media/js/libs/modal.js': []
-!!python/unicode 'media/js/libs/offcanvas.js': []
-!!python/unicode 'media/js/libs/popover.js': []
-!!python/unicode 'media/js/libs/scrollspy.js': []
-!!python/unicode 'media/js/libs/tab.js': []
-!!python/unicode 'media/js/libs/tooltip.js': []
-!!python/unicode 'media/js/libs/transition.js': []
-!!python/unicode 'media/js/libs/uglify.js': []
-!!python/unicode 'media/less/animated.less': []
-!!python/unicode 'media/less/bordered-pulled.less': []
-!!python/unicode 'media/less/core.less': []
-!!python/unicode 'media/less/fixed-width.less': []
-!!python/unicode 'media/less/font-awesome.less': []
-!!python/unicode 'media/less/icons.less': []
-!!python/unicode 'media/less/larger.less': []
-!!python/unicode 'media/less/list.less': []
-!!python/unicode 'media/less/mixins.less': []
-!!python/unicode 'media/less/path.less': []
-!!python/unicode 'media/less/rotated-flipped.less': []
-!!python/unicode 'media/less/screen-reader.less': []
-!!python/unicode 'media/less/stacked.less': []
-!!python/unicode 'media/less/variables.less': []
-!!python/unicode 'media/scss/_animated.scss': []
-!!python/unicode 'media/scss/_bordered-pulled.scss': []
-!!python/unicode 'media/scss/_core.scss': []
-!!python/unicode 'media/scss/_fixed-width.scss': []
-!!python/unicode 'media/scss/_icons.scss': []
-!!python/unicode 'media/scss/_larger.scss': []
-!!python/unicode 'media/scss/_list.scss': []
-!!python/unicode 'media/scss/_mixins.scss': []
-!!python/unicode 'media/scss/_path.scss': []
-!!python/unicode 'media/scss/_rotated-flipped.scss': []
-!!python/unicode 'media/scss/_screen-reader.scss': []
-!!python/unicode 'media/scss/_stacked.scss': []
-!!python/unicode 'media/scss/_variables.scss': []
-!!python/unicode 'media/scss/font-awesome.scss': []
-!!python/unicode 'media/sidabras.bib': []
-!!python/unicode 'publications.html': [base.j2, fullwidth.j2, analytics.j2, topbar.j2]
+!!python/unicode 'media/js/libs/bootstrap.min.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/button.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/carousel.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/collapse.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/customizer.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/dropdown.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/google-code-prettify/prettify.css': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/google-code-prettify/prettify.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/holder/holder.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/html5shiv.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/jquery.bbq.min.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/jquery.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/jszip.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/modal.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/offcanvas.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/popover.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/scrollspy.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/tab.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/tooltip.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/transition.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/libs/uglify.js': [base.j2, analytics.j2]
+!!python/unicode 'media/js/plugins.js': []
+!!python/unicode 'media/js/plugins.min.js': []
+!!python/unicode 'media/less/animated.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/bordered-pulled.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/core.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/fixed-width.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/font-awesome.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/icons.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/larger.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/list.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/mixins.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/path.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/rotated-flipped.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/screen-reader.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/stacked.less': [base.j2, analytics.j2]
+!!python/unicode 'media/less/variables.less': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_animated.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_bordered-pulled.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_core.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_fixed-width.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_icons.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_larger.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_list.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_mixins.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_path.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_rotated-flipped.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_screen-reader.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_stacked.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/_variables.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/scss/font-awesome.scss': [base.j2, analytics.j2]
+!!python/unicode 'media/sidabras.bib': [base.j2, analytics.j2]
+!!python/unicode 'publications.html': [!!python/unicode 'base.j2']
+!!python/unicode 'sitemap.xml': []

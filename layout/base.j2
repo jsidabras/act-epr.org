@@ -32,6 +32,15 @@
     {% endblock basecss %}
     {% block css %}{% endblock %}
 
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', '{{ google_analytics_id }}', 'auto', {'allowLinker': true});
+        ga('send', 'pageview');
+    </script>
 
 
     {% block favicons %}
@@ -43,9 +52,6 @@
     {% endblock headjs %}
 
     {% block endhead %}{% endblock endhead %}
-    {% block analytics %}
-    {% include "analytics.j2" %}
-    {% endblock analytics %}
   </head>
 
   <body class="{{ resource.meta.id if resource.meta.id else resource.slug }}">
@@ -68,7 +74,7 @@
                     <div class="row">
                         <div class="col-md-5"><!-- logo -->
                             <a href="index.html" title="Job Board" rel="home">
-                                <img class="main-logo" style="margin-left: 20px; height: 100px;" src="/media/img/ActEPRLogo.png" alt="Act-EPR" />
+                                <img class="main-logo" style="margin-left: 20px; width: 75%;" src="/media/img/ActEPRLogo.png" alt="Act-EPR" />
                             </a>
                             <br />
                             <br />
@@ -78,16 +84,17 @@
                         <div class="col-md-8  main-nav"><!-- Main Navigation -->
                             <a id="touch-menu" class="mobile-menu" href="#"><i class="fa fa-bars fa-2x"></i></a>
                             <nav>
-                                <ul class="navbar-nav menu">
-                                    <li class="nav-item"><a href="index.html">HOME</a></li>
-                                    <li class="nav-item"><a  href="#">WORK PACKAGES</a>
+                                <ul class="menu">
+                                    <li><a href="/">HOME</a></li>
+                                    <li><a  href="#">WORK PACKAGES</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">WP1 Micro-Helix Resonators</a></li>
                                             <li><a href="#">WP2 Technology Advancements</a></li>
                                             <li><a href="#">WP3 Biological Research</a></li>
                                         </ul>
                                     </li>
-                                    <li><a  href="publications.html">PUBLICATIONS</a></li>
+                                    <li><a  href="/publications.html">PUBLICATIONS</a></li>
+                                   <!-- <li><a  href="/blog/">BLOG</a></li> -->
                                     <li><a  href="#">ABOUT</a></li>
                                 </ul>
                             </nav>
@@ -106,7 +113,7 @@
             
                 </div> <!-- /row-->
             </div> <!-- /container -->
-
+        </div>
     {% endblock body %}
 
     <div id="footer"><!-- Footer -->

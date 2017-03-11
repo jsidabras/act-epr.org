@@ -1,48 +1,63 @@
-mode: development # Use "hyde publish -c prod.yaml to have this automatically switch to production
+base_url: /
+simple_copy:
+  - media/*
 media_root: media # Relative path from content folder.
 media_url: /media # URL where the media files are served from.
+server:
+  extensions:
+    default: text/html
+
 plugins:
-    - hyde.ext.plugins.meta.MetaPlugin
-    - hyde.ext.plugins.auto_extend.AutoExtendPlugin
-    - hyde.ext.plugins.syntext.SyntextPlugin
-    - hyde.ext.plugins.textlinks.TextlinksPlugin
-    - hyde.ext.plugins.meta.SorterPlugin
-    - hyde.ext.plugins.meta.TaggerPlugin
+  - hyde.ext.plugins.meta.MetaPlugin
+  - hyde.ext.plugins.meta.AutoExtendPlugin
+  - hyde.ext.plugins.text.SyntextPlugin
+  - hyde.ext.plugins.text.TextlinksPlugin
+  - hyde.ext.plugins.urls.UrlCleanerPlugin
+  - hyde.ext.plugins.meta.SorterPlugin
+  - hyde.ext.plugins.meta.TaggerPlugin
+  - hyde.ext.plugins.structure.PaginatorPlugin
+
+syntax:
+  use_figure: False
+
+sorter:
+  name:
+    attr: name
+    filters:
+      # source_file.kind: html
+      is_processable: True
+  time:
+     attr: meta.created
+     reverse: True
+     filters:
+       # source_file.kind: html
+       is_processable: True
+
+tagger:
+  sorter: time
+  archives:
+    atom:
+      source: blog
+      target: blog/tags
+      template: tag.xml.j2
+      extension: xml
+    blog:
+      source: blog
+      target: blog/tags
+      template: tag.j2
+
+urlcleaner:
+  index_file_names:
+    - index.html
+  strip_extensions:
+    - html
+
 context:
     data:
-        site_title: Act-EPR MSC Individual Fellowship 
+        site_url: https://julien.danjou.info
+        site_title: Julien Danjou
+        blog_title: jd:/dev/blog
         author:
-            name: Jason W. Sidabras 
-            url: "http://act-epr.org"
-        google_analytics_id: UA-91383149-1 
-        home_url: index.html
-        menu:
-            - title: Home 
-              type: page
-              url: index.html
-            - title: Publications 
-              type: page
-              url: publications.html
-        sidebar:
-            - title: One
-              url: one.html
-            - title: Two
-              url: \#
-sorter:
-    time:
-        attr:
-            - meta.created
-        reverse: true
-        filters:
-            source.kind: html
-            meta.listable: true
-tagger:
-    sorter: time
-    archives:
-        blog:
-            source: blog
-            target: blog/tags
-            template: tagged_posts.j2
-            archive_extension: html
-            meta:
-                listable: false
+            name: Julien Danjou
+            url: "https://julien.danjou.info"
+        google_analytics_id: UA-25393581-1
