@@ -54,10 +54,10 @@ urlcleaner:
 
 context:
     data:
-        site_url: https://julien.danjou.info
-        site_title: Julien Danjou
-        blog_title: jd:/dev/blog
+        site_url: http://act-epr.org
+        site_title: Act-EPR MSC Fellowship 
+        blog_title: Act-EPR
         author:
-            name: Julien Danjou
-            url: "https://julien.danjou.info"
+            name: Jason W. Sidabras 
+            url: "http://act-epr.org"
         google_analytics_id: UA-25393581-1
