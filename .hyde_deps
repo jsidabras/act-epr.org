@@ -1,4 +1,5 @@
 !!python/unicode '.hyde_deps': [!!python/unicode 'base.j2']
+!!python/unicode 'about.html': [!!python/unicode 'base.j2']
 !!python/unicode 'blarg/2017/gnocchi-3.1-release': [blog.j2, base.j2, analytics.j2]
 !!python/unicode 'blarg/2017/index.html': [blog.j2, base.j2, analytics.j2]
 !!python/unicode 'blarg/2017/python-tenacity': [blog.j2, base.j2, analytics.j2]
@@ -356,8 +357,9 @@
 !!python/unicode 'blog/2017/gnocchi-3.1-release': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
 !!python/unicode 'blog/2017/gnocchi-collectd-setup': [!!python/unicode 'blog.j2',
   !!python/unicode 'base.j2']
-!!python/unicode 'blog/2017/index.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'blog/2017/announcing-act-epr',
-  !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/index.html': [!!python/unicode 'blog/2017/jeol-prize-winner',
+  !!python/unicode 'blog.j2', !!python/unicode 'base.j2', !!python/unicode 'blog-list.j2']
+!!python/unicode 'blog/2017/jeol-prize-winner': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
 !!python/unicode 'blog/2017/metrics-on-amazon-with-gnocchi-s3-driver': [!!python/unicode 'blog.j2',
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/2017/packaging-python-with-pbr': [!!python/unicode 'blog.j2',
@@ -365,8 +367,8 @@
 !!python/unicode 'blog/2017/python-tenacity': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
 !!python/unicode 'blog/atom.xml': [atom.j2]
 !!python/unicode 'blog/excerpts.xml': [atom.j2]
-!!python/unicode 'blog/index.html': [!!python/unicode 'blog.j2', !!python/unicode 'blog/2017/announcing-act-epr',
-  !!python/unicode 'base.j2', !!python/unicode 'blog-list.j2']
+!!python/unicode 'blog/index.html': [!!python/unicode 'blog/2017/jeol-prize-winner',
+  !!python/unicode 'blog.j2', !!python/unicode 'base.j2', !!python/unicode 'blog-list.j2']
 !!python/unicode 'blog/index.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2']
 !!python/unicode 'blog/tags/Alembic.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
   !!python/unicode 'base.j2']
@@ -387,6 +389,10 @@
 !!python/unicode 'blog/tags/AsciiDoc.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/AsciiDoc.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Awards.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Awards.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
   !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/BBDB.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
   !!python/unicode 'base.j2']

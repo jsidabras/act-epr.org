@@ -1,0 +1,25 @@
+---
+title: JEOL Student Lecture Prize 
+created: !!timestamp '2017-04-09 16:00:00'
+image: /media/images/blog/2017/scapy-title.jpg
+default_block: None
+tags:
+    - Awards 
+---
+
+{% block article %}
+{% block excerpt %}
+{% mark excerpt %}
+
+I am honored to have been awarded the 21st annual JEOL Student Lecture Prize at the 50th annual international Royal Society of Chemistry EPR meeting. I would like to thank the organizers for the amazing opportunity to present my current work in Oxford at the beautiful Keble College. This prestegious award 
+
+{% endmark %}
+{% endblock %}
+
+The work I presented focuses on the use of micro-resonators, such as the Planar Micro Resonator (PMR) and micro-helix.
+
+{% endblock %}
+
+{# Local Variables: #}
+{# mode: markdown #}
+{# End: #}

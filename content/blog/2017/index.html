@@ -1,1 +1,22 @@
-../index.html
+---
+extends: false
+default_block: None
+title: News and Blog 
+paginator:
+    sorter: time
+    size: 10
+    file_pattern: page$PAGE
+---
+{% set post_list = resource.page.posts %}
+
+{% extends "blog-list.j2" %}
+
+{# If we are rendering a year, just replace the title #}
+{% block page_title %}
+  {% if resource.node.parent.name == "blog" %}
+    Blog posts for year {{ resource.node.name }}
+  {% else %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
