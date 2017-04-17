@@ -465,6 +465,11 @@ ul {
   margin-bottom: 10px;
 }
 
+ul.pagination {
+  margin: 200px 0 10px 0;;
+  list-style-type: none;
+}
+
 ul ul {
   margin-bottom: 0;
 }

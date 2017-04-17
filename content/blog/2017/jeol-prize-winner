@@ -11,12 +11,11 @@ tags:
 {% block excerpt %}
 {% mark excerpt %}
 
-I am honored to have been awarded the 21st annual JEOL Student Lecture Prize at the 50th annual international Royal Society of Chemistry EPR meeting. I would like to thank the organizers for the amazing opportunity to present my current work in Oxford at the beautiful Keble College. This prestegious award 
+I am honored to have been awarded the 21st annual JEOL Student Lecture Prize at the 50th annual international Royal Society of Chemistry EPR meeting. I would like to thank the organizers for the amazing opportunity to present my current work in Oxford at the beautiful Keble College.
 
 {% endmark %}
 {% endblock %}
-
-The work I presented focuses on the use of micro-resonators, such as the Planar Micro Resonator (PMR) and micro-helix.
+More information about the award can be found [here](http://www.esr-group.org/jeol-lectures/). The talk titled _Planar Micro-Resonators and Micro-Helix Geometries for Studying Protein Single Crystals with X-band EPR_ can be found in the [Publications](http://act-epr.org/publications.html) tab.
 
 {% endblock %}
 
