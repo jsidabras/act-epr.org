@@ -7,7 +7,7 @@
     <link href="http://act-epr.org/blog/"/>
   
     
-  <updated>2017-05-01T12:08:41Z</updated>
+  <updated>2017-05-01T12:21:02Z</updated>
 
   <id>http://act-epr.org/blog/tags/Simulations.xml</id>
 
@@ -29,7 +29,7 @@
 &lt;h3&gt;The right computer for the job.&lt;/h3&gt;
 &lt;p&gt;The first thing you need is a good computer. Ansys HFSS can run on any Windows computer, but we are not interested in just running this simulation package but to squeeze every last ounce of power out of it. The &lt;strong&gt;most important&lt;/strong&gt; part is the L2 cache size of a processor. This is the scratch pad of the calculation and the bigger this is, the less amount of time the program will be using memory and &lt;em&gt;shudder&lt;/em&gt; disk space.&lt;/p&gt;
 &lt;p&gt;I personally have preferred Intel Xeon chips and they remain the industry standard. Load up the cores (one for each purchased High Performance Computing License) and buy a system with 2 processors. Hyper-threading has come a long way in terms of performance, but it is still split by CPU cycles. In terms of raw simulation power, Hyper-threading (IMHO) doesn&#39;t cut it. I have seen 10-15% improvements without Hyper-threading. &lt;/p&gt;
-&lt;p&gt;Ever since Intel introduced &lt;a href=&#34;https://en.wikipedia.org/wiki/Intel_QuickPath_Interconnect&#34;&gt;QuickPath Interconnect&lt;/a&gt; to the Northbridge Chipset, the memory interface has been optimized for transfer from the chipset. This is highly desired in simulation programs like HFSS. And we will use this later when we set up a &lt;a href=&#34;https://en.wikipedia.org/wiki/RAM_drive&#34;&gt;RAMDrive&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Ever since Intel introduced &lt;a href=&#34;https://en.wikipedia.org/wiki/Intel_QuickPath_Interconnect&#34;&gt;QuickPath Interconnect&lt;/a&gt; to the Northbridge Chipset, the memory interface has been optimized for data transfer from the chipset. This is highly desired in simulation programs like HFSS. And we will use this later when we set up a &lt;a href=&#34;https://en.wikipedia.org/wiki/RAM_drive&#34;&gt;RAMDrive&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Ensure your RAM is ECC protected (to minimize bit failure) and load it up. My current computer is up to 128 GB of DDR4 RAM. However, I&#39;ve had the privilege of having a workstation with 512 GB of DDR4 RAM. It was needed to solve a &lt;a href=&#34;http://aip.scitation.org/doi/abs/10.1063/1.4961573?journalCode=rsi&#34;&gt;complex problem&lt;/a&gt; where the typical boundary conditions of electric field on a metal surface was not correct. Therefore we had to solve &lt;strong&gt;inside&lt;/strong&gt; the metal. This increases the mesh needed immensely and needed lots of RAM to solve.&lt;/p&gt;
 &lt;p&gt;What is interesting is that the GPU is not as critical as you expect. And unless you expecting to utilize the GPU solver for iterative solutions a mid-high end nVidia card will be sufficient. Currently, standard DrivenMode (Terminal and Modal) and EigenMode &lt;em&gt;do not&lt;/em&gt; utilize the GPU.&lt;/p&gt;
 &lt;h3&gt;Your data is worth more than gold&lt;/h3&gt;
