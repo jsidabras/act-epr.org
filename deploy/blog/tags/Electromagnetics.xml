@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="http://act-epr.org">
+  <title>
+    Act-EPR  </title>
+    <link href="http://act-epr.org/blog/tags/Electromagnetics.xml" rel="self" />
+  
+    <link href="http://act-epr.org/blog/"/>
+  
+    
+  <updated>2017-05-01T12:08:41Z</updated>
+
+  <id>http://act-epr.org/blog/tags/Electromagnetics.xml</id>
+
+      <entry>
+    <title type="html">Boosting Ansys HFSS Performance</title>
+    <author><name>Jason W. Sidabras</name></author>
+    <link href="http://act-epr.org/blog/2017/boosting-ansys-hfss-performance"/>
+    <link rel="alternate" type="text/html" href="http://act-epr.org/blog/2017/boosting-ansys-hfss-performance"/>
+    <updated>2017-04-28T06:00:00Z</updated>
+    <published>2017-04-28T06:00:00Z</published>
+    <id>http://act-epr.org/blog/2017/boosting-ansys-hfss-performance</id>
+        <category term="Ansys HFSS" label="Ansys Hfss" />
+        <category term="Tips and Tricks" label="Tips And Tricks" />
+        <category term="Electromagnetics" label="Electromagnetics" />
+        <category term="Simulations" label="Simulations" />
+    
+    <content type="html">
+                  &lt;p&gt;After 12 years of running Ansys (previously Ansoft) &lt;a href=&#34;http://www.ansys.com/products/electronics/ansys-hfss&#34;&gt;High Frequency Structure Simulator&lt;/a&gt; I have a series of helpful tricks to improve the performance of your simulations. Over the last 5 years Ansys HFSS has significantly improved in its ability to handle multiple processors and now even support GPU acceleration for iterative solutions. However, there are always going to be bottlenecks.&lt;/p&gt;
+&lt;h3&gt;The right computer for the job.&lt;/h3&gt;
+&lt;p&gt;The first thing you need is a good computer. Ansys HFSS can run on any Windows computer, but we are not interested in just running this simulation package but to squeeze every last ounce of power out of it. The &lt;strong&gt;most important&lt;/strong&gt; part is the L2 cache size of a processor. This is the scratch pad of the calculation and the bigger this is, the less amount of time the program will be using memory and &lt;em&gt;shudder&lt;/em&gt; disk space.&lt;/p&gt;
+&lt;p&gt;I personally have preferred Intel Xeon chips and they remain the industry standard. Load up the cores (one for each purchased High Performance Computing License) and buy a system with 2 processors. Hyper-threading has come a long way in terms of performance, but it is still split by CPU cycles. In terms of raw simulation power, Hyper-threading (IMHO) doesn&#39;t cut it. I have seen 10-15% improvements without Hyper-threading. &lt;/p&gt;
+&lt;p&gt;Ever since Intel introduced &lt;a href=&#34;https://en.wikipedia.org/wiki/Intel_QuickPath_Interconnect&#34;&gt;QuickPath Interconnect&lt;/a&gt; to the Northbridge Chipset, the memory interface has been optimized for transfer from the chipset. This is highly desired in simulation programs like HFSS. And we will use this later when we set up a &lt;a href=&#34;https://en.wikipedia.org/wiki/RAM_drive&#34;&gt;RAMDrive&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Ensure your RAM is ECC protected (to minimize bit failure) and load it up. My current computer is up to 128 GB of DDR4 RAM. However, I&#39;ve had the privilege of having a workstation with 512 GB of DDR4 RAM. It was needed to solve a &lt;a href=&#34;http://aip.scitation.org/doi/abs/10.1063/1.4961573?journalCode=rsi&#34;&gt;complex problem&lt;/a&gt; where the typical boundary conditions of electric field on a metal surface was not correct. Therefore we had to solve &lt;strong&gt;inside&lt;/strong&gt; the metal. This increases the mesh needed immensely and needed lots of RAM to solve.&lt;/p&gt;
+&lt;p&gt;What is interesting is that the GPU is not as critical as you expect. And unless you expecting to utilize the GPU solver for iterative solutions a mid-high end nVidia card will be sufficient. Currently, standard DrivenMode (Terminal and Modal) and EigenMode &lt;em&gt;do not&lt;/em&gt; utilize the GPU.&lt;/p&gt;
+&lt;h3&gt;Your data is worth more than gold&lt;/h3&gt;
+&lt;p&gt;I need to put this in its own section. &lt;strong&gt;There is nothing more important than the safety of your data.&lt;/strong&gt; Windows 7 Professional and Ansys HFSS should be installed on a SSD, but you can&#39;t trust the MTBF of an SSD for your data. Instead you should at least have a RAID1 volume to store your data. &lt;/p&gt;
+&lt;p&gt;However, I am paranoid. In addition to the RAID1 volume I use &lt;a href=&#34;https://itefix.net/cwrsync&#34;&gt;cwrsync&lt;/a&gt; to backup my HFSS files to a secured remote server. By backing up the hfss files you save significantly on space (and backup time) while maintaining the most important parts. This is done by EXCLUDE command to exclude the solution folders.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rsync.exe -avz --delete-after --prune-empty-dirs --exclude &#34;*.hfssresults&#34; --exclude &#34;*.mxwlresults&#34; --exclude &#34;*_files&#34; --exclude &#34;*.adsnresults&#34; &#34;/cygdrive/D/Maxwell&#34;  &#34;username@servername:~/Backup/&#34;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This code ensures that your Backup server is &lt;em&gt;exactly&lt;/em&gt; like your current drive. If you delete something in the local hard drive this will delete it in the server. There are other ways to &lt;a href=&#34;http://www.mikerubel.org/computers/rsync_snapshots/&#34;&gt;backup using rsync&lt;/a&gt; and maybe you would like a different scheme.&lt;/p&gt;
+&lt;p&gt;Set cwrsync to &lt;a href=&#34;https://www.nextofwindows.com/how-to-run-a-script-or-command-at-logoff-in-windows-7-8&#34;&gt;backup when you logoff&lt;/a&gt; or &lt;a href=&#34;https://www.howtogeek.com/123393/how-to-automatically-run-programs-and-set-reminders-with-the-windows-task-scheduler/&#34;&gt;run at a certain time every day&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;RAMDrive: Eliminated the Bottleneck&lt;/h3&gt;
+&lt;p&gt;Running a simulation on a RAID1 drive is not the best idea. First, it increases the MTBF of the drives. Second, it creates a significant bottleneck due to the speeds of the hard drives compared to the SSD. At the very least you should be running your simulations on the SSD and use the RAID1 volume for backup.&lt;/p&gt;
+&lt;p&gt;However, there is an advanced way to get (theoretically) over 4 GB/s throughput. Using a RAMDrive. A RAMDrive is when you format part of your system memory and create a usable drive. Although this is risky (RAM is volatile, computer reboot will lose data) the speedup is worth it for long solutions. &lt;/p&gt;
+&lt;p&gt;Before we get into the setup, you must be aware that Ansys HFSS uses both the TEMP directory &lt;strong&gt;and&lt;/strong&gt; the .adsnresults folders when solving. So we must make the RAMDrive large enough to handle our solution. In one instance our .adsnresults folder was over 200 GB due to a Direct Solver of the sweep and keeping the fields. Obviously we didn&#39;t run this in a RAMDrive, but instead on the SSD. &lt;/p&gt;
+&lt;p&gt;For years I have been using &lt;a href=&#34;http://winramtech.hostei.com/RAMDriv/&#34;&gt;WinRamTech RAMDisc&lt;/a&gt; with a lot of success. I highly recommend purchasing the 64-bit enterprise version for $11 (I get &lt;strong&gt;no&lt;/strong&gt; kickback.) Installation is simple and configuration is straight forward. I typically set up a 8-24 GB RAMDrive depending on the problem at hand. &lt;/p&gt;
+&lt;p&gt;First, remember to set your TEMP directory to be inside the RAMDrive. Everyday running (8 GB RAMDrive) should have the TEMP directory set up. If your computer reboots, you only lose partial solutions. &lt;/p&gt;
+&lt;p&gt;When you are ready to solve you should &lt;em&gt;Save As...&lt;/em&gt; from your working file to the RAMDrive. Ansys HFSS builds the .adsnresults folder where the HFSS file is located. With this your solutions will easily be cut by 50%. &lt;/p&gt;
+&lt;h3&gt;Forcing Mesh Optimization&lt;/h3&gt;
+&lt;p&gt;The meshing function in Ansys HFSS is quite good and has gotten better over the years. But there are a few key ideas that you can use to to optimize your solution space. &lt;/p&gt;
+&lt;p&gt;Ansys HFSS uses corners and edges to start the initial mesh. It then refines the mesh based on dielectric properties. After a first solution, Ansys increases the mesh at volumes of maximum electric field and generally increases the solution. Although this is a good way to solve for ports and antenna, it tends to over compensate in magnetic resonance resonator and surface coil design. &lt;/p&gt;
+&lt;p&gt;In order to guide better mesh optimization I use three methods. The first is to chose the number of sides for a cylindrical object. The default HFSS cylinder only has 12 edges and it is visually made smooth. However, you can set the number of size (typically 32 works nicely). This increases the edges and corners for mesh to attached.&lt;/p&gt;
+&lt;p&gt;The second is to create small vacuum regions in your gaps (for a loop-gap resonator) or around important coupling sections (for a planar micro-resonator). These vacuum regions can be individually meshed to focus the algorithm on important features.&lt;/p&gt;
+&lt;p&gt;Finally, in order to make the beautiful figure on the top I had to create hundreds of 0.1 mm boxes around the sample and into the vacuum region. Regular meshing created a very choppy Ephi plot (Figure B and C) and a much finer mesh was needed. However all of the zero region forced a lot of wasted mesh. By creating the boxes or volumes around the sample a significant was formed at the points of interest. Such as the sample/volume interface and the &lt;a href=&#34;https://doi.org/10.1016/j.jmr.2017.02.009&#34;&gt;Type III dipole interface at the edges of the finite sample size&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;I hope this post helps in speeding up your Ansys HFSS solutions. I will add more and refine this post as I learn more!&lt;/p&gt;
+&lt;p&gt;Good luck and happy simulating.&lt;/p&gt;      
+          </content>
+  </entry>
+  
+
+</feed>

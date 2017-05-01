@@ -95,6 +95,9 @@
                 <div class="row">
                     <div class="container" id="top">
         <div class="col-md-9">
+    <div class="entry-content">
+      <div class="blog-title-image" style="background-image: url('/media/blog/2017/jeol.png');">
+    </div>
     <header>
     <h1>JEOL Student Lecture Prize</h1>
       <div class="meta">

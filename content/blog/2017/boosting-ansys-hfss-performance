@@ -1,0 +1,84 @@
+---
+title: Boosting Ansys HFSS Performance 
+created: !!timestamp '2017-04-28 6:00:00'
+image: /media/blog/2017/hfss.png
+default_block: None
+tags:
+    - Ansys HFSS
+    - Tips and Tricks
+    - Electromagnetics
+    - Simulations
+---
+
+{% block article %}
+{% block excerpt %}
+{% mark excerpt %}
+
+After 12 years of running Ansys (previously Ansoft) [High Frequency Structure Simulator](http://www.ansys.com/products/electronics/ansys-hfss) I have a series of helpful tricks to improve the performance of your simulations. Over the last 5 years Ansys HFSS has significantly improved in its ability to handle multiple processors and now even support GPU acceleration for iterative solutions. However, there are always going to be bottlenecks.
+
+{% endmark %}
+{% endblock %}
+
+
+### The right computer for the job.
+
+The first thing you need is a good computer. Ansys HFSS can run on any Windows computer, but we are not interested in just running this simulation package but to squeeze every last ounce of power out of it. The **most important** part is the L2 cache size of a processor. This is the scratch pad of the calculation and the bigger this is, the less amount of time the program will be using memory and *shudder* disk space.
+
+I personally have preferred Intel Xeon chips and they remain the industry standard. Load up the cores (one for each purchased High Performance Computing License) and buy a system with 2 processors. Hyper-threading has come a long way in terms of performance, but it is still split by CPU cycles. In terms of raw simulation power, Hyper-threading (IMHO) doesn't cut it. I have seen 10-15% improvements without Hyper-threading. 
+
+Ever since Intel introduced [QuickPath Interconnect](https://en.wikipedia.org/wiki/Intel_QuickPath_Interconnect) to the Northbridge Chipset, the memory interface has been optimized for transfer from the chipset. This is highly desired in simulation programs like HFSS. And we will use this later when we set up a [RAMDrive](https://en.wikipedia.org/wiki/RAM_drive).
+
+Ensure your RAM is ECC protected (to minimize bit failure) and load it up. My current computer is up to 128 GB of DDR4 RAM. However, I've had the privilege of having a workstation with 512 GB of DDR4 RAM. It was needed to solve a [complex problem](http://aip.scitation.org/doi/abs/10.1063/1.4961573?journalCode=rsi) where the typical boundary conditions of electric field on a metal surface was not correct. Therefore we had to solve **inside** the metal. This increases the mesh needed immensely and needed lots of RAM to solve.
+
+What is interesting is that the GPU is not as critical as you expect. And unless you expecting to utilize the GPU solver for iterative solutions a mid-high end nVidia card will be sufficient. Currently, standard DrivenMode (Terminal and Modal) and EigenMode *do not* utilize the GPU.
+
+### Your data is worth more than gold 
+
+I need to put this in its own section. **There is nothing more important than the safety of your data.** Windows 7 Professional and Ansys HFSS should be installed on a SSD, but you can't trust the MTBF of an SSD for your data. Instead you should at least have a RAID1 volume to store your data. 
+
+However, I am paranoid. In addition to the RAID1 volume I use [cwrsync](https://itefix.net/cwrsync) to backup my HFSS files to a secured remote server. By backing up the hfss files you save significantly on space (and backup time) while maintaining the most important parts. This is done by EXCLUDE command to exclude the solution folders.
+
+```
+rsync.exe -avz --delete-after --prune-empty-dirs --exclude "*.hfssresults" --exclude "*.mxwlresults" --exclude "*_files" --exclude "*.adsnresults" "/cygdrive/D/Maxwell"  "username@servername:~/Backup/" 
+```
+
+This code ensures that your Backup server is *exactly* like your current drive. If you delete something in the local hard drive this will delete it in the server. There are other ways to [backup using rsync](http://www.mikerubel.org/computers/rsync_snapshots/) and maybe you would like a different scheme.
+
+Set cwrsync to [backup when you logoff](https://www.nextofwindows.com/how-to-run-a-script-or-command-at-logoff-in-windows-7-8) or [run at a certain time every day](https://www.howtogeek.com/123393/how-to-automatically-run-programs-and-set-reminders-with-the-windows-task-scheduler/).
+
+### RAMDrive: Eliminated the Bottleneck
+
+Running a simulation on a RAID1 drive is not the best idea. First, it increases the MTBF of the drives. Second, it creates a significant bottleneck due to the speeds of the hard drives compared to the SSD. At the very least you should be running your simulations on the SSD and use the RAID1 volume for backup.
+
+However, there is an advanced way to get (theoretically) over 4 GB/s throughput. Using a RAMDrive. A RAMDrive is when you format part of your system memory and create a usable drive. Although this is risky (RAM is volatile, computer reboot will lose data) the speedup is worth it for long solutions. 
+
+Before we get into the setup, you must be aware that Ansys HFSS uses both the TEMP directory **and** the .adsnresults folders when solving. So we must make the RAMDrive large enough to handle our solution. In one instance our .adsnresults folder was over 200 GB due to a Direct Solver of the sweep and keeping the fields. Obviously we didn't run this in a RAMDrive, but instead on the SSD. 
+
+For years I have been using [WinRamTech RAMDisc](http://winramtech.hostei.com/RAMDriv/) with a lot of success. I highly recommend purchasing the 64-bit enterprise version for $11 (I get **no** kickback.) Installation is simple and configuration is straight forward. I typically set up a 8-24 GB RAMDrive depending on the problem at hand. 
+
+First, remember to set your TEMP directory to be inside the RAMDrive. Everyday running (8 GB RAMDrive) should have the TEMP directory set up. If your computer reboots, you only lose partial solutions. 
+
+When you are ready to solve you should *Save As...* from your working file to the RAMDrive. Ansys HFSS builds the .adsnresults folder where the HFSS file is located. With this your solutions will easily be cut by 50%. 
+
+### Forcing Mesh Optimization
+
+The meshing function in Ansys HFSS is quite good and has gotten better over the years. But there are a few key ideas that you can use to to optimize your solution space. 
+
+Ansys HFSS uses corners and edges to start the initial mesh. It then refines the mesh based on dielectric properties. After a first solution, Ansys increases the mesh at volumes of maximum electric field and generally increases the solution. Although this is a good way to solve for ports and antenna, it tends to over compensate in magnetic resonance resonator and surface coil design. 
+
+In order to guide better mesh optimization I use three methods. The first is to chose the number of sides for a cylindrical object. The default HFSS cylinder only has 12 edges and it is visually made smooth. However, you can set the number of size (typically 32 works nicely). This increases the edges and corners for mesh to attached.
+
+The second is to create small vacuum regions in your gaps (for a loop-gap resonator) or around important coupling sections (for a planar micro-resonator). These vacuum regions can be individually meshed to focus the algorithm on important features.
+
+Finally, in order to make the beautiful figure on the top I had to create hundreds of 0.1 mm boxes around the sample and into the vacuum region. Regular meshing created a very choppy Ephi plot (Figure B and C) and a much finer mesh was needed. However all of the zero region forced a lot of wasted mesh. By creating the boxes or volumes around the sample a significant was formed at the points of interest. Such as the sample/volume interface and the [Type III dipole interface at the edges of the finite sample size](https://doi.org/10.1016/j.jmr.2017.02.009).
+
+### Conclusion
+
+I hope this post helps in speeding up your Ansys HFSS solutions. I will add more and refine this post as I learn more!
+
+Good luck and happy simulating.
+{% endblock %}
+
+{# Local Variables: #}
+{# mode: markdown #}
+{# End: #}
