@@ -875,3 +875,4 @@
 !!python/unicode 'media/sidabras.bib': [base.j2, analytics.j2]
 !!python/unicode 'publications.html': [!!python/unicode 'base.j2']
 !!python/unicode 'sitemap.xml': []
+!!python/unicode 'wp1-helix.html': [!!python/unicode 'base.j2']
