@@ -7,11 +7,90 @@
     <link href="http://act-epr.org/blog/"/>
   
     
-  <updated>2017-07-16T13:23:22Z</updated>
+  <updated>2017-07-18T17:37:03Z</updated>
 
   <id>http://act-epr.org/blog/tags/Ansys%20HFSS.xml</id>
 
       <entry>
+    <title type="html">Numerical Analysis of the EPR Signal using HFSS</title>
+    <author><name>Jason W. Sidabras</name></author>
+    <link href="http://act-epr.org/blog/2017/numerical-analysis-epr"/>
+    <link rel="alternate" type="text/html" href="http://act-epr.org/blog/2017/numerical-analysis-epr"/>
+    <updated>2017-07-12T16:00:00Z</updated>
+    <published>2017-07-12T16:00:00Z</published>
+    <id>http://act-epr.org/blog/2017/numerical-analysis-epr</id>
+        <category term="Ansys HFSS" label="Ansys Hfss" />
+        <category term="Electromagnetics" label="Electromagnetics" />
+        <category term="Tips and Tricks" label="Tips And Tricks" />
+        <category term="Simulations" label="Simulations" />
+    
+    <content type="html">
+                  &lt;p&gt;With the progression of computer technology to multi-core processors, it has become increasingly efficient to use computer simulation models to test experimental ideas. Through these virtual experiments, one can gain intuition and refine theory to better describe the models. This especially holds true in resonator development, where interactions between electromagnetics and the sample play a crucial role in optimizing probes for specific experiments or sample types. &lt;/p&gt;
+&lt;p&gt;While analytical methods have laid the groundwork for theoretical advancement, practical solution space is not always solvable in a closed-form solution. To solve these problems, numerical methods are used. Many numerical methods have been developed such as: the finite-difference time-domain (FD-TD), the finite-element method (FEM), and the method of moments (MoM). Each method has its strengths and weaknesses and is valid for many different boundary-value problems. Here, the focus will be on finite-element modeling.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(This post is an updated version that was published in the EPR Newsletter in 2012.)&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;Finite-element Modeling&lt;/h3&gt;
+&lt;p&gt;The finite-element method developed as a way to solve complex structural analysis problems and can be traced back to Alexander Hrennikoff [1] and Richard Courant [2]. Both developers created a discretization of a continuous domain by creating a mesh of sub-domain elements. The solution is then solved on the sub-domains and later extrapolated to the whole domain. The method by Richard Courant, where finite triangular subregions are used to solve partial-differential equations (PDE), is more widely used. A more detailed history can be found in Refs. [3], [4], and [5].&lt;/p&gt;
+&lt;p&gt;As an example, a two-dimensional object is created as a solvable domain, as shown in Fig. 1a. The domain is then split into an arbitrary number of sub-domains by way of meshing (Fig. 1b). The trade-off in the finite-element method is between the number of sub-domains and the total error of the solution. As the number of sub-domains increase, the number of unknowns increases, using more memory and CPU time to formulate and solve the solution matrix. With too few sub-domains, the irregular object would not have an adequate approximation to its actual shape. Each sub-domain is connected via its vertices, and each connection is called a node. Each node is assigned a number, and a connectivity array is created describing the interlacing of the sub-domains to each other. Nodes are either described as open or fixed. An open node represents a node that requires a solution, while a fixed node represents either a boundary value or source value.&lt;/p&gt;
+&lt;p&gt;Commercially available electromagnetic finite-modeling software creates a suite in which boundary conditions, sources, and dielectric properties are all available in a CAD –like environment. Ansys High Frequency Structure Simulator (HFSS) and Computer Simulation Technology (CST) Microwave Studio are two such commercial electromagnetic three-dimensional FEM solvers. &lt;/p&gt;
+&lt;p&gt;Both employ a “driven-mode” and “eigen-mode” solving domains, which are primarily used for the development of EPR resonators. The “eigen-mode” solver uses Maxwell’s equations in their variational form to find the lowest energy states of a structure given its boundary and electromagnetic material properties. This lowest energy state, or eigenvalue, is then used to calculate the eigenvectors of the structure yielding a wave solution. No sources are needed in this mode and typically solutions are normalized by the electric field to 1 V/m. The “driven-mode” solver uses Maxwell’s equations with the addition a source forcing function. For “driven-mode” coupling considerations are devised in order to maximize power transfer to the resonator.  The “driven-mode” provides outputs similar to network analyzers and is typically normalized to an input power of 1 W.&lt;/p&gt;
+&lt;h2&gt;Signal Calculation and Resonator Comparison&lt;/h2&gt;
+&lt;p&gt;A method to obtain EPR signal intensities from numerical modeling has been devised [6]. This method uses parameters easily calculated in post-processing field calculators to determine a normalized EPR signal intensity under saturating or nonsaturating conditions. This calculation can be done using eigenmode or driven-mode methods. For a matched reflection cavity and a voltage-sensitive detector, Feher [7] expressed the microwave EPR signal as&lt;/p&gt;
+&lt;p&gt;S=χ&#39;&#39;ηQP^(1⁄2) [V],&lt;/p&gt;
+&lt;p&gt;where χ&#39;&#39; is the imaginary part of the magnetic susceptibility, η is the filling factor, Q is the unloaded Q0-value with sample, and P is the incident microwave power. In comparing resonators we assume the sample has the same concentration for an arbitrary volume. With this assumption the magnetic susceptibility, χ&#39;&#39;, simply becomes proportional to frequency. This incorporates the Boltzmann factor to resonator comparisons. &lt;/p&gt;
+&lt;p&gt;The filling factor is defined as the ratio of the magnetic field in the sample (that gives and EPR signal) to the magnetic field in all space. Using the FEM program this can be calculated as&lt;/p&gt;
+&lt;p&gt;η=(∫▒〖H_r∙H_r^&lt;em&gt; dVs〗)/(∫▒〖H∙H^&lt;/em&gt; dV〗),&lt;/p&gt;
+&lt;p&gt;where H is all three rectangular magnetic field components integrated over all space (dV), and H_r is the clock-wise (or counter clock-wise) rotational component of the linear magnetic field components perpendicular to the static magnetic field integrated over the sample volume (dVs). Assuming H is linear and the static magnetic field is in the x-coordinate&lt;/p&gt;
+&lt;p&gt;H_r=0.5(Hy+Hz) [A/m].&lt;/p&gt;
+&lt;p&gt;The Q-value of a circuit is classically described as the ratio of the stored energy and power loss of a system per cycle,&lt;/p&gt;
+&lt;p&gt;Q=(ω 1/2 μ∫▒〖H∙H^* dV〗)/P_l   ,&lt;/p&gt;
+&lt;p&gt;where power loss, P_l, is the sum of the power losses on sample walls, defined as&lt;/p&gt;
+&lt;p&gt;P_lw=σ/2 ∫▒〖n ̂×H∙H^* dSw〗  &#34;[W]&#34;,&lt;/p&gt;
+&lt;p&gt;where σ is the skin depth and n ̂ is the normal vector of the resonator walls (dSw), and power loss in dielectric materials, defined as&lt;/p&gt;
+&lt;p&gt;P_ld=(ω ϵ_0 ε&#39;&#39;)/2 ∫▒〖E∙E^* dVd〗  &#34;[W]&#34;,&lt;/p&gt;
+&lt;p&gt;where ε&#39;&#39; is the imaginary part of the dielectric constant of the volume, dVd. Multiple dielectrics or conducting surfaces are just summed to create the total power loss, P_l.&lt;/p&gt;
+&lt;p&gt;Two experiments are performed: the experimental microwave power is held constant or the experimental microwave field at the sample is held constant. The first experiment is considered for unsaturable samples, where increasing the microwave power, increases the EPR signal intensity. The second experiment is considered for saturable samples, where the sample is held at the same microwave field. In this case it is convenient to introduce the microwave efficiency parameter, [8]&lt;/p&gt;
+&lt;p&gt;Λ=(Max(H_r))/〖P_l〗^(1/2)  &#34; [G/&#34; &#34;W&#34; ^&#34;1/2&#34;  &#34;]&#34;.&lt;/p&gt;
+&lt;p&gt;The microwave efficiency parameter, Λ, assumes a uniform magnetic field over the sample, for nonuniform fields an average microwave efficiency parameter can be introduced as&lt;/p&gt;
+&lt;p&gt;Λ_ave=(∫▒〖H_r dVs〗)/(〖P_l〗^(1/2) Vs) &#34; [G/&#34; &#34;W&#34; ^&#34;1/2&#34;  &#34;]&#34;,&lt;/p&gt;
+&lt;p&gt;where Vs is the sample volume. A saturable sample can then be calculated by normalizing the magnetic field and computing&lt;/p&gt;
+&lt;p&gt;S_s=(χ&#39;&#39;ω∫▒〖H_r∙H_r^* dVs〗)/(10000 Max(H_r ) √(P_l ))  &#34;[V]&#34;.&lt;/p&gt;
+&lt;p&gt;Finally, by normalizing the input power, the unsaturable sample can be calculated by&lt;/p&gt;
+&lt;p&gt;S_s=(χ&#39;&#39;μω∫▒〖H_r∙H_r^* dVs〗)/P_l   &#34;[V]&#34;.&lt;/p&gt;
+&lt;p&gt;These calculations can be inserted into post-processing field calculators or the fields can be exported to MATLAB for further analysis. The numbers obtained from these calculations are proportional to the voltage signal and are used as ratios in comparing different simulations of resonator geometries. The microwave efficiency parameter can be directly compared to experimental calculation.
+Tailoring Resonators for Specific Experiments or Samples&lt;/p&gt;
+&lt;p&gt;As Software-defined bridges (SDB), where components that are typically implemented in hardware (eg. mixers, filters, oscillators, and detectors) are replaced by digital counterparts after direct acquisition of the carrier frequency, and sources replaced by ultra-low phase noise DAC cards (Arbitrary Waveform Generators), become more common so will the need for specific resonators, optimized for the experiments, to replace general purpose probes. It is no longer adequate for a resonator to be suitable for spin-labels and Cu-complexes, instead optimizing frequency and volume constraints can yield improvements a fixed frequency general probe could not obtain. Or in the case of experiments, where uniformity of magnetic field sweep at multiple frequencies is the driving design criteria and analysis of eddy-current effects are required. These niche resonators follow the same design development, outlined in Fig. 2.&lt;/p&gt;
+&lt;p&gt;One such example is a L-band (2 GHz) loop-gap resonator designed for Cu-complexes and optimized for high uniformity B1 and to minimize stray fields that would give rise to forbidden transitions. This resonator was designed with the steps outlined in Fig. 2. The frequency was chosen specifically because of spectral cross-overs that occur at 2 GHz. This frequency was confirmed using computer simulations of the spin-system. The resonator was selected to be a two¬-loop–one-gap resonator so that the sample does not go through the coupling loop. The coupling loop was fixed to a PTFE holder to minimize vibrations, a common source of noise. Coupling was adjusted using a variable transmission line. A solid 0.99999 silver design is used in the fabrication of the resonator both for its thermal stability and pureness. In order to allow 100 kHz field modulation penetration, modulation slots were cut perpendicular to the sample loop. Finally sample “shields” were placed above and below the sample loop to reduce the magnetic field in the coordinates perpendicular to the sample axis. The shields forced the flux and reduced the non-axis components by 30%. &lt;/p&gt;
+&lt;p&gt;Such specific goals and intuition could only have been built up by computer aided numerical designs. By optimizing resonators to specific experiments or samples, sensitivity gains and/or quantitative gains are numerous. Additionally, by combining analytical methods, which couple approximations to numerical data, parameter spaces can be narrowed down and insights into physical properties of samples and resonators can be found. &lt;/p&gt;
+&lt;h3&gt;REFFERENCES:&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;A. Hrenniko, “Solution of problems of elasticity by the frame-work method,” ASME J. Appl. Mech., vol. 8, p. A6190A715, 1941.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;R. L. Courant, “Variational methods for the solution of problems of equilibrium and vibration,” Bulletin of the American Mathematical Society, vol. 49, pp. 1-23, 1943.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;G. Pelosi, “The Finite-element method, Part I: R. L. Courant [historical corner],” IEEE Antennas and Propagation, vol. 49;2, pp. 180-182, 2007.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;R. Ferrari, “The finite-element method, Part 2: P. P. Silvester, an innovator in electromagnetic numerical modeling,” IEEE Antennas and Propagation, vol. 49;3, pp.216-234, 2007.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;J. Tinsley, “Historical comments on finite-elements,” History of Scientific Computing, ACM, pp. 152-166, 1990.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;R.R. Mett, J.W. Sidabras, J.S. Hyde, “Resonators for Multifrequency EPR of Spin Labels”, in Multifrequency Electron Paramagnetic Resonance: Theory and Applications (ed. S.K. Misra), Wiley, Chapter 5.2, 2011.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;G. Feher, “Sensitivity considerations in microwave paramagnetic resonance absorption techniques,” Bell System Technical Journal 36, 449–484, 1957.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;J.S. Hyde, W. Froncisz, “Loop gap resonators”, in Advanced EPR: Applications in Biology and Biochemistry (ed. A.J. Hoff), Elsevier, Amsterdam, pp. 277–306, 1989.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;      
+          </content>
+  </entry>
+    <entry>
     <title type="html">Boosting Ansys HFSS Performance</title>
     <author><name>Jason W. Sidabras</name></author>
     <link href="http://act-epr.org/blog/2017/boosting-ansys-hfss-performance"/>
