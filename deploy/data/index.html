@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
         <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Posts with tag Tips and Tricks | Act-EPR MSC Fellowship</title>
+    <title>DATA files and geometries | Act-EPR MSC Fellowship</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="Act-EPR is a Marie Skłodowska-Curie Individual Fellowship interested in the creation of new Electron Paramagnetic Resonance technology in order to study protein single crystals of the hydrogen splitting enzyme, [FeFe] Hydrogenase.">
     <meta name="author" content="Jason W. Sidabras">
 
     <link href="/media/css/style.css" rel="stylesheet">
@@ -39,9 +38,19 @@
     <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
     
         
-      </head>
+    <script>
+function loadthing()
+{
+document.getElementById('vs_iframe').contentWindow.postMessage({msg_type:'load', url:'http://act-epr.org/media/ReEntrantTE01U.stl'}, '*');
+setTimeout(function(){
+document.getElementById('vs_iframe').contentWindow.postMessage({msg_type:'set_shading', type:'smooth'}, '*');
+document.getElementById('vs_iframe').contentWindow.postMessage({msg_type:'set_bgcolor', value:'#E6E6E6'}, '*');
+}, 1000);
+}
+</script>
+  </head>
 
-  <body class="Tips and Tricks">
+  <body class="index">
         <!-- start main wrapper -->
         <div id="header"><!-- start main header -->
             <div class="top-line">&nbsp;</div>
@@ -95,90 +104,18 @@
             <div class="container"><!-- Container -->
                 <div class="row">
                     <div class="container" id="top">
-      Posts with tag <strong>Tips and Tricks</strong>
-<div class="container">
-  <div class="col-md-8">
-          <div class="post format-image">
-      <div class="entry">
-	<header class="entry-header">
-	  <h2><a href="/blog/2017/boosting-ansys-hfss-performance">Boosting Ansys HFSS Performance</a></h2>
-	  <div class="meta">
-	    <small><i class="fa fa-calendar"></i>Friday 28 April 2017</small>&nbsp;&nbsp;&nbsp;&nbsp;
-	    <small>
-	      <i class="fa fa-folder"></i>
-                              <a href="/blog/tags/Ansys HFSS.html">Ansys HFSS</a>,                              <a href="/blog/tags/Tips and Tricks.html">Tips and Tricks</a>,                              <a href="/blog/tags/Electromagnetics.html">Electromagnetics</a>,                              <a href="/blog/tags/Simulations.html">Simulations</a>              	    </small>
-	  </div>
-	</header>
-	<div class="entry-content">
-                      <a href="/blog/2017/boosting-ansys-hfss-performance">
-              <div class="blog-title-image" style="background-image: url('/media/blog/2017/hfss.png');">
-              </div>
-            </a>
-                              <p>After 12 years of running Ansys (previously Ansoft) <a href="http://www.ansys.com/products/electronics/ansys-hfss">High Frequency Structure Simulator</a> I have a series of helpful tricks to improve the performance of your simulations. Over the last 5 years Ansys HFSS has significantly improved in its ability to handle multiple processors and now even support GPU acceleration for iterative solutions. However, there are always going to be bottlenecks.</p>
-	  <a href="/blog/2017/boosting-ansys-hfss-performance" class="btn btn-default white">Read More</a>
-	</div>
-   </div>
+      <br />
+<div class="container"><!-- Container -->
+    <div class="row">
+    <div class="col-md-9 footer-widget"><!-- Text Widget -->
+        <p style="margin-right: 50px; text-align: justify;"><b>Re-Entrant Cylindrical TE<sub>01U</sub> Cavity: </br>
+<iframe onload="loadthing()" id="vs_iframe" src="http://www.viewstl.com/?embedded" style="border:0;margin:0;width:100%;he    ight:800px;"></iframe>        
+</br>
+       <a href="/media/data/ReEntrantTE01U.stl">stl</a>&nbsp;&nbsp;<a href="/media/data/ReEntrantTE01U.pdf">pdf</a> 
+        <br />
     </div>
-  
-  </div>
-  <div class="col-md-3 col-sm-5 sidebar m-center">
-    <!-- .widget -->
-    <div class="widget">
-      <h4>Tags</h4>
-      <ul class="category-list flat">
-                                                                                                                          <li>
-	  <a               href="/blog/tags/Awards">
-               Awards
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-                <li>
-	  <a               href="/blog/tags/Electromagnetics">
-               Electromagnetics
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-                <li>
-	  <a               href="/blog/tags/Ansys HFSS">
-               Ansys HFSS
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-                <li>
-	  <a class="active"               href="/blog/tags/Tips and Tricks">
-               Tips and Tricks
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-                <li>
-	  <a               href="/blog/tags/Simulations">
-               Simulations
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-              </ul>
-    </div>
- 
 </div>
 </div>
-    <div class="container pagination-bar text-center">
-      <ul class="pagination">
-                              </ul>
-  </div>
-
-</div>
-   <!-- /.widget -->
-  </div>
 </div>
             
                 </div> <!-- /row-->
