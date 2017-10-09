@@ -1,149 +1,491 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-        <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> | Act-EPR MSC Fellowship</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Jason W. Sidabras">
-
-    <link href="/media/css/style.css" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="/media/js/libs/bootstrap.min.js"></script>
-   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-        <!-- fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Nunito:300,400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700' rel='stylesheet' type='text/css'>
-    <!-- nfonts -->
-        
-    <script type="text/javascript">
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-91383149-1', 'auto', {'allowLinker': true});
-        ga('send', 'pageview');
-    </script>
+/**
+ * @author aleeper / http://adamleeper.com/
+ * @author mrdoob / http://mrdoob.com/
+ * @author gero3 / https://github.com/gero3
+ *
+ * Description: A THREE loader for STL ASCII files, as created by Solidworks and other CAD programs.
+ *
+ * Supports both binary and ASCII encoded files, with automatic detection of type.
+ *
+ * Limitations:
+ *  Binary decoding supports "Magics" color format (http://en.wikipedia.org/wiki/STL_(file_format)#Color_in_binary_STL).
+ *  There is perhaps some question as to how valid it is to always assume little-endian-ness.
+ *  ASCII decoding assumes file is UTF-8. Seems to work for the examples...
+ *
+ * Usage:
+ *  var loader = new THREE.STLLoader();
+ *  loader.load( './models/stl/slotted_disk.stl', function ( geometry ) {
+ *    scene.add( new THREE.Mesh( geometry ) );
+ *  });
+ *
+ * For binary STLs geometry might contain colors for vertices. To use it:
+ *  // use the same code to load STL as above
+ *  if (geometry.hasColors) {
+ *    material = new THREE.MeshPhongMaterial({ opacity: geometry.alpha, vertexColors: THREE.VertexColors });
+ *  } else { .... }
+ *  var mesh = new THREE.Mesh( geometry, material );
+ */
 
 
-        <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
-    
-        
-      </head>
+THREE.STLLoader = function ( manager ) {
 
-  <body class="STLLoader">
-        <!-- start main wrapper -->
-        <div id="header"><!-- start main header -->
-            <div class="top-line">&nbsp;</div>
-                <div class="top"><!-- top -->
-                    <div class="container">
-                        <div class="media-top-right">
-                            <ul class="media-top clearfix">
-                                <li class="item"><a href="https://www.linkedin.com/in/jason-sidabras-596466b6" target="blank"    ><i class="fa fa-linkedin-square fa-2x"></i></a></li>
-                                <li class="item"><a href="https://scholar.google.com/citations?user=pbXGcaoAAAAJ" target="blank"><i class="ai ai-google-scholar ai-2x"></i></a></li>
-                                <li class="item"><a href="https://www.researchgate.net/profile/Jason_Sidabras" target="blank"><i class="ai ai-researchgate ai-2x"></i></a></li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div><!-- top -->
-                <div class="container"><!-- container -->
-                    <div class="row">
-                        <div class="col-md-5"><!-- logo -->
-                            <a href="index.html" title="Act-EPR" rel="home">
-                                <img class="main-logo" style="margin-left: 20px; width: 75%;" src="/media/img/ActEPRLogo.png" alt="Act-EPR" />
-                            </a>
-                            <br />
-                            <br />
-                        </div><!-- logo -->
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8  main-nav"><!-- Main Navigation -->
-                            <a id="touch-menu" class="mobile-menu" href="#"><i class="fa fa-bars fa-2x"></i></a>
-                            <nav>
-                                <ul class="menu">
-                                    <li><a href="/">HOME</a></li>
-                                    <li><a  href="#">WORK PACKAGES</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="/wp1-helix.html">WP1 Micro-Helix Resonators</a></li>
-                                            <li><a href="#">WP2 Technology Advancements</a></li>
-                                            <li><a href="#">WP3 Biological Research</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a  href="/publications.html">PUBLICATIONS</a></li>
-                                    <li><a  href="/data/">DATA</a></li> 
-                                    <li><a  href="/blog/">NEWS</a></li> 
-                                    <li><a  href="/about.html">ABOUT ME</a></li>
-                                </ul>
-                            </nav>
-                        </div><!-- Main Navigation -->
-                        <div class="clearfix"></div>
-                    </div>
-                </div><!-- container -->
-            </div><!-- end main header -->
-            <br />
-            <div class="container"><!-- Container -->
-                <div class="row">
-                    <div class="container" id="top">
-      
-                  
-                </div> <!-- /row-->
-            </div> <!-- /container -->
-        </div>
-    </br>
-</br>
-    <div id="footer"><!-- Footer -->
-        <div class="container"><!-- Container -->
-            <div class="row">
-                <div style="margin-left: 60px;" class="col-md-5 footer-widget"><!-- Text Widget -->
-                    <h6 class="widget-title">Acknowledgements</h6>
-                        <div class="textwidget">
-                            <a href="http://ec.europa.eu/research/participants/portal/desktop/en/home.html">
-                              <img src="/media/img/logo_EUh2020_horizontal.png" />
-                            </a>
-                            <br /><br />
-                            <a href="https://cec.mpg.de/home/">
-                              <img src="/media/img/csm_mpi-logo.png" />
-                            </a>
-                        </div>
+	this.manager = ( manager !== undefined ) ? manager : THREE.DefaultLoadingManager;
 
-                </div><!-- Text Widget -->
+};
 
-                <div style="margin-right:20px;" class="col-md-3 footer-widget"><!-- Recent Tweet Widget -->
-                    <h6 class="widget-title">Links of Interest</h6>
-                    <div class="recent-twitt">
-                    <p class="textwidget" style="text-align: justify;">
-                        <a style="color: #f0ce42;" href="https://cec.mpg.de/biophysikalische-chemie/dr-edward-j-reijerse/">Bio Hydrogen Group</a> - Led by Dr. Edward J. Reijerse, the Bio Hydrogen Group looks to understand the chemical reaction of biological hydrogenase in order to create bio-inspired molecular catalysts. 
-                    </p>
-                </div>
-            </div><!-- Recent Tweet Widget -->
+THREE.STLLoader.prototype = {
 
-            <div class="col-md-3 footer-widget"><!-- News Leter Widget -->
-                <h6 class="widget-title">News</h6>
-                <div class="textwidget">
-                    <p>Act-EPR project starts on 1st May, 2017.</p>
-                    <p>2017.07 I was awarded the EPR2017 Award of Excellence for my talk.</p>
-                    <p>2017.04 I was awarded the 21st annual <a style="color: #f0ce42;" href="/blog/2017/jeol-prize-winner">JEOL Prize</a>.</p>
-                </div>
-            </div><!-- News Leter Widget -->
-            <div class="clearfix"></div>
-        </div>
+	constructor: THREE.STLLoader,
 
-        <div class="footer-credits"><!-- Footer credits -->
-            2017 &copy; Jason W. Sidabras
-        </div><!-- Footer credits -->
-    </div><!-- Container -->
-</div><!-- Footer -->
+	load: function ( url, onLoad, onProgress, onError ) {
 
-</div><!-- end main wrapper -->
- </body>
-</html>
+		var scope = this;
+
+		var loader = new THREE.XHRLoader( scope.manager );
+		loader.setResponseType( 'arraybuffer' );
+		loader.load( url, function ( text ) {
+
+			onLoad( scope.parse( text ) );
+
+		}, onProgress, onError );
+
+	},
+
+	parse: function ( data ) {
+
+		var isBinary = function () {
+
+			var expect, face_size, n_faces, reader;
+			reader = new DataView( binData );
+			face_size = ( 32 / 8 * 3 ) + ( ( 32 / 8 * 3 ) * 3 ) + ( 16 / 8 );
+			n_faces = reader.getUint32( 80, true );
+			expect = 80 + ( 32 / 8 ) + ( n_faces * face_size );
+
+			if ( expect === reader.byteLength ) {
+
+				return true;
+
+			}
+
+			// some binary files will have different size from expected,
+			// checking characters higher than ASCII to confirm is binary
+			var fileLength = reader.byteLength;
+			for ( var index = 0; index < fileLength; index ++ ) {
+
+				if ( reader.getUint8( index, false ) > 127 ) {
+
+					return true;
+
+				}
+
+			}
+
+			return false;
+
+		};
+
+		var binData = this.ensureBinary( data );
+
+		return isBinary()
+			? this.parseBinary( binData )
+			: this.parseASCII( this.ensureString( data ) );
+
+	},
+
+	parseBinary: function ( data ) {
+
+		var reader = new DataView( data );
+		var faces = reader.getUint32( 80, true );
+
+		var r, g, b, hasColors = false, colors;
+		var defaultR, defaultG, defaultB, alpha;
+
+		// process STL header
+		// check for default color in header ("COLOR=rgba" sequence).
+
+		for ( var index = 0; index < 80 - 10; index ++ ) {
+
+			if ( ( reader.getUint32( index, false ) == 0x434F4C4F /*COLO*/ ) &&
+				( reader.getUint8( index + 4 ) == 0x52 /*'R'*/ ) &&
+				( reader.getUint8( index + 5 ) == 0x3D /*'='*/ ) ) {
+
+				hasColors = true;
+				colors = new Float32Array( faces * 3 * 3 );
+
+				defaultR = reader.getUint8( index + 6 ) / 255;
+				defaultG = reader.getUint8( index + 7 ) / 255;
+				defaultB = reader.getUint8( index + 8 ) / 255;
+				alpha = reader.getUint8( index + 9 ) / 255;
+
+			}
+
+		}
+
+		var dataOffset = 84;
+		var faceLength = 12 * 4 + 2;
+
+		var offset = 0;
+
+		var geometry = new THREE.BufferGeometry();
+
+		var vertices = new Float32Array( faces * 3 * 3 );
+		var normals = new Float32Array( faces * 3 * 3 );
+
+		for ( var face = 0; face < faces; face ++ ) {
+
+			var start = dataOffset + face * faceLength;
+			var normalX = reader.getFloat32( start, true );
+			var normalY = reader.getFloat32( start + 4, true );
+			var normalZ = reader.getFloat32( start + 8, true );
+
+			if ( hasColors ) {
+
+				var packedColor = reader.getUint16( start + 48, true );
+
+				if ( ( packedColor & 0x8000 ) === 0 ) {
+
+					// facet has its own unique color
+
+					r = ( packedColor & 0x1F ) / 31;
+					g = ( ( packedColor >> 5 ) & 0x1F ) / 31;
+					b = ( ( packedColor >> 10 ) & 0x1F ) / 31;
+
+				} else {
+
+					r = defaultR;
+					g = defaultG;
+					b = defaultB;
+
+				}
+
+			}
+
+			for ( var i = 1; i <= 3; i ++ ) {
+
+				var vertexstart = start + i * 12;
+
+				vertices[ offset ] = reader.getFloat32( vertexstart, true );
+				vertices[ offset + 1 ] = reader.getFloat32( vertexstart + 4, true );
+				vertices[ offset + 2 ] = reader.getFloat32( vertexstart + 8, true );
+
+				normals[ offset ] = normalX;
+				normals[ offset + 1 ] = normalY;
+				normals[ offset + 2 ] = normalZ;
+
+				if ( hasColors ) {
+
+					colors[ offset ] = r;
+					colors[ offset + 1 ] = g;
+					colors[ offset + 2 ] = b;
+
+				}
+
+				offset += 3;
+
+			}
+
+		}
+
+		geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+		geometry.addAttribute( 'normal', new THREE.BufferAttribute( normals, 3 ) );
+
+		if ( hasColors ) {
+
+			geometry.addAttribute( 'color', new THREE.BufferAttribute( colors, 3 ) );
+			geometry.hasColors = true;
+			geometry.alpha = alpha;
+
+		}
+
+		return geometry;
+
+	},
+
+	parseASCII: function ( data ) {
+
+		var geometry, length, normal, patternFace, patternNormal, patternVertex, result, text;
+		geometry = new THREE.Geometry();
+		patternFace = /facet([\s\S]*?)endfacet/g;
+
+		while ( ( result = patternFace.exec( data ) ) !== null ) {
+
+			text = result[ 0 ];
+			patternNormal = /normal[\s]+([\-+]?[0-9]+\.?[0-9]*([eE][\-+]?[0-9]+)?)+[\s]+([\-+]?[0-9]*\.?[0-9]+([eE][\-+]?[0-9]+)?)+[\s]+([\-+]?[0-9]*\.?[0-9]+([eE][\-+]?[0-9]+)?)+/g;
+
+			while ( ( result = patternNormal.exec( text ) ) !== null ) {
+
+				normal = new THREE.Vector3( parseFloat( result[ 1 ] ), parseFloat( result[ 3 ] ), parseFloat( result[ 5 ] ) );
+
+			}
+
+			patternVertex = /vertex[\s]+([\-+]?[0-9]+\.?[0-9]*([eE][\-+]?[0-9]+)?)+[\s]+([\-+]?[0-9]*\.?[0-9]+([eE][\-+]?[0-9]+)?)+[\s]+([\-+]?[0-9]*\.?[0-9]+([eE][\-+]?[0-9]+)?)+/g;
+
+			while ( ( result = patternVertex.exec( text ) ) !== null ) {
+
+				geometry.vertices.push( new THREE.Vector3( parseFloat( result[ 1 ] ), parseFloat( result[ 3 ] ), parseFloat( result[ 5 ] ) ) );
+
+			}
+
+			length = geometry.vertices.length;
+
+			geometry.faces.push( new THREE.Face3( length - 3, length - 2, length - 1, normal ) );
+
+		}
+
+		geometry.computeBoundingBox();
+		geometry.computeBoundingSphere();
+
+		return geometry;
+
+	},
+
+	ensureString: function ( buf ) {
+
+		if ( typeof buf !== "string" ) {
+
+			var array_buffer = new Uint8Array( buf );
+			var str = '';
+			for ( var i = 0; i < buf.byteLength; i ++ ) {
+
+				str += String.fromCharCode( array_buffer[ i ] ); // implicitly assumes little-endian
+
+			}
+			return str;
+
+		} else {
+
+			return buf;
+
+		}
+
+	},
+
+	ensureBinary: function ( buf ) {
+
+		if ( typeof buf === "string" ) {
+
+			var array_buffer = new Uint8Array( buf.length );
+			for ( var i = 0; i < buf.length; i ++ ) {
+
+				array_buffer[ i ] = buf.charCodeAt( i ) & 0xff; // implicitly assumes little-endian
+
+			}
+			return array_buffer.buffer || array_buffer;
+
+		} else {
+
+			return buf;
+
+		}
+
+	}
+
+};
+
+if ( typeof DataView === 'undefined' ) {
+
+	DataView = function( buffer, byteOffset, byteLength ) {
+
+		this.buffer = buffer;
+		this.byteOffset = byteOffset || 0;
+		this.byteLength = byteLength || buffer.byteLength || buffer.length;
+		this._isString = typeof buffer === "string";
+
+	};
+
+	DataView.prototype = {
+
+		_getCharCodes: function( buffer, start, length ) {
+
+			start = start || 0;
+			length = length || buffer.length;
+			var end = start + length;
+			var codes = [];
+			for ( var i = start; i < end; i ++ ) {
+
+				codes.push( buffer.charCodeAt( i ) & 0xff );
+
+			}
+			return codes;
+
+		},
+
+		_getBytes: function ( length, byteOffset, littleEndian ) {
+
+			var result;
+
+			// Handle the lack of endianness
+			if ( littleEndian === undefined ) {
+
+				littleEndian = this._littleEndian;
+
+			}
+
+			// Handle the lack of byteOffset
+			if ( byteOffset === undefined ) {
+
+				byteOffset = this.byteOffset;
+
+			} else {
+
+				byteOffset = this.byteOffset + byteOffset;
+
+			}
+
+			if ( length === undefined ) {
+
+				length = this.byteLength - byteOffset;
+
+			}
+
+			// Error Checking
+			if ( typeof byteOffset !== 'number' ) {
+
+				throw new TypeError( 'DataView byteOffset is not a number' );
+
+			}
+
+			if ( length < 0 || byteOffset + length > this.byteLength ) {
+
+				throw new Error( 'DataView length or (byteOffset+length) value is out of bounds' );
+
+			}
+
+			if ( this.isString ) {
+
+				result = this._getCharCodes( this.buffer, byteOffset, byteOffset + length );
+
+			} else {
+
+				result = this.buffer.slice( byteOffset, byteOffset + length );
+
+			}
+
+			if ( ! littleEndian && length > 1 ) {
+
+				if ( Array.isArray( result ) === false ) {
+
+					result = Array.prototype.slice.call( result );
+
+				}
+
+				result.reverse();
+
+			}
+
+			return result;
+
+		},
+
+		// Compatibility functions on a String Buffer
+
+		getFloat64: function ( byteOffset, littleEndian ) {
+
+			var b = this._getBytes( 8, byteOffset, littleEndian ),
+
+				sign = 1 - ( 2 * ( b[ 7 ] >> 7 ) ),
+				exponent = ( ( ( ( b[ 7 ] << 1 ) & 0xff ) << 3 ) | ( b[ 6 ] >> 4 ) ) - ( ( 1 << 10 ) - 1 ),
+
+			// Binary operators such as | and << operate on 32 bit values, using + and Math.pow(2) instead
+				mantissa = ( ( b[ 6 ] & 0x0f ) * Math.pow( 2, 48 ) ) + ( b[ 5 ] * Math.pow( 2, 40 ) ) + ( b[ 4 ] * Math.pow( 2, 32 ) ) +
+							( b[ 3 ] * Math.pow( 2, 24 ) ) + ( b[ 2 ] * Math.pow( 2, 16 ) ) + ( b[ 1 ] * Math.pow( 2, 8 ) ) + b[ 0 ];
+
+			if ( exponent === 1024 ) {
+
+				if ( mantissa !== 0 ) {
+
+					return NaN;
+
+				} else {
+
+					return sign * Infinity;
+
+				}
+
+			}
+
+			if ( exponent === - 1023 ) {
+
+				// Denormalized
+				return sign * mantissa * Math.pow( 2, - 1022 - 52 );
+
+			}
+
+			return sign * ( 1 + mantissa * Math.pow( 2, - 52 ) ) * Math.pow( 2, exponent );
+
+		},
+
+		getFloat32: function ( byteOffset, littleEndian ) {
+
+			var b = this._getBytes( 4, byteOffset, littleEndian ),
+
+				sign = 1 - ( 2 * ( b[ 3 ] >> 7 ) ),
+				exponent = ( ( ( b[ 3 ] << 1 ) & 0xff ) | ( b[ 2 ] >> 7 ) ) - 127,
+				mantissa = ( ( b[ 2 ] & 0x7f ) << 16 ) | ( b[ 1 ] << 8 ) | b[ 0 ];
+
+			if ( exponent === 128 ) {
+
+				if ( mantissa !== 0 ) {
+
+					return NaN;
+
+				} else {
+
+					return sign * Infinity;
+
+				}
+
+			}
+
+			if ( exponent === - 127 ) {
+
+				// Denormalized
+				return sign * mantissa * Math.pow( 2, - 126 - 23 );
+
+			}
+
+			return sign * ( 1 + mantissa * Math.pow( 2, - 23 ) ) * Math.pow( 2, exponent );
+
+		},
+
+		getInt32: function ( byteOffset, littleEndian ) {
+
+			var b = this._getBytes( 4, byteOffset, littleEndian );
+			return ( b[ 3 ] << 24 ) | ( b[ 2 ] << 16 ) | ( b[ 1 ] << 8 ) | b[ 0 ];
+
+		},
+
+		getUint32: function ( byteOffset, littleEndian ) {
+
+			return this.getInt32( byteOffset, littleEndian ) >>> 0;
+
+		},
+
+		getInt16: function ( byteOffset, littleEndian ) {
+
+			return ( this.getUint16( byteOffset, littleEndian ) << 16 ) >> 16;
+
+		},
+
+		getUint16: function ( byteOffset, littleEndian ) {
+
+			var b = this._getBytes( 2, byteOffset, littleEndian );
+			return ( b[ 1 ] << 8 ) | b[ 0 ];
+
+		},
+
+		getInt8: function ( byteOffset ) {
+
+			return ( this.getUint8( byteOffset ) << 24 ) >> 24;
+
+		},
+
+		getUint8: function ( byteOffset ) {
+
+			return this._getBytes( 1, byteOffset )[ 0 ];
+
+		}
+
+	 };
+
+}

@@ -361,7 +361,8 @@
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/2017/index.html': [!!python/unicode 'blog/2017/jeol-prize-winner',
   !!python/unicode 'blog.j2', !!python/unicode 'blog/2017/boosting-ansys-hfss-performance',
-  !!python/unicode 'blog-list.j2', !!python/unicode 'base.j2']
+  !!python/unicode 'blog/2017/uniform-field-reEntrant-cavity', !!python/unicode 'blog-list.j2',
+  !!python/unicode 'base.j2']
 !!python/unicode 'blog/2017/jeol-prize-winner': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
 !!python/unicode 'blog/2017/metrics-on-amazon-with-gnocchi-s3-driver': [!!python/unicode 'blog.j2',
   !!python/unicode 'base.j2']
@@ -376,7 +377,8 @@
 !!python/unicode 'blog/excerpts.xml': [atom.j2]
 !!python/unicode 'blog/index.html': [!!python/unicode 'blog/2017/jeol-prize-winner',
   !!python/unicode 'blog.j2', !!python/unicode 'blog/2017/boosting-ansys-hfss-performance',
-  !!python/unicode 'blog-list.j2', !!python/unicode 'base.j2']
+  !!python/unicode 'blog/2017/uniform-field-reEntrant-cavity', !!python/unicode 'blog-list.j2',
+  !!python/unicode 'base.j2']
 !!python/unicode 'blog/index.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2']
 !!python/unicode 'blog/tags/Alembic.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
   !!python/unicode 'base.j2']

@@ -1,149 +1,245 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-        <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> | Act-EPR MSC Fellowship</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Jason W. Sidabras">
+	<head>
+		<title>STL Viewer</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+}
 
-    <link href="/media/css/style.css" rel="stylesheet">
+			body {
+				font-family: Monospace;
+				background-color: #000000;
+				margin: 0px;
+				overflow: hidden;
+				position: relative;
+			}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="/media/js/libs/bootstrap.min.js"></script>
-   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-        <!-- fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Nunito:300,400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700' rel='stylesheet' type='text/css'>
-    <!-- nfonts -->
-        
-    <script type="text/javascript">
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			#info {
+				color: #fff;
+				position: absolute;
+				top: 10px;
+				width: 100%;
+				text-align: center;
+				z-index: 100;
+				display:block;
 
-        ga('create', 'UA-91383149-1', 'auto', {'allowLinker': true});
-        ga('send', 'pageview');
-    </script>
+			}
 
+			a {
+				color: skyblue;
+			}
+			.button {
+				background: #999;
+				color: #eee;
+				padding: 0.2em 0.5em;
+				cursor: pointer;
+			}
+			.highlight {
+				background:orange;
+				color:#fff;
+			}
 
-        <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
-    
-        
-      </head>
+			span {
+				display: inline-block;
+				width: 60px;
+				float: left;
+				text-align: center;
+			}
 
-  <body class="index">
-        <!-- start main wrapper -->
-        <div id="header"><!-- start main header -->
-            <div class="top-line">&nbsp;</div>
-                <div class="top"><!-- top -->
-                    <div class="container">
-                        <div class="media-top-right">
-                            <ul class="media-top clearfix">
-                                <li class="item"><a href="https://www.linkedin.com/in/jason-sidabras-596466b6" target="blank"    ><i class="fa fa-linkedin-square fa-2x"></i></a></li>
-                                <li class="item"><a href="https://scholar.google.com/citations?user=pbXGcaoAAAAJ" target="blank"><i class="ai ai-google-scholar ai-2x"></i></a></li>
-                                <li class="item"><a href="https://www.researchgate.net/profile/Jason_Sidabras" target="blank"><i class="ai ai-researchgate ai-2x"></i></a></li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div><!-- top -->
-                <div class="container"><!-- container -->
-                    <div class="row">
-                        <div class="col-md-5"><!-- logo -->
-                            <a href="index.html" title="Act-EPR" rel="home">
-                                <img class="main-logo" style="margin-left: 20px; width: 75%;" src="/media/img/ActEPRLogo.png" alt="Act-EPR" />
-                            </a>
-                            <br />
-                            <br />
-                        </div><!-- logo -->
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8  main-nav"><!-- Main Navigation -->
-                            <a id="touch-menu" class="mobile-menu" href="#"><i class="fa fa-bars fa-2x"></i></a>
-                            <nav>
-                                <ul class="menu">
-                                    <li><a href="/">HOME</a></li>
-                                    <li><a  href="#">WORK PACKAGES</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="/wp1-helix.html">WP1 Micro-Helix Resonators</a></li>
-                                            <li><a href="#">WP2 Technology Advancements</a></li>
-                                            <li><a href="#">WP3 Biological Research</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a  href="/publications.html">PUBLICATIONS</a></li>
-                                    <li><a  href="/data/">DATA</a></li> 
-                                    <li><a  href="/blog/">NEWS</a></li> 
-                                    <li><a  href="/about.html">ABOUT ME</a></li>
-                                </ul>
-                            </nav>
-                        </div><!-- Main Navigation -->
-                        <div class="clearfix"></div>
-                    </div>
-                </div><!-- container -->
-            </div><!-- end main header -->
-            <br />
-            <div class="container"><!-- Container -->
-                <div class="row">
-                    <div class="container" id="top">
-      
-                  
-                </div> <!-- /row-->
-            </div> <!-- /container -->
-        </div>
-    </br>
-</br>
-    <div id="footer"><!-- Footer -->
-        <div class="container"><!-- Container -->
-            <div class="row">
-                <div style="margin-left: 60px;" class="col-md-5 footer-widget"><!-- Text Widget -->
-                    <h6 class="widget-title">Acknowledgements</h6>
-                        <div class="textwidget">
-                            <a href="http://ec.europa.eu/research/participants/portal/desktop/en/home.html">
-                              <img src="/media/img/logo_EUh2020_horizontal.png" />
-                            </a>
-                            <br /><br />
-                            <a href="https://cec.mpg.de/home/">
-                              <img src="/media/img/csm_mpi-logo.png" />
-                            </a>
-                        </div>
+			#uploader {
+    			border: 3px white solid;
+    			margin-top: 10px;
+    			margin-left: -85px;
+    			left: 100%;
+    			color: white;
+    			background: black;
+    			padding: 5px;
+    			font-family: Monospace;
+    			position: absolute;
+			}
 
-                </div><!-- Text Widget -->
+			#uploader input {
+				background: none;
+				font-family: monospace;
+				color: white;
+    			border: none;
+			}
+			.pp-slider {
+				display: inline-block;
+				width: 150px;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-o-user-select: none;
+				user-select: none;
+				height: 30px;
+			}
+		    .pp-slider .pp-slider-scale {
+		    	background-color: #aaa;
+		    	height: 1px;
+		    	border-bottom: 1px solid #efefef;
+		    	width: 120px;
+		    	margin-top: 6px;
+		    	float: left;
+		    }
+		    .pp-slider .pp-slider-scale .pp-slider-button {
+		    	width: 12px;
+		    	border-radius: 2px;
+		    	border: 1px solid #adadad;
+		    	height: 16px;
+		    	position: relative;
+		    	top: -7px;
+		    	left: 0px;
+		    	background-color: #efefef;
+		    	cursor: pointer;
+		    }
+		    .pp-slider .pp-slider-scale .pp-slider-button .pp-slider-divies {
+		    	border-left: 1px solid #adadad;
+		    	border-right: 1px solid #adadad;
+		    	position: relative;
+		    	left: 3px;
+		    	top: 3px;
+		    	width: 4px;
+		    	height: 10px;
+		    }
+		    .pp-slider .pp-slider-scale .pp-slider-button:hover {
+		    	border-color: #777;
+		    	background-color: #eee;
+		    }
+		    .pp-slider .pp-slider-scale .pp-slider-tooltip {
+		    	width: 24px;
+		    	height: 20px;
+		    	position: relative;
+		    	top: -5px;
+		    	left: 0px;
+		    	text-align: center;
+		    	font-size: 10px;
+		    	color: #aaa;
+		    }
+		    .pp-slider .pp-slider-min {
+		    	float: left;
+		    	width: 15px;
+		    	color: #aaa;
+		    	font-size: 10px;
+		    }
+		    .pp-slider .pp-slider-max {
+		    	float: left;
+		    	width: 15px;
+		    	color: #aaa;
+		    	font-size: 10px;
+		    	text-align: right;
+		    }
 
-                <div style="margin-right:20px;" class="col-md-3 footer-widget"><!-- Recent Tweet Widget -->
-                    <h6 class="widget-title">Links of Interest</h6>
-                    <div class="recent-twitt">
-                    <p class="textwidget" style="text-align: justify;">
-                        <a style="color: #f0ce42;" href="https://cec.mpg.de/biophysikalische-chemie/dr-edward-j-reijerse/">Bio Hydrogen Group</a> - Led by Dr. Edward J. Reijerse, the Bio Hydrogen Group looks to understand the chemical reaction of biological hydrogenase in order to create bio-inspired molecular catalysts. 
-                    </p>
-                </div>
-            </div><!-- Recent Tweet Widget -->
+		    #controls {
+		    	top: 100%;
+		    	left: 100%;
+    			margin-top: -35px;
+    			margin-left: -315px;
+    			position: fixed;
+    			font-family: monospace;
+		    }
 
-            <div class="col-md-3 footer-widget"><!-- News Leter Widget -->
-                <h6 class="widget-title">News</h6>
-                <div class="textwidget">
-                    <p>Act-EPR project starts on 1st May, 2017.</p>
-                    <p>2017.07 I was awarded the EPR2017 Award of Excellence for my talk.</p>
-                    <p>2017.04 I was awarded the 21st annual <a style="color: #f0ce42;" href="/blog/2017/jeol-prize-winner">JEOL Prize</a>.</p>
-                </div>
-            </div><!-- News Leter Widget -->
-            <div class="clearfix"></div>
-        </div>
+		    #selector {
+		    	top: 100%;
+    			margin-top: -145px;
+    			margin-left: 15px;
+    			position: fixed;
+		    }
+		    #selector select {
+		    	height: 130px;
+		    	padding: 5px;
+		    	font-family: monospace;
+		    	background: none;
+		    	border: none !important;
+		    	 outline:0px;
+		    }
+		    
+			::-webkit-scrollbar {
+			  width: 5px;
+			  height: 5px;
+			}
+			::-webkit-scrollbar-button {
+			  width: 0px;
+			  height: 0px;
+			}
+			::-webkit-scrollbar-thumb {
+			  background: #e1e1e1;
+			  border: 0px none #ffffff;
+			  border-radius: 0px;
+			}
+			::-webkit-scrollbar-thumb:hover {
+			  background: #ffffff;
+			}
+			::-webkit-scrollbar-thumb:active {
+			  background: #000000;
+			}
+			::-webkit-scrollbar-track {
+			  background: #666666;
+			  border: 0px none #ffffff;
+			  border-radius: 0px;
+			}
+			::-webkit-scrollbar-track:hover {
+			  background: #666666;
+			}
+			::-webkit-scrollbar-track:active {
+			  background: #333333;
+			}
+			::-webkit-scrollbar-corner {
+			  background: transparent;
+			}
+</style>
+		</style>
+	</head>
+	<body>
+		<div id="info">
+			<!-- Based on work by <a href="https://github.com/aleeper">aleeper</a> -->
+			<form action="upload.php" method="post" enctype="multipart/form-data">
+    			Select STL to upload:
+    			<input type="file" name="stl" />
+         		<input type="submit" value="Upload"/>
+			</form>
+			<br>
+		</div>
 
-        <div class="footer-credits"><!-- Footer credits -->
-            2017 &copy; Jason W. Sidabras
-        </div><!-- Footer credits -->
-    </div><!-- Container -->
-</div><!-- Footer -->
+		<div id="selector">
+			<select id="selectBox" name="interests" size="5" onchange="changeFunc();">
+	 			<?php 
+	 			$models = array_slice(scandir("models"), 2); 
+				
+				foreach ($models as $stl) {
+				echo "<option value='$stl'>$stl</option><br>";
+				}
+?>
+			</select>
+		</div>
 
-</div><!-- end main wrapper -->
- </body>
+		<div id="controls">
+			<input type="hidden" value="40" id="slider1"/>
+		</div>
+
+		<!-- <div id="uploader">
+			<form action="upload.php" method="post" enctype="multipart/form-data">
+				<input type="submit" value="Upload" name="submit"></input>
+			</form>
+		</div> -->
+
+		<script src="js/three.min.js"></script>
+		<script src="js/STLLoader.js"></script>
+		<script src="js/OrbitControls.js"></script>
+		<script src="js/Detector.js"></script>
+		<script src="js/stats.min.js"></script>
+		<script src="js/STLViewer.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/slider.js"></script>
+
+	</body>
 </html>

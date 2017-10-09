@@ -1,6 +1,7 @@
 base_url: /
 simple_copy:
   - media/*
+  - stuff/*
 media_root: media # Relative path from content folder.
 media_url: /media # URL where the media files are served from.
 server:
