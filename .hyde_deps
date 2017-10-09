@@ -370,6 +370,8 @@
 !!python/unicode 'blog/2017/packaging-python-with-pbr': [!!python/unicode 'blog.j2',
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/2017/python-tenacity': [!!python/unicode 'blog.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/2017/uniform-field-reEntrant-cavity': [!!python/unicode 'blog.j2',
+  !!python/unicode 'base.j2']
 !!python/unicode 'blog/atom.xml': [atom.j2]
 !!python/unicode 'blog/excerpts.xml': [atom.j2]
 !!python/unicode 'blog/index.html': [!!python/unicode 'blog/2017/jeol-prize-winner',
@@ -656,6 +658,10 @@
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/Postmodern.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
   !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Published Work.html': [!!python/unicode 'blog-list.j2',
+  !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Published Work.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/Python.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/Python.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
@@ -663,6 +669,10 @@
 !!python/unicode 'blog/tags/Red Hat.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/Red Hat.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/Resonator Design.html': [!!python/unicode 'blog-list.j2',
+  !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/Resonator Design.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
   !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/SQLAlchemy.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
   !!python/unicode 'base.j2']
@@ -878,4 +888,16 @@
 !!python/unicode 'media/sidabras.bib': [base.j2, analytics.j2]
 !!python/unicode 'publications.html': [!!python/unicode 'base.j2']
 !!python/unicode 'sitemap.xml': []
+!!python/unicode 'stuff/stl-viewer/README.md': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/index.php': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/js/Detector.js': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/js/OrbitControls.js': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/js/STLLoader.js': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/js/STLViewer.js': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/js/jquery.min.js': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/js/slider.js': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/js/stats.min.js': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/js/three.min.js': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/models/slotted_disk.stl': [!!python/unicode 'base.j2']
+!!python/unicode 'stuff/stl-viewer/upload.php': [!!python/unicode 'base.j2']
 !!python/unicode 'wp1-helix.html': [!!python/unicode 'base.j2']

@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
         <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Posts with tag Awards | Act-EPR MSC Fellowship</title>
+    <title> | Act-EPR MSC Fellowship</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Jason W. Sidabras">
@@ -41,7 +40,7 @@
         
       </head>
 
-  <body class="Awards">
+  <body class="STLViewer">
         <!-- start main wrapper -->
         <div id="header"><!-- start main header -->
             <div class="top-line">&nbsp;</div>
@@ -95,108 +94,8 @@
             <div class="container"><!-- Container -->
                 <div class="row">
                     <div class="container" id="top">
-      Posts with tag <strong>Awards</strong>
-<div class="container">
-  <div class="col-md-8">
-          <div class="post format-image">
-      <div class="entry">
-	<header class="entry-header">
-	  <h2><a href="/blog/2017/jeol-prize-winner">JEOL Student Lecture Prize</a></h2>
-	  <div class="meta">
-	    <small><i class="fa fa-calendar"></i>Sunday 09 April 2017</small>&nbsp;&nbsp;&nbsp;&nbsp;
-	    <small>
-	      <i class="fa fa-folder"></i>
-                              <a href="/blog/tags/Awards.html">Awards</a>              	    </small>
-	  </div>
-	</header>
-	<div class="entry-content">
-                      <a href="/blog/2017/jeol-prize-winner">
-              <div class="blog-title-image" style="background-image: url('/media/blog/2017/jeol.png');">
-              </div>
-            </a>
-                              <p>I am honored to have been awarded the 21st annual JEOL Student Lecture Prize at the 50th annual international Royal Society of Chemistry EPR meeting. I would like to thank the organizers for the amazing opportunity to present my current work in Oxford at the beautiful Keble College.</p>
-	  <a href="/blog/2017/jeol-prize-winner" class="btn btn-default white">Read More</a>
-	</div>
-   </div>
-    </div>
-  
-  </div>
-  <div class="col-md-3 col-sm-5 sidebar m-center">
-    <!-- .widget -->
-    <div class="widget">
-      <h4>Tags</h4>
-      <ul class="category-list flat">
-                                                                                                                                                              <li>
-	  <a               href="/blog/tags/Electromagnetics">
-               Electromagnetics
-            <span class="text-right pull-right">
-              2
-            </span>
-          </a>
-        </li>
-                <li>
-	  <a               href="/blog/tags/Ansys HFSS">
-               Ansys HFSS
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-                <li>
-	  <a               href="/blog/tags/Tips and Tricks">
-               Tips and Tricks
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-                <li>
-	  <a class="active"               href="/blog/tags/Awards">
-               Awards
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-                <li>
-	  <a               href="/blog/tags/Simulations">
-               Simulations
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-                <li>
-	  <a               href="/blog/tags/Published Work">
-               Published Work
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-                <li>
-	  <a               href="/blog/tags/Resonator Design">
-               Resonator Design
-            <span class="text-right pull-right">
-              1
-            </span>
-          </a>
-        </li>
-              </ul>
-    </div>
- 
-</div>
-</div>
-    <div class="container pagination-bar text-center">
-      <ul class="pagination">
-                              </ul>
-  </div>
-
-</div>
-   <!-- /.widget -->
-  </div>
-</div>
-            
+      
+                  
                 </div> <!-- /row-->
             </div> <!-- /container -->
         </div>
