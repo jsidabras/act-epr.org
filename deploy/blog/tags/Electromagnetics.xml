@@ -7,28 +7,11 @@
     <link href="http://act-epr.org/blog/"/>
   
     
-  <updated>2017-10-17T10:21:54Z</updated>
+  <updated>2017-10-17T10:32:40Z</updated>
 
   <id>http://act-epr.org/blog/tags/Electromagnetics.xml</id>
 
       <entry>
-    <title type="html">Uniform Field ReEntrant Cavity for Improved Pulse EPR</title>
-    <author><name>Jason W. Sidabras</name></author>
-    <link href="http://act-epr.org/blog/2017/uniform-field-reEntrant-cavity"/>
-    <link rel="alternate" type="text/html" href="http://act-epr.org/blog/2017/uniform-field-reEntrant-cavity"/>
-    <updated>2017-10-02T06:00:00Z</updated>
-    <published>2017-10-02T06:00:00Z</published>
-    <id>http://act-epr.org/blog/2017/uniform-field-reEntrant-cavity</id>
-        <category term="Electromagnetics" label="Electromagnetics" />
-        <category term="Published Work" label="Published Work" />
-        <category term="Resonator Design" label="Resonator Design" />
-    
-    <content type="html">
-                  &lt;p&gt;test&lt;/p&gt;
-&lt;p&gt;test test&lt;/p&gt;      
-          </content>
-  </entry>
-    <entry>
     <title type="html">Boosting Ansys HFSS Performance</title>
     <author><name>Jason W. Sidabras</name></author>
     <link href="http://act-epr.org/blog/2017/boosting-ansys-hfss-performance"/>
