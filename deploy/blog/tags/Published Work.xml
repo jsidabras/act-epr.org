@@ -7,7 +7,7 @@
     <link href="http://act-epr.org/blog/"/>
   
     
-  <updated>2017-10-21T19:08:25Z</updated>
+  <updated>2017-10-21T19:10:40Z</updated>
 
   <id>http://act-epr.org/blog/tags/Published%20Work.xml</id>
 
@@ -36,7 +36,7 @@
 &lt;/ol&gt;
 &lt;p&gt;The end sections were designed with low-loss Rexolite plastic and provide an electromagnetic discontinuity to transfer the end-plate short to an open. Such a design is easy to manufacture with re-entrant geometries at Q- and W-band, unlike loop-gap resonators where the gaps are too small to machine plastic caps. Because of this a true uniform field can be realized.&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;
-&lt;div class=&#34;container&#34;&gt;&lt;div class=&#34;col-md-5&#34; style=&#34;padding-left: 0px;  padding-right: 0px;&#34;&gt;&lt;img style=&#34;max-width:100%;height:auto;&#34; src=&#34;/media/blog/2017/img/blog-UF-Fig2-UFCompare.png&#34; title=&#34;Comparison of Uniform Field Resonators with different dielectrics&#34;&gt; &lt;/div&gt;&lt;/div&gt;
+&lt;div class=&#34;container&#34;&gt;&lt;div class=&#34;col-md-10&#34; style=&#34;padding-left: 0px;  padding-right: 0px;&#34;&gt;&lt;img style=&#34;max-width:100%;height:auto;&#34; src=&#34;/media/blog/2017/img/blog-UF-Fig2-UFCompare.png&#34; title=&#34;Comparison of Uniform Field Resonators with different dielectrics&#34;&gt; &lt;/div&gt;&lt;/div&gt;
 &lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;One important aspect of the re-entrant geometry is the stability of the uniform field mode. Shown on the left is a Uniform Field Cylindrical TE&lt;sub&gt;01U&lt;/sub&gt; resonator (which can include the dielectric tube) as the dielectric constant of the sample is changed from an epsilon of 1 to 5 (dark to light). The dotted lines indicate the 10 mm region-of-interest. This simulates placing different samples in the resonator, for instance changes in glycerol content. The field uniformity swings from a &#39;W&#39; shape to a slightly cosine shape. And the end sections change significantly. Experimentally this would mean a change in the pi pulse needed to excite the sample. Although this is much better than the traditional TE&lt;sub&gt;011&lt;/sub&gt; cavity, it could be improved.&lt;/p&gt;
 &lt;p&gt;On the right shows the same sample change from epsilon 1 to 5 (dark to light). It is apparent that the variation is much smaller with the re-entrant geometry. This is due to the fins reducing the electric field in the sample and, consequently, reducing the frequency shift as the sample is changed. For instance, the cylindrical TE&lt;sub&gt;01U&lt;/sub&gt; geometry has a 1.3 GHz shift, while the re-entrant TE&lt;sub&gt;01U&lt;/sub&gt; geometry only shifts by 810 MHz. This exciting feature of the re-entrant resonator may allow it to become a general purpose resonator for pulse experiments.&lt;/p&gt;
