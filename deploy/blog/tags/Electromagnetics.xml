@@ -7,7 +7,7 @@
     <link href="http://act-epr.org/blog/"/>
   
     
-  <updated>2017-10-23T12:07:07Z</updated>
+  <updated>2017-11-04T11:17:57Z</updated>
 
   <id>http://act-epr.org/blog/tags/Electromagnetics.xml</id>
 
@@ -44,7 +44,7 @@
 &lt;div class=&#34;container&#34;&gt;&lt;div class=&#34;col-md-5&#34; style=&#34;padding-left: 0px;  padding-right: 0px;&#34;&gt;&lt;img style=&#34;max-width:100%;height:auto;&#34; src=&#34;/media/blog/2017/img/blog-UF-Fig3-nutation.png&#34; title=&#34;Nutation experiment comparing the TE011 vs the re-entrant TE01U&#34;&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The first experiment performed to test the re-entrant resonator was a simple nutation experiment. This experiment relies on coherent preparation pulse, which requires uniform fields. Performing the experiment in a traditional TE&lt;sub&gt;011&lt;/sub&gt; yields sub-par results. The nutations roll-off quickly, there are phase-inversions at 1200 ns 2400 ns, and there is a complex background. If this was a DEER experiment, these would all create unwanted distances due to frequency content created &lt;b&gt;only by the non-uniformity of the resonator&lt;/b&gt;.&lt;/p&gt;
-&lt;p&gt;By placing he sample in the re-entrant TE&lt;sub&gt;01U&lt;/sub&gt; cavity, these issues disappear and you are left with a clean nutation experiment with reasonable roll-off and no complex background. However, by preparing a sample that sits only in the 10 mm region of interest the nutations can be extended even further.&lt;/p&gt;
+&lt;p&gt;By placing the sample in the re-entrant TE&lt;sub&gt;01U&lt;/sub&gt; cavity, these issues disappear and you are left with a clean nutation experiment with reasonable roll-off and no complex background. However, by preparing a sample that sits only in the 10 mm region of interest the nutations can be extended even further.&lt;/p&gt;
 &lt;p&gt;In the future I plan on testing this resonator using other coherent pulse spectroscopies, such as ESEEM/HYSCORE, DEER, and EDNMR. The larger bandwidth and uniform fields of the re-entrant TE&lt;sub&gt;01U&lt;/sub&gt; with the same concentration sensitivity should provide a superior resonator and pave the way for uniform field resonators to be used for general purpose spectroscopy. &lt;/p&gt;
 &lt;p&gt;The design drawings and STL field can be found in the &lt;a href=&#34;/data/&#34;&gt;Data Section&lt;/a&gt; of this web-site.&lt;/p&gt;      
           </content>
