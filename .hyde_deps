@@ -904,3 +904,5 @@
 !!python/unicode 'stuff/stl-viewer/models/slotted_disk.stl': [!!python/unicode 'base.j2']
 !!python/unicode 'stuff/stl-viewer/upload.php': [!!python/unicode 'base.j2']
 !!python/unicode 'wp1-helix.html': [!!python/unicode 'base.j2']
+!!python/unicode 'wp2-tech.html': [!!python/unicode 'base.j2']
+!!python/unicode 'wp3-bio.html': [!!python/unicode 'base.j2']
