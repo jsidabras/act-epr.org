@@ -4,7 +4,7 @@ span.undefined { color:red; }
 .clear {clear:both;}
 .year { width: 50px; position: relative; height: 100%; border-bottom: 1px solid black; display: inline-block;}
 .yearlabel { position: absolute; bottom: -20px; text-align: center; width: 100%; font-size: smaller;}
-.pub { border: 1px solid white; background-color: #eee; }
+.pub {margin: 1.8px 2px 0 0; background-color: #eee; }
 .inproceedings { background-color: #ccf; }
 .article { background-color: #50c1b6; }
 .inbook { background-color: #eaa; }

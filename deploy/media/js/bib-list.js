@@ -1,7 +1,6 @@
 /*!*
  * Javascript BibTex Parser v0.1
  * Copyright (c) 2008 Simon Fraser University
- * Modified by Jason W. Sidabras 2014
  * @author Steve Hannah <shannah at sfu dot ca>
  * 
  *
@@ -235,6 +234,28 @@ function array_keys( input, search_value, strict ) {
 
     return tmp_arr;
 }// }}}
+
+// {{{ array_values
+function array_values(input) {
+  // From: http://phpjs.org/functions
+  // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  // +      improved by: Brett Zamir (http://brett-zamir.me)
+  // *     example 1: array_values( {firstname: 'Kevin', surname: 'van Zonneveld'} );
+  // *     returns 1: {0: 'Kevin', 1: 'van Zonneveld'}
+  var tmp_arr = [],
+      key = '';
+
+  if (input && typeof input === 'object' && input.change_key_case) { // Duck-type check for our own array()-created PHPJS_Array
+    return input.values();
+  }
+
+  for (key in input) {
+    tmp_arr[tmp_arr.length] = input[key];
+  }
+
+  return tmp_arr;
+}
+// }}}
 
 // {{{ in_array
 function in_array(needle, haystack, strict) {
@@ -1076,7 +1097,7 @@ BibTex.prototype = {
             while (strrpos(entry,'=') !== false) {
                 position = strrpos(entry, '=');
                 //Checking that the equal sign is not quoted or is not inside a equation (For example in an abstract)
-                var proceed  = true;
+                proceed  = true;
                 if (substr(entry, position-1, 1) == '\\') {
                     proceed = false;
                 }
@@ -1134,6 +1155,10 @@ BibTex.prototype = {
             //Handling the authors
             if (in_array('author', array_keys(ret)) && this._options['extractAuthors']) {
                 ret['author'] = this._extractAuthors(ret['author']);
+            }
+            //Handling the editors (added by vkaravir 2017)
+            if (in_array('editor', array_keys(ret)) && this._options['extractAuthors']) {
+                ret['editor'] = this._extractAuthors(ret['editor']);
             }
         }
         return ret;
@@ -1233,7 +1258,7 @@ BibTex.prototype = {
         //Getting the value (at is only allowd in values)
         if (strrpos(entry,'=') !== false) {
             position = strrpos(entry, '=');
-            var proceed  = true;
+            proceed  = true;
             if (substr(entry, position-1, 1) == '\\') {
                 proceed = false;
             }
@@ -1398,7 +1423,7 @@ BibTex.prototype = {
                 var tmparray     = [];
                 tmparray     = explode(',', author);
                 //The first entry must contain von and last
-                var vonlastarray = [];
+                vonlastarray = [];
                 vonlastarray = explode(' ', tmparray[0]);
                 size         = sizeof(vonlastarray);
                 if (1==size) { //Only one entry.got to be the last
@@ -2455,6 +2480,7 @@ if(bInitHandedOff===false){_fnInitalise(oSettings)}})}})(jQuery);
 var bibtexify = (function($) {
     // helper function to "compile" LaTeX special characters to HTML
     var htmlify = function(str) {
+        if (!str) { return ''; }
         // TODO: this is probably not a complete list..
         str = str.replace(/\\"\{a\}/g, '&auml;')
             .replace(/\{\\aa\}/g, '&aring;')
@@ -2466,6 +2492,7 @@ var bibtexify = (function($) {
             .replace(/\\'a/g, '&aacute;')
             .replace(/\\'A/g, '&Aacute;')
             .replace(/\\"o/g, '&ouml;')
+            .replace(/\\"u/g, '&uuml;')
             .replace(/\\ss\{\}/g, '&szlig;')
             .replace(/\{/g, '')
             .replace(/\}/g, '')
@@ -2474,6 +2501,7 @@ var bibtexify = (function($) {
         return str;
     };
     var uriencode = function(str) {
+        if (!str) { return ''; }
         // TODO: this is probably not a complete list..
         str = str.replace(/\\"\{a\}/g, '%C3%A4')
             .replace(/\{\\aa\}/g, '%C3%A5')
@@ -2485,6 +2513,7 @@ var bibtexify = (function($) {
             .replace(/\\'a/g, '%C3%A1')
             .replace(/\\'A/g, '%C3%81')
             .replace(/\\"o/g, '%C3%B6')
+            .replace(/\\"u/g, '%C3%BC')
             .replace(/\\ss\{\}/g, '%C3%9F')
             .replace(/\{/g, '')
             .replace(/\}/g, '')
@@ -2496,21 +2525,32 @@ var bibtexify = (function($) {
     var bib2html = {
         // the main function which turns the entry into HTML
         entry2html: function(entryData, bib) {
-            var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
+            var type = entryData.entryType.toLowerCase();
+            // default to type misc if type is unknown
+            if(array_keys(bib2html).indexOf(type) === -1) {
+                type = 'misc';
+                entryData.entryType = type;
+            }
+            var itemStr = htmlify(bib2html[type](entryData));
             itemStr += bib2html.links(entryData);
             itemStr += bib2html.bibtex(entryData);
             if (bib.options.tweet && entryData.url) {
                 itemStr += bib2html.tweet(entryData, bib);
             }
-            return itemStr.replace(/undefined/g,
+            return itemStr.replace(/undefined[,.]?/g,
                                    '<span class="undefined">missing<\/span>');
         },
         // converts the given author data into HTML
         authors2html: function(authorData) {
             var authorsStr = '';
+            var author;
+            if (!authorData) { return authorsStr ;}
             for (var index = 0; index < authorData.length; index++) {
                 if (index > 0) { authorsStr += ", "; }
-                authorsStr += authorData[index].last;
+                author = authorData[index];
+                authorsStr += author.first
+                              + (author.von ? ' ' + author.von + ' ' : ' ')
+                              + author.last;
             }
             return htmlify(authorsStr);
         },
@@ -2518,10 +2558,10 @@ var bibtexify = (function($) {
         links: function(entryData) {
             var itemStr = '';
             if (entryData.url && entryData.url.match(/.*\.pdf/)) {
-                itemStr += ' (<a title="PDF-version of this article" href="' +
+                itemStr += ' (<a title="PDF-version of this article"  target="_blank" href="' +
                             entryData.url + '">pdf<\/a>)';
             } else if (entryData.url) {
-                itemStr += ' (<a title="This article online" href="' + entryData.url +
+                itemStr += ' (<a title="This article online" target="_blank" href="' + entryData.url +
                             '">link<\/a>)';
             }
             return itemStr;
@@ -2560,14 +2600,16 @@ var bibtexify = (function($) {
             return spl[spl.length-1];
           };
           var auth = entryData.author;
-          if (auth.length == 1) {
+          if (!auth) {
+            // nothing to do
+          } else if (auth.length == 1) {
             itemStr += uriencode(splitName(auth[0].last));
           } else if (auth.length == 2) {
             itemStr += uriencode(splitName(auth[0].last) + "%26" + splitName(auth[1].last));
           } else {
             itemStr += uriencode(splitName(auth[0].last) + " et al");
           }
-          itemStr += ": " + encodeURIComponent('"' + entryData.title + '"');
+          itemStr += ": " + uriencode(entryData.title);
           itemStr += '" target="_blank">tweet</a>)';
           return itemStr;
         },
@@ -2575,6 +2617,14 @@ var bibtexify = (function($) {
         inproceedings: function(entryData) {
             return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
                 entryData.title + ". In <em>" + entryData.booktitle +
+                ", pp. " + entryData.pages +
+                ((entryData.address)?", " + entryData.address:"") + ".<\/em>";
+        },
+        incollection: function(entryData) {
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
+                entryData.title + ". In " +
+                ((entryData.editor)?"" + this.authors2html(entryData.editor) + ", editor, ":"") +
+                "<em>" + entryData.booktitle +
                 ", pp. " + entryData.pages +
                 ((entryData.address)?", " + entryData.address:"") + ".<\/em>";
         },
@@ -2591,21 +2641,6 @@ var bibtexify = (function($) {
                 ((entryData.howpublished)?entryData.howpublished + ". ":"") +
                 ((entryData.note)?entryData.note + ".":"");
         },
-        patent: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
-            entryData.title + ". " + 
-            entryData.organization + ".";
-        },
-        conference: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
-            entryData.title + ". " + entryData.type + ": " +
-            entryData.organization + ".";
-        },
-        proceedings: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
-            entryData.title + ". " + entryData.type + ": " +
-            entryData.organization + ".";
-        },
         mastersthesis: function(entryData) {
             return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
             entryData.title + ". " + entryData.type + ". " +
@@ -2617,7 +2652,7 @@ var bibtexify = (function($) {
                 entryData.number + ". " + entryData.type + ".";
         },
         book: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
+            return this.authors2html(entryData.author || entryData.editor) + " (" + entryData.year + "). " +
                 " <em>" + entryData.title + "<\/em>, " +
                 entryData.publisher + ", " + entryData.year +
                 ((entryData.issn)?", ISBN: " + entryData.issn + ".":".");
@@ -2625,12 +2660,17 @@ var bibtexify = (function($) {
         inbook: function(entryData) {
             return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
                 entryData.chapter + " in <em>" + entryData.title + "<\/em>, " +
-                ((entryData.editor)?" Edited by " + entryData.editor + ", ":"") +
+                ((entryData.editor)?" Edited by " + this.authors2html(entryData.editor) + ", ":"") +
                 entryData.publisher + ", pp. " + entryData.pages + "" +
                 ((entryData.series)?", <em>" + entryData.series + "<\/em>":"") +
                 ((entryData.volume)?", Vol. " + entryData.volume + "":"") +
                 ((entryData.issn)?", ISBN: " + entryData.issn + "":"") +
                 ".";
+        },
+        proceedings: function(entryData) {
+            return this.authors2html(entryData.author) + ", (" + entryData.year + "). " +
+                " <em>" + entryData.title + ".<\/em>" +
+                entryData.organization;
         },
         // weights of the different types of entries; used when sorting
         importance: {
@@ -2639,14 +2679,14 @@ var bibtexify = (function($) {
             'manual': 10,
             'techreport': 20,
             'mastersthesis': 30,
-            'patent': 55,
             'inproceedings': 40,
             'incollection': 50,
-            'proceedings': 95,
-            'conference': 100,
+            'proceedings': 60,
+            'conference': 70,
             'article': 80,
             'phdthesis': 90,
             'inbook': 100,
+            'proceedings': 105,
             'book': 110,
             'unpublished': 120
         },
@@ -2654,21 +2694,22 @@ var bibtexify = (function($) {
         labels: {
             'article': 'Journal',
             'book': 'Book',
-            'conference': 'Abstract',
-            'inbook': 'Book Chapter',
-            'incollection': '',
+            'conference': 'Conference',
+            'inbook': 'Book chapter',
+            'incollection': 'In Collection',
             'inproceedings': 'Conference',
             'manual': 'Manual',
-            'patent': 'Patent',
             'mastersthesis': 'Thesis',
             'misc': 'Misc',
             'phdthesis': 'PhD Thesis',
-            'proceedings': 'Invited Talk',
-            'techreport': 'Technical Report',
+            'proceedings': 'Presentation',
+            'techreport': 'Technical report',
             'unpublished': 'Unpublished'}
     };
     // format a phd thesis similarly to masters thesis
     bib2html.phdthesis = bib2html.mastersthesis;
+    // conference is the same as inproceedings
+    bib2html.conference = bib2html.inproceedings;
 
     // event handlers for the bibtex links
     var EventHandlers = {
@@ -2696,13 +2737,21 @@ var bibtexify = (function($) {
         bibtex.content = data;
         bibtex.parse();
         var bibentries = [], len = bibtex.data.length;
-		var entryTypes = {};
-		jQuery.extend(true, bib2html, this.options.bib2html);
+        var entryTypes = {};
+        jQuery.extend(true, bib2html, this.options.bib2html);
         for (var index = 0; index < len; index++) {
             var item = bibtex.data[index];
-            bibentries.push([item.year, bib2html.labels[item.entryType], bib2html.entry2html(item, this)]);
-            entryTypes[bib2html.labels[item.entryType]] = item.entryType;
-            this.updateStats(item);
+            if (!item.year) {
+              item.year = this.options.defaultYear || "To Appear";
+            }
+            try {
+                var html = bib2html.entry2html(item, this);
+                bibentries.push([item.year, bib2html.labels[item.entryType], html]);
+                entryTypes[bib2html.labels[item.entryType]] = item.entryType;
+                this.updateStats(item);
+            } catch (e) {
+                console.error('Failed to process entry: ', item);
+            }
         }
         jQuery.fn.dataTableExt.oSort['type-sort-asc'] = function(x, y) {
             var item1 = bib2html.importance[entryTypes[x]],
@@ -2714,13 +2763,13 @@ var bibtexify = (function($) {
                 item2 = bib2html.importance[entryTypes[y]];
             return ((item1 < item2) ? 1 : ((item1 > item2) ?  -1 : 0));
         };
-        var table = this.$pubTable.dataTable({ 'aaData': bibentries,
+        var table = this.$pubTable.dataTable($.extend({ 'aaData': bibentries,
                               'aaSorting': this.options.sorting,
                               'aoColumns': [ { "sTitle": "Year" },
                                              { "sTitle": "Type", "sType": "type-sort", "asSorting": [ "desc", "asc" ] },
                                              { "sTitle": "Publication", "bSortable": false }],
                               'bPaginate': false
-                            });
+                            }, this.options.datatable));
         if (this.options.visualization) {
             this.addBarChart();
         }
@@ -2740,8 +2789,8 @@ var bibtexify = (function($) {
           }
         });
         // attach the event handlers to the bib items
-        $(".biblink", this.$pubTable).live('click', EventHandlers.showbib);
-        $(".bibclose", this.$pubTable).live('click', EventHandlers.hidebib);
+        $(".biblink", this.$pubTable).on('click', EventHandlers.showbib);
+        $(".bibclose", this.$pubTable).on('click', EventHandlers.hidebib);
     };
     // updates the stats, called whenever a new bibtex entry is parsed
     bibproto.updateStats = function updateStats(item) {
@@ -2759,12 +2808,24 @@ var bibtexify = (function($) {
     };
     // adds the barchart of year and publication types
     bibproto.addBarChart = function addBarChart() {
-        var yearstats = [], max = 0;
+        var yearstats = [];
+        var maxItems = 0;
+        var maxTypes = 0;
         $.each(this.stats, function(key, value) {
-            max = Math.max(max, value.count);
+            var types = [];
+            $.each(value.types, function(type) {
+              types.push(type);
+            });
+            types.sort(function(x, y) {
+              return bib2html.importance[y] - bib2html.importance[x];
+            });
+
             yearstats.push({'year': key, 'count': value.count,
-                'item': value, 'types': value.types});
+                'item': value, 'types': value.types, typeArr: types});
+            maxItems = Math.max(maxItems, value.count);
+            maxTypes = Math.max(maxTypes, types.length);
         });
+        var isTypeMode = maxItems > 15;
         yearstats.sort(function(a, b) {
             var diff = a.year - b.year;
             if (!isNaN(diff)) {
@@ -2776,37 +2837,39 @@ var bibtexify = (function($) {
             }
             return 0;
         });
-        var chartIdSelector = "#" + this.$pubTable[0].id + "pubchart";
-        var pubHeight = $(chartIdSelector).height()/max - 2;
-        var styleStr = chartIdSelector +" .year { width: " +
-//                        (100.0/yearstats.length) + "%; }" +
-                        "100px; }" +
-                        chartIdSelector + " .pub { height: " + pubHeight + "px; }";
+        var chartIdSelector = '#' + this.$pubTable[0].id + 'pubchart';
+        var chartHeight = $(chartIdSelector).height();
+        var styleStr = chartIdSelector + ' .year { width: ' +
+                        (50.0/yearstats.length) + '%; }';
         var legendTypes = [];
         var stats2html = function(item) {
-            var types = [],
-                str = '<div class="year">',
-                sum = 0;
-            $.each(item.types, function(type, value) {
-              types.push(type);
-              sum += value;
-            });
-            types.sort(function(x, y) {
-              return bib2html.importance[y] - bib2html.importance[x];
-            });
-            str += '<div class="filler" style="height:' + ((pubHeight)*(max-sum)) + 'px;"></div>';
+            var types = item.typeArr;
+            var borderHeight = isTypeMode ? types.length * 2 : item.count * 2;
+            var totalHeight = item.count / maxItems * chartHeight;
+            var pubHeight = (totalHeight - borderHeight) / item.count;
+            var str = '<div class="year">';
+            str += '<div class="filler" style="height:' + (chartHeight - totalHeight ) + 'px;"></div>';
+            var itemStr = '';
             for (var i = 0; i < types.length; i++) {
                 var type = types[i];
                 if (legendTypes.indexOf(type) === -1) {
                     legendTypes.push(type);
                 }
-                for (var j = 0; j < item.types[type]; j++) {
-                    str += '<div class="pub ' + type + '"></div>';
+                if (isTypeMode) {
+                    // just one block for publication type
+                    itemStr += '<div style="height:' + (item.types[type] * pubHeight) + 'px" class="pub ' + type + '"></div>';
+                } else {
+                    // one block for each entry of the publication type
+                    for (var j = 0; j < item.types[type]; j++) {
+                        itemStr += '<div style="height:' + pubHeight + 'px" class="pub ' + type + '"></div>';
+                    }
                 }
             }
+            str += itemStr;
+
             return str + '<div class="yearlabel">' + item.year + '</div></div>';
         };
-        var statsHtml = "<style>" + styleStr + "</style>";
+        var statsHtml = '<style>' + styleStr + '</style>';
         yearstats.forEach(function(item) {
             statsHtml += stats2html(item);
         });
@@ -2825,12 +2888,12 @@ var bibtexify = (function($) {
     //     as the bibtex data
     //   - a URL, which is loaded and used as data. Note, that same-origin
     //     policy restricts where you can load the data.
-    // Supported options: 
+    // Supported options:
     //   - visualization: A boolean to control addition of the visualization.
     //                    Defaults to true.
     //   - tweet: Twitter username to add Tweet links to bib items with a url field.
-    //   - sorting: Control the default sorting of the list. Defaults to [[0, "desc"], 
-    //              [1, "desc"]]. See http://datatables.net/api fnSort for details 
+    //   - sorting: Control the default sorting of the list. Defaults to [[0, "desc"],
+    //              [1, "desc"]]. See http://datatables.net/api fnSort for details
     //              on formatting.
     //   - bib2html: Can be used to override any of the functions or properties of
     //               the bib2html object. See above, starting around line 40.
@@ -2838,19 +2901,20 @@ var bibtexify = (function($) {
         var options = $.extend({}, {'visualization': true,
                                 'sorting': [[0, "desc"], [1, "desc"]]},
                                 opts);
-        var yearBit = 1, typeBit = 0;
         var $pubTable = $("#" + bibElemId).addClass("bibtable");
-        if ($("#shutter").size() === 0) {
+        if ($("#shutter").length === 0) {
             $pubTable.before('<div id="shutter" class="hidden"></div>');
             $("#shutter").click(EventHandlers.hidebib);
         }
         if (options.visualization) {
             $pubTable.before('<div id="' + bibElemId + 'pubchart" class="bibchart"></div>');
         }
-        var $bibSrc = $(bibsrc);
-        if ($bibSrc.length) { // we found an element, use its HTML as bibtex
+        var $bibSrc;
+        if(bibsrc.indexOf('/') === -1) {
+            $bibSrc = $(bibsrc);
+        }
+        if ($bibSrc && $bibSrc.length) { // we found an element, use its HTML as bibtex
             new Bib2HTML($bibSrc.html(), $pubTable, options);
-            bibdownloaded();
             $bibSrc.hide();
         } else { // otherwise we assume it is a URL
             var callbackHandler = function(data) {

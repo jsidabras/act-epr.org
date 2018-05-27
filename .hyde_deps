@@ -756,8 +756,10 @@
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/Xen.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
   !!python/unicode 'tag.xml.j2']
-!!python/unicode 'blog/tags/angry.html': [base.j2, tagged_posts.j2, analytics.j2,
-  topbar.j2]
+!!python/unicode 'blog/tags/angry.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/angry.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/awesome.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/awesome.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
@@ -778,8 +780,14 @@
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/collectd.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
   !!python/unicode 'tag.xml.j2']
-!!python/unicode 'blog/tags/happy.html': [base.j2, tagged_posts.j2, analytics.j2,
-  topbar.j2]
+!!python/unicode 'blog/tags/events.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/events.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/happy.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/happy.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/index.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/mod_defensible.html': [!!python/unicode 'blog-list.j2',
   !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
@@ -789,13 +797,22 @@
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/pbr.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
   !!python/unicode 'tag.xml.j2']
-!!python/unicode 'blog/tags/sad.html': [base.j2, tagged_posts.j2, analytics.j2, topbar.j2]
+!!python/unicode 'blog/tags/sad.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/sad.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/startup-notification.html': [!!python/unicode 'blog-list.j2',
   !!python/unicode 'tag.j2', !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/startup-notification.xml': [!!python/unicode 'xml.j2',
   !!python/unicode 'macros.j2', !!python/unicode 'tag.xml.j2']
-!!python/unicode 'blog/tags/thoughts.html': [base.j2, tagged_posts.j2, analytics.j2,
-  topbar.j2]
+!!python/unicode 'blog/tags/thoughts.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/thoughts.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
+!!python/unicode 'blog/tags/transform.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
+  !!python/unicode 'base.j2']
+!!python/unicode 'blog/tags/transform.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
+  !!python/unicode 'tag.xml.j2']
 !!python/unicode 'blog/tags/xpyb.html': [!!python/unicode 'blog-list.j2', !!python/unicode 'tag.j2',
   !!python/unicode 'base.j2']
 !!python/unicode 'blog/tags/xpyb.xml': [!!python/unicode 'xml.j2', !!python/unicode 'macros.j2',
@@ -891,6 +908,44 @@
 !!python/unicode 'media/sidabras.bib': [base.j2, analytics.j2]
 !!python/unicode 'publications.html': [!!python/unicode 'base.j2']
 !!python/unicode 'sitemap.xml': []
+!!python/unicode 'src/README.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/.gitignore': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/.travis.yml': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/CHANGELOG.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/CONTRIBUTING.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/LICENSE': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/MANIFEST.in': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/dev-only.txt': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/dev-req.txt': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs-requirements.txt': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/Makefile': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/_static/.gitkeep': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/changelog.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/cli.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/conf.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/configuration.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/index.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/installation.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/plugins.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/server.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/docs/templates.rst': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/h': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/__init__.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/_compat.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/engine.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/exceptions.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/generator.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/layout.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/main.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/model.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/plugin.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/publisher.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/server.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/hyde/site.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/requirements.txt': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/setup.py': [!!python/unicode 'base.j2']
+!!python/unicode 'src/hyde/tox.ini': [!!python/unicode 'base.j2']
+!!python/unicode 'src/pip-delete-this-directory.txt': [!!python/unicode 'base.j2']
 !!python/unicode 'stuff/stl-viewer/README.md': [!!python/unicode 'base.j2']
 !!python/unicode 'stuff/stl-viewer/index.php': [!!python/unicode 'base.j2']
 !!python/unicode 'stuff/stl-viewer/js/Detector.js': [!!python/unicode 'base.j2']
