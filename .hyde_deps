@@ -848,6 +848,8 @@
 !!python/unicode 'media/js/bib-list.js': []
 !!python/unicode 'media/js/bootstrap-tab-bookmark.js': []
 !!python/unicode 'media/js/custom.min.js': []
+!!python/unicode 'media/js/images/index.html': [!!python/unicode 'base.j2']
+!!python/unicode 'media/js/index.html': [!!python/unicode 'base.j2']
 !!python/unicode 'media/js/libs/README.md': [base.j2, analytics.j2]
 !!python/unicode 'media/js/libs/affix.js': [base.j2, analytics.j2]
 !!python/unicode 'media/js/libs/alert.js': [base.j2, analytics.j2]
