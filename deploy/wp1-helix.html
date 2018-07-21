@@ -36,6 +36,23 @@ p {
 </style>
 
     <script type="text/javascript">
+$(document).ready(function () {
+    $('.nav-toggle').click(function () {
+        var collapse_content_selector = $(this).attr('href');
+        var collapse_content_selector = '#collapse2';
+        var toggle_switch = $(this);
+        $(collapse_content_selector).toggle(function () {
+            if ($(this).css('display') == 'none') {
+                toggle_switch.html('Read More >>>');
+            } else {
+                toggle_switch.html('<<< Read Less');
+            }
+        });
+    });
+
+});
+</script>
+    <script type="text/javascript">
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -123,35 +140,12 @@ p {
     <br>
     <div class="container"><!-- Container -->
       <div class="row">
-        <div class="col-md-8 footer-widget"><!-- Text Widget -->
+        <div class="col-md-2"><!-- Text Widget -->
+            <img title="micro-helix " alt="micro helix geometry and magnetic field distribution" src="/media/img/wp1/microhelix.png">
+	</div>
+        <div class="col-md-7 "><!-- Text Widget -->
           <div style="text-align: justify;">
-<img class="float1" title="micro-helix " alt="micro helix geometry and magnetic field distribution" src="/media/img/wp1/microhelix.png">
-            <p>Helical resonators were introduced to EPR in the late-1950s as a
-              method to increase the magnetic field of a non-resonant shorted
-              waveguide. The helices that were described in the literature were
-              designed as slow-wave broadband focusing-resonators affixed to the
-              bottom of a waveguide short. The sample was placed within the
-              helix. Although this improved the filling factor of the shorted
-              waveguide, it had a Q-value essentially at unity but could be matched
-              with a slide-screw tuner. I propose re-evaluating the helix for
-              extremely limited samples in EPR, the first prototype tested is
-              shown in Fig. 1A, simulated fields in Fig. 1B. With the
-              self-resonant micro-helix described here, at least a factor of 10 
-              in EPR signal intensity has been simulated and experimentally
-              confirmed in preliminary experiments. Simulation results are shown
-              in Table 1.</p>
-            <p>Recently, the micro-helix has gained some popularity in the NMR
-              literature for micro-fluidic environments. However, these coils
-              resonate well below 500 MHz, are typically not self-resonant, and
-              do not employ inductive coupling techniques. Extending these
-              geometries to X-band (9.5 GHz) and implementing a mutual
-              inductance coupling system are considered highly innovative.
-              Furthermore, the 0.17 mm micro-helix geometry cannot currently be
-              built by ordinary techniques. Therefore, such techniques as
-              three-dimensional printing are being investigated. Taking
-              advantage of this technology, a micro-helix with inner diameters
-              down to 0.17 mm can be reproducibly constructed.</p>
-            <p>Three characteristics differentiate the proposed micro-helix
+           <p style="margin-left: 15px;">Three characteristics differentiate the proposed micro-helix
               configuration from those described in literature: </p>
             <ol type="i">
               <li> The helix is <b>self-resonant</b>, meaning that the self-inductance
@@ -165,27 +159,31 @@ p {
                 designed to minimize noise and further increase the EPR signal
                 intensity.</li>
             </ol>
-            </br>
-            <center>
+            <br/>
+	</div>
+    </div>
+    </div>
+
+      <div class="row">
+        <div class="col-md-9"><!-- Text Widget -->
+            <br/>
+    <a href="#" class="nav-toggle">Read More >>></a>
+            <br/>
+            <br/>
+    <div id="collapse2" style="display:none">
+    <h5>Introduction</h5>
+        <p>Helical resonators were introduced to EPR in the late-1950s as a method to increase the magnetic field of a non-resonant shorted waveguide. The helices that were described in the literature were designed as slow-wave broadband focusing-resonators affixed to the bottom of a waveguide short. The sample was placed within the helix. Although this improved the filling factor of the shorted waveguide, it had a Q-value essentially at unity but could be matched with a slide-screw tuner. I propose re-evaluating the helix for extremely limited samples in EPR, the first prototype tested is shown in Fig. 1A, simulated fields in Fig. 1B. With the self-resonant micro-helix described here, at least a factor of 10  in EPR signal intensity has been simulated and experimentally confirmed in preliminary experiments. Simulation results are shown in Table 1.</p>
+        <p>Recently, the micro-helix has gained some popularity in the NMR literature for micro-fluidic environments. However, these coils resonate well below 500 MHz, are typically not self-resonant, and do not employ inductive coupling techniques. Extending these geometries to X-band (9.5 GHz) and implementing a mutual inductance coupling system are considered highly innovative. Furthermore, the 0.17 mm micro-helix geometry cannot currently be built by ordinary techniques. Therefore, such techniques as three-dimensional printing are being investigated. Taking advantage of this technology, a micro-helix with inner diameters down to 0.17 mm can be reproducibly constructed.</p>
+ 
+        <center>
             <img style="width:500px" src="/media/img/wp1/table1.png">
-            </center>
-            </br>
-            </br>
-            <p>
-            Table 1 presents simulated resonator characteristics of a few
-            geometries of interest with all EPR signals volume normalized. For
-            comparison, an X-band (9.5 GHz) dielectric cavity resonator (DR) is
-            presented. This is a standard cavity that can be purchased from
-            Bruker BioSpin, the leading EPR spectrometer manufacturer. EPR
-            Signal improvements and Λmax-Λave ratios are encouraging.
-            Simulations show the microwave field of the PMR
-            has at least a 21% inhomogeneity within a sample of dimensions 0.1
-            mm diameter by 0.1 mm height. In contrast, the micro-helix of Fig.
-            1B has 4.5% variation.
-            </p>
-            <p></p>
-          </div>
-        </div>
+        </center>
+        </br>
+        </br>
+        <p>Table 1 presents simulated resonator characteristics of a few geometries of interest with all EPR signals volume normalized. For comparison, an X-band (9.5 GHz) dielectric cavity resonator (DR) is presented. This is a standard cavity that can be purchased from Bruker BioSpin, the leading EPR spectrometer manufacturer. EPR Signal improvements and Λmax-Λave ratios are encouraging. Simulations show the microwave field of the PMR has at least a 21% inhomogeneity within a sample of dimensions 0.1 mm diameter by 0.1 mm height. In contrast, the micro-helix of Fig. 1B has 4.5% variation.
+        </p>
+    </div>
+       </div>
       </div>
     </div>
                 
@@ -215,7 +213,10 @@ p {
                     <h6 class="widget-title">Links of Interest</h6>
                     <div class="recent-twitt">
                     <p class="textwidget" style="text-align: justify;">
-                        <a style="color: #f0ce42;" href="https://cec.mpg.de/biophysikalische-chemie/dr-edward-j-reijerse/">Bio Hydrogen Group</a> - Led by Dr. Edward J. Reijerse, the Bio Hydrogen Group looks to understand the chemical reaction of biological hydrogenase in order to create bio-inspired molecular catalysts. 
+                        <a style="color: #f0ce42;" href="https://cec.mpg.de/forschung/anorganische-spektroskopie/dr-alexander-schnegg/">EPR Research Group</a> - Led by Dr. Alexander Schnegg, the EPR Research Group aims to develop and utilise state-of-the-art EPR spectrometers ranging from GHz to Thz frequencies.
+                    </p>
+                    <p class="textwidget" style="text-align: justify;">
+                        <a style="color: #f0ce42;" href="https://cec.mpg.de/emeriti/">Dept. Biophysical Chemistry</a> - Led by Prof. Wolfgang Lubitz, the Department of Biophysical Chemistry looks to understand the chemical reaction of biological hydrogenase in order to create bio-inspired molecular catalysts. 
                     </p>
                 </div>
             </div><!-- Recent Tweet Widget -->
@@ -224,8 +225,8 @@ p {
                 <h6 class="widget-title">News</h6>
                 <div class="textwidget">
                     <p>Act-EPR project starts on 1st May, 2017.</p>
-                    <p>2017.07 I was awarded the EPR2017 Award of Excellence for my talk.</p>
                     <p>2017.04 I was awarded the 21st annual <a style="color: #f0ce42;" href="/blog/2017/jeol-prize-winner">JEOL Prize</a>.</p>
+                    <p>2017.07 I was awarded the EPR2017 Award of Excellence for my talk.</p>
                 </div>
             </div><!-- News Leter Widget -->
             <div class="clearfix"></div>

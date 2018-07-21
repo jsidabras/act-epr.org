@@ -25,6 +25,23 @@
     <!-- nfonts -->
         
     <script type="text/javascript">
+$(document).ready(function () {
+    $('.nav-toggle').click(function () {
+        var collapse_content_selector = $(this).attr('href');
+        var collapse_content_selector = '#collapse2';
+        var toggle_switch = $(this);
+        $(collapse_content_selector).toggle(function () {
+            if ($(this).css('display') == 'none') {
+                toggle_switch.html('Read More >>>');
+            } else {
+                toggle_switch.html('<<< Read Less');
+            }
+        });
+    });
+
+});
+</script>
+    <script type="text/javascript">
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -108,17 +125,57 @@
             <div class="container"><!-- Container -->
                 <div class="row">
                     <div class="container" id="top">
-      <br />
-<div class="container"><!-- Container -->
-    <div class="row">
+      <div class="container"><!-- Container -->
+           <div class="row">
     <div class="col-md-7 footer-widget"><!-- Text Widget -->
-        <p style="margin-right: 50px; text-align: justify;">In order to keep up with societal challenges of the 21st century, we must devise sustainable ways to efficiently store and retrieve energy from hydrogen. This &ldquo;hydrogen economy&rdquo; is one path for the future of clean energy. Nature's solution to this challenge is a branch of enzymes called hydrogenases which typically use an organometallic active-site to reversibly split molecular hydrogen to hydrogen-ions and energy, in the form of electrons. Here, we choose to focus on [FeFe]-hydrogenase due to its high catalytic behavior. To understand these metallo-enzymes we must be able to study the enzymes grown as a single crystal. </p>
-        <p style="margin-right: 50px; text-align: justify;"><b>Single crystal protein Electron Paramagnetic Resonance (EPR) experiments are the ultimate method to study the paramagnetic states of hydrogenases and obtain the full magnetic interactions reflecting the electronic structure of the active site.</b> Ultimately the catalytic activity of the hydrogenase can be understood by relating the information of the magnetic principal axes to the known protein structure of the enzyme. However, the application of single-crystal EPR is severely limited by the small crystals sizes that are usually available (sub-nanoliter to nanoliter volumes). The Key Enabling Technologies outlined in this fellowship have the potential to increase the sensitivity of EPR by a <b>factor of 30</b> through the application of highly innovative concepts based on planar micro-resonators (PMR). </p>
-        <p style="margin-right: 50px; text-align: justify;"> The technology in this fellowship provides the sensitivity needed for the Act-EPR project to     be the first to study single crystals of the [FeFe]-hydrogenase enzyme with X-band EPR and advance the &ldquo;hydrogen economy&rdquo;.</p>
-        <br />
+<div class="row">
+ <div class="jumbotron" style="margin-right: 35px; padding: 15px; background-color: #55c0b5;">
+	            <h1 style="font-size: 2em; color: #fff;"><b>EPR of Protein Single Crystals at X-band </b></h1>
+	            <h5 style="text-align: justify; color: #fff;"> Technology research and method development for studying protein single crystals of nanoliter volumes (0.2&nbsp;mm<sup>3</sup>) at X-band using advanced resonators and state-of-the-art digital detection.</h5>
+      </div>
     </div>
-    <div style="margin-top: 25px; text-align: center;" class="col-md-5 footer-widget"><!-- Text Widget -->
-        <img style="width: 90%;" src="./media/img/act-epr.png" />
+
+       <p style="margin-right:35px; text-align: justify;"><b>Electron Paramagnetic Resonance (EPR) experiments on single crystals are the ultimate method to study paramagnetic states and obtain the full magnetic tensor interactions reflecting the electronic structure of the active site.</b> Ultimately the catalytic activity of hydrogenase enzymes can be understood by relating the information of the magnetic principal axes to the known protein structure. However, the application of single-crystal EPR is severely limited by the small crystals sizes that are usually available (sub-nanoliter to nanoliter volumes). We propose the following work packages to make single crystal EPR feasible.</p>
+
+    <br />
+    <h4>Work Packages</h4>
+    <div class="row">
+        <div class="col-md-3"><img style="width: 100%;" src="./media/img/helix2.jpg" /></div>
+        <div class="col-md-9"> 
+            <a style="font-size: large;" href="./wp1-helix.html">Micro-Helix Resonators</a>
+            <p style="margin-right:35px; text-align: justify;">In this work package, we introduce a self-resonant micro-helix with an inner diameter of 0.4&nbsp;mm. With this geometry microwave efficiences up to 3.5 mT/W<sup>1/2</sup> are possible.</p></div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3"><img style="width: 100%;" src="./media/img/nars.png" /></div>
+        <div class="col-md-9"> 
+            <a style="font-size: large;" href="./wp2-tech.html">Technology Advancements</a>
+            <p style="margin-right:35px; text-align: justify;">This work package explores the usage of Non-adiabatic Rapid Scan (NARS) and Arbitrary Waveform Generators (AWGs) to enhance signal-to-noise by modern digital detection. </p></div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3"><img style="width: 100%;" src="./media/img/fefehyd.jpg" /></div>
+        <div class="col-md-9">
+            <a style="font-size: large;" href="./wp3-bio.html">Biological Research</a>
+            <p style="margin-right:35px; text-align: justify;">This work package makes use of the key enabling technologies in order to study, for the first time, protein single crystals of [FeFe]-Hydrogenase enzymes.</p></div>
+    </div>
+    <br />
+
+    <br />
+    </div>
+    <div style="text-align: center; margin-top: 50px;" class="h-100 col-md-5 footer-widget"><!-- Text Widget -->
+        <img style="margin-top: 50px; width: 90%;" src="./media/img/act-epr.png" />
+
+        <br />
+        <br />
+        <br />
+    <div class="jumbotron" style="padding: 5px; margin: 0px; background-color: #fff;">
+        <h5><u>Key Enabling Technologies</u></h5>
+        <p style="font-size: 1em; margin: 10px; text-align: justify;">The Key Enabling Technologies outlined in this fellowship have the potential to increase the sensitivity of EPR by a <b>factor of 30</b> through the application of highly innovative concepts based on micro-resonators. </p>
+    </div>
+        <br />
+        <br />
+        <br />
     </div>
 </div>
 </div>
@@ -150,7 +207,10 @@
                     <h6 class="widget-title">Links of Interest</h6>
                     <div class="recent-twitt">
                     <p class="textwidget" style="text-align: justify;">
-                        <a style="color: #f0ce42;" href="https://cec.mpg.de/biophysikalische-chemie/dr-edward-j-reijerse/">Bio Hydrogen Group</a> - Led by Dr. Edward J. Reijerse, the Bio Hydrogen Group looks to understand the chemical reaction of biological hydrogenase in order to create bio-inspired molecular catalysts. 
+                        <a style="color: #f0ce42;" href="https://cec.mpg.de/forschung/anorganische-spektroskopie/dr-alexander-schnegg/">EPR Research Group</a> - Led by Dr. Alexander Schnegg, the EPR Research Group aims to develop and utilise state-of-the-art EPR spectrometers ranging from GHz to Thz frequencies.
+                    </p>
+                    <p class="textwidget" style="text-align: justify;">
+                        <a style="color: #f0ce42;" href="https://cec.mpg.de/emeriti/">Dept. Biophysical Chemistry</a> - Led by Prof. Wolfgang Lubitz, the Department of Biophysical Chemistry looks to understand the chemical reaction of biological hydrogenase in order to create bio-inspired molecular catalysts. 
                     </p>
                 </div>
             </div><!-- Recent Tweet Widget -->
@@ -159,8 +219,8 @@
                 <h6 class="widget-title">News</h6>
                 <div class="textwidget">
                     <p>Act-EPR project starts on 1st May, 2017.</p>
-                    <p>2017.07 I was awarded the EPR2017 Award of Excellence for my talk.</p>
                     <p>2017.04 I was awarded the 21st annual <a style="color: #f0ce42;" href="/blog/2017/jeol-prize-winner">JEOL Prize</a>.</p>
+                    <p>2017.07 I was awarded the EPR2017 Award of Excellence for my talk.</p>
                 </div>
             </div><!-- News Leter Widget -->
             <div class="clearfix"></div>
