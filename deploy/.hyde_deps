@@ -150,11 +150,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <h6 class="widget-title">Acknowledgements</h6>
                         <div class="textwidget">
                             <a href="http://ec.europa.eu/research/participants/portal/desktop/en/home.html">
-                              <img src="/media/img/logo_EUh2020_horizontal.png" />
+                              <img  style="width: 100%;" src="/media/img/logo_EUh2020_horizontal.png" />
                             </a>
                             <br /><br />
                             <a href="https://cec.mpg.de/home/">
-                              <img src="/media/img/csm_mpi-logo.png" />
+                              <img style="width: 100%;" src="/media/img/csm_mpi-logo.png" />
                             </a>
                         </div>
 
@@ -175,7 +175,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="col-md-3 footer-widget"><!-- News Leter Widget -->
                 <h6 class="widget-title">News</h6>
                 <div class="textwidget">
-		        <ul style="list-style-type:disc; margin: 0px; padding: 0px;">
+		        <ul style="list-style-type:disc; margin: 0px; padding: 0px; margin-left: 15px;">
                     <li style="padding-bottom: 5px;">Act-EPR project starts on 1st May, 2017.</li>
                     <li style="padding-bottom: 5px;">2017.04 I was awarded the 21st annual <a style="color: #f0ce42;" href="/blog/2017/jeol-prize-winner">JEOL Prize</a>.</li>
                     <li style="padding-bottom: 5px;">2017.07 I was awarded the EPR2017 <a style="color: #f0ce42;" href="http://www.hsc.wvu.edu/epr2017/awards/">Award of Excellence</a> for my talk.</li>
