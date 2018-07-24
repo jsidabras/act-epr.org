@@ -1069,7 +1069,6 @@ h2 + table,h3 + table,h4 + table,h2 + .row {
 
 @media (max-width: 480px) {
   /* Remove padding above jumbotron */
-
   body {
     padding-top: 0;
   }

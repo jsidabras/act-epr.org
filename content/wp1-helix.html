@@ -6,54 +6,47 @@ description: Act-EPR is a Marie Skłodowska-Curie Individual Fellowship interest
 {% block css %}
 <style>
 p {
-    text-align: justify;
         text-indent: 2em;
 }
 </style>
 {% endblock %}
 {% block container %}
     <h2>Work Package 1 - Micro-Helix Resonators</h2>
-    <br>
-    <div class="container"><!-- Container -->
+    <div style="text-align: justify;" class="container"><!-- Container -->
       <div class="row">
         <div class="col-md-2"><!-- Text Widget -->
             <img style="width: 100%;" title="micro-helix " alt="micro helix geometry and magnetic field distribution" src="/media/img/wp1/microhelix.png">
 	</div>
-        <div class="col-md-7 "><!-- Text Widget -->
-          <div style="text-align: justify;">
-           <p style="margin-left: 15px;">We propose re-evaluating the helix for extremely limited samples in EPR, the first prototype tested is shown in Fig. 1A, simulated magnetic fields in Fig. 1B. With the self-resonant micro-helix described here, at least a factor of 10  in EPR signal intensity has been simulated and experimentally confirmed in preliminary experiments.</p> 
-           <p style="margin-left: 15px;">Three characteristics differentiate the proposed micro-helix
+        <div class="col-md-7"><!-- Text Widget -->
+           <p>We propose re-evaluating the helix for extremely limited samples in EPR, the first prototype tested is shown in Fig. 1A, simulated magnetic fields in Fig. 1B. With the self-resonant micro-helix described here, at least a factor of 10  in EPR signal intensity has been simulated and experimentally confirmed in preliminary experiments.</p> 
+           <p>Three characteristics differentiate the proposed micro-helix
               configuration from those described in literature: </p>
-            <ol type="i"">
-              <li> <h5 style="color: #55c0b5; margin-bottom: 0px;">The helix is <b>self-resonant</b></h5> This means that the self-inductance per loop and self-capacitance between the loops resonate at a frequency determined by &omega;&radic;LC = 1, where is the resonant frequency &omega; in radians/s. No external capacitors are used, minimizing losses. </li>
+            <ol type="i">
+                <li> <h5 style="color: #55c0b5; margin-bottom: 0px;">The helix is <b>self-resonant</b></h5> This means that the self-inductance per loop and self-capacitance between the loops resonate at a frequency determined by &omega;<sup>2</sup>LC = 1, where is the resonant frequency &omega; in radians/s. No external capacitors are used, minimizing losses. </li>
               <li> <h5 style="color: #55c0b5; margin-bottom: 0px;">The helix length is <b>much smaller than a wavelength</b></h5> This increases the uniformity, and the diameter is less than 0.4&nbsp;mm at X-band, which increases the resonator efficiency. </li>
               <li> <h5 style="color: #55c0b5; margin-bottom: 0px;"> The helix is <b>coupled by mutual inductance</b></h5> The coupling structure can be designed to minimize noise and maximize the EPR signal intensity.</li>
             </ol>
-	        </div>
         </div>
     </div>
       <div class="row">
-        <div class="col-md-9"><!-- Text Widget -->
-            <a href="#collapse2" class="nav-toggle">Read More >>></a>
-            <br/>
-            <div id="collapse2" style="display:none">
-                <div class="row">
-                    <div class="col-md-8"><!-- Text Widget -->
-                        <p>Helical resonators were introduced to EPR in the late-1950s as a method to increase the magnetic field of a non-resonant shorted waveguide. The helices that were described in the literature were primarily configured as slow-wave broadband focusing-resonators affixed to the bottom of a waveguide short. The sample was placed within the helix. Although this improved the filling factor of the shorted waveguide, it had a Q-value essentially at unity but could be matched with a slide-screw tuner.</p>
-                <p>Recently, the micro-coils has gained some popularity in the NMR literature for micro-fluidic environments. However, these coils resonate well below 800 MHz, are not self-resonant, and do not employ inductive coupling techniques. Extending these geometries to X-band (9.5 GHz) and implementing a mutual inductance coupling system are considered highly innovative.</p> 
-	                </div>
-                    <div class="col-md-4"><!-- Text Widget -->
-                        <img style="width:100%;" title="built micro-helix with coupler" alt="micro helix with coupler" src="/media/img/wp1/helix.jpg">
-	                </div>
-
-	            </div>
+      <a href="#collapse2" class="nav-toggle">Read More >>></a>
+      <br/>
+      <div class="col-md-9" id="collapse2" style="display:none">
+          <div class="row">
+              <div class="col-md-8"><!-- Text Widget -->
+                  <p>Helical resonators were introduced to EPR in the late-1950s as a method to increase the magnetic field of a non-resonant shorted waveguide. The helices that were described in the literature were primarily configured as slow-wave broadband focusing-resonators affixed to the bottom of a waveguide short. The sample was placed within the helix. Although this improved the filling factor of the shorted waveguide, it had a Q-value essentially at unity but could be matched with a slide-screw tuner.</p>
+                 <p>Recently, the micro-coils has gained some popularity in the NMR literature for micro-fluidic environments. However, these coils resonate well below 800 MHz, are not self-resonant, and do not employ inductive coupling techniques. Extending these geometries to X-band (9.5 GHz) and implementing a mutual inductance coupling system are considered highly innovative.</p> 
+	          </div>
+              <div class="col-md-4"><!-- Text Widget -->
+                <img style="width:100%;" title="Fabricated micro-helix with coupler" alt="fabricated micro helix with coupler" src="/media/img/wp1/helix.jpg">
+	          </div>
+	      </div>
         </br>
         <center>
-            <img style="width:500px" src="/media/img/wp1/table1.png">
+            <img alt="Ansys HFSS simulated results comparing resonators" title="Ansys HFSS simulated results comparing resonators" style="width:500px" src="/media/img/wp1/table1.png">
         </center>
         </br>
-        <p>Table 1 presents simulated resonator characteristics of a few geometries of interest with all EPR signals volume normalized. For comparison, an X-band (9.5 GHz) dielectric cavity resonator (DR) is presented. This is a standard cavity that can be purchased from Bruker BioSpin, the leading EPR spectrometer manufacturer. EPR Signal improvements and Λmax-Λave ratios are encouraging. Simulations show the microwave field of the PMR has at least a 21% inhomogeneity within a sample of dimensions 0.1 mm diameter by 0.1 mm height. In contrast, the micro-helix simulated here has 4.5% variation. This table has been verified experimentally. 
-        </p>
+        <p>Table 1 presents simulated resonator characteristics of a few geometries of interest with all EPR signals volume normalized. For comparison, an X-band (9.5 GHz) dielectric cavity resonator (DR) is presented. This is a standard cavity that can be purchased from Bruker BioSpin, the leading EPR spectrometer manufacturer. EPR Signal improvements and Λmax-Λave ratios are encouraging. Simulations show the microwave field of the PMR has at least a 21% inhomogeneity within a sample of dimensions 0.1 mm diameter by 0.1 mm height. In contrast, the micro-helix simulated here has 4.5% variation. This table has been verified experimentally. </p>
     </div>
        </div>
       </div>

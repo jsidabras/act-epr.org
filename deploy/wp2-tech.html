@@ -31,10 +31,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700' rel='stylesheet' type='text/css'>
     <!-- nfonts -->
         <style>
-img.float1 {
-    float: left;
-    margin: 0 20px 20px 0;
-    width: 200px;
+.col-centered{
+    float: none;
+    margin: 0 auto;
 }
 p {
     text-align: justify;
@@ -148,15 +147,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="row">
                     <div class="container" id="top">
           <h2>Work Package 2 - Technology Advancements</h2>
-    <br>
-    <div class="container"><!-- Container -->
+    <div style="text-align: justify;" class="container"><!-- Container -->
       <div class="row">
-        <div class="col-md-8 footer-widget"><!-- Text Widget -->
-          <div style="text-align: justify;">
-          </div>
+        <div class="col-md-6"><!-- Text Widget -->
+            <p>Non-Adiabatic Rapid Scan (NARS) was introduced as a method to obtain pure-absorption EPR spectra while maintaining the thermal equilibrium condition of continuous-wave EPR. Using modern digital detection, the traditional lock-in amplifier is replaced by digital filtering. For the same collection time, NARS spectroscopy has a factor of 2 in SNR compared to optimally chosen field modulation. For a spectra with disparate linewidths or narrow hyperfine features, the SNR increase is more.</p>
+            <p>Due to the relatively large 3&nbsp;dB bandwidth (33&nbsp;MHz) of the micro-helix, combining NARS with arbitrary-waveform generator (AWG) frequency sweeps allows for a 1&nbsp;mT equivalent sweep. Additional signal averaging occurs when field steps are used and spectra are collapsed together. Segmented NARS has an added benefit of removing low frequency baseline.</p>
+             <div class="row">
+                <div class="col-md-9 col-centered">
+                    <img style="width:100%;" src="/media/img/wp2/NARSstep.png">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"><!-- Text Widget -->
+            <img style="width:100%;" src="/media/img/wp2/nars.png">
         </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-md-9"><!-- Text Widget -->
+            <p style="color: #55c0b5; text-indent: 0px; font-weight: bold;"> Frequency sweep has a number of advantages compared to field sweep modulation:</p>
+            <ul style="list-style-type:disc">
+                <li>No eddy-current forces are present on the resonator, lowering potential noise.</li>
+                <li>Background of frequency sweep is not field dependant and may average out with field step averaging.</li>
+                <li>Speed of the frequency sweep can be significantly faster than that of field modulation, allowing for passage or Rapid Scan EPR techniques with systems that have short T<sub>2</sub>.</li>
+            </ul>
+       </div>
+        </div>
+        <div class="row">
+            <a href="#collapse2" class="nav-toggle">Read More >>></a>
+            <br/>
+            <div id="collapse2" style="display:none">
+                <div  class="col-md-6">
+                    <p>Due to the high efficiency of the micro-helix (3.3&nbsp;mT/G<sup>1/2</sup>), Rapid Scan EPR can further improve the signal-to-noise ratio by changing the P<sub>1/2</sub>-value. As the speed of the modulation increases, the spin system goes into passage and is no longer in thermal equilibrium. This allows for an increase in microwave power. However, as the sample goes into passage the obtained time-domain signal must be deconvolved with the input modulation and a FFT is taken. It is wholly expected that triangular or trapizoidal frequency sweep Rapid Scan can significantly increase the SNR of the resonator.</p>
+                </div>
+                <div  class="col-md-3">
+                    <img style="width:100%;" src="/media/img/wp2/pwrsatRapidScan.png">
+                </div>
+	        </div>
+	   </div>
+	 </div>
+</div>
+</div>
             
                 </div> <!-- /row-->
             </div> <!-- /container -->
