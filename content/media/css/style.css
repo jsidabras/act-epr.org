@@ -29,7 +29,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.fix-img {
+    width: 100%;
+}
 .ai-google-scholar:before {
   content: "\e900";
 }
@@ -1013,7 +1015,6 @@ h2 + table,h3 + table,h4 + table,h2 + .row {
 
 @media (max-width: 980px) {
   /* Unfloat brand */
-
   /* Inline-block quick links for more spacing */
 
   /* When affixed, space properly */
@@ -1024,11 +1025,10 @@ h2 + table,h3 + table,h4 + table,h2 + .row {
 
 @media (min-width: 768px) and (max-width: 979px) {
   /* Remove any padding from the body */
-
+ 
   body {
     padding-top: 0;
   }
-
   /* Widen masthead and social buttons to fill body padding */
 
   /* Adjust sidenav width */
@@ -2548,7 +2548,9 @@ nav {
     margin-left: 0;
     padding: 0;
   }
-
+  .fix-img {
+      width: 50%;
+  }
   .meta-author i:first-child {
     margin-left: 0;
   }
@@ -2558,7 +2560,11 @@ nav {
   .container {
     padding: 0 15px;
   }
+  .fix-img {
+      width: 50%;
+  }
 }
+
 
 @media (max-width: 780px ) {
   .footer-widget {
@@ -2573,6 +2579,9 @@ nav {
   .footer-credits {
     padding: 0;
     font-size: 12px;
+  }
+  .fix-img {
+      width: 50%;
   }
 }
 
@@ -2599,7 +2608,9 @@ nav {
     margin: 0;
     padding: 0;
   }
-
+  .fix-img {
+      width: 50%;
+  }
   .menu li:first-child {
     padding: 0;
   }
@@ -2645,7 +2656,9 @@ nav {
     float: none;
     margin: 0 auto;
   }
-
+  .fix-img {
+      width: 100%;
+  }
   .media-top-2 {
     float: right;
     margin: 0;
