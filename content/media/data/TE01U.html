@@ -1,0 +1,96 @@
+<html>
+<head>
+<script src="/media/js/three.min.js"></script>
+<script src="/media/js/MTLLoader.js"></script>
+<script src="/media/js/OBJLoader.js"></script>
+</head>
+<body>
+<script>
+var container, camera, scene, renderer;
+
+init();
+animate();
+
+function init(){
+    container=document.createElement('div');
+    document.body.appendChild(container);
+
+    camera=new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 200);
+    camera.position.set(0, 0, 50);
+
+    scene=new THREE.Scene();
+    scene.add( camera );
+    var onProgress = function ( xhr ) {
+
+    if ( xhr.lengthComputable ) {
+
+        var percentComplete = xhr.loaded / xhr.total * 100;
+        console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+
+        }   
+    };
+
+    var onError = function ( xhr ) { };
+
+    // material
+    var mtlLoader = new THREE.MTLLoader();
+    mtlLoader.setPath( '/media/data/' );
+    var url = "ReEntrantTE01U_Half.mtl";
+    mtlLoader.load( url, function( materials ) {
+
+        materials.preload();
+
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials( materials );
+        objLoader.setPath( '/media/data/' );
+        objLoader.load( 'ReEntrantTE01U_Half.obj', function ( object ) {
+
+            object.rotation.x = Math.PI / 2;
+            object.rotation.y = Math.PI;
+            scene.add( object );
+
+    }, onProgress, onError );
+
+});
+    // lights
+    scene.add(new THREE.AmbientLight(0xcccccc, 0.8));
+
+    var directionalLight=new THREE.PointLight(0xffffff, 0.8);
+    directionalLight.position=camera.position;
+    scene.add(directionalLight);
+
+    // renderer
+
+    renderer=new THREE.WebGLRenderer({ alpha: false, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    container.appendChild(renderer.domElement);
+
+    window.addEventListener('resize', onWindowResize, false);}
+
+function addLight(x, y, z, color, intensity){
+    var directionalLight=new THREE.DirectionalLight(color, intensity);
+    directionalLight.position.set(x, y, z)
+    scene.add(directionalLight);}
+
+function onWindowResize(){
+    camera.aspect=window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);}
+
+  function animate(){
+      requestAnimationFrame(animate);
+      render();}
+
+  function render(){
+      var timer=Date.now() * 0.0005;
+      r=150;
+      camera.position.x = scene.position.x - r * Math.cos( timer );
+      camera.position.z = scene.position.z - r * Math.sin( timer );
+      camera.lookAt(scene.position);
+      renderer.render(scene, camera);
+      renderer.setClearColor(0xf5f5f5, 1);}
+</script>
+
+</body>
+</html>
