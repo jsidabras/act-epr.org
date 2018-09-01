@@ -1,0 +1,6 @@
+RewriteEngine on
+# Options +FollowSymlinks
+RewriteCond %{HTTP_REFERER} auto-seo-service\.org [NC,OR]
+RewriteCond %{HTTP_REFERER} autoseoservice\.org [NC,OR]
+RewriteCond %{HTTP_REFERER} auto-seoservice\.org
+RewriteRule .* - [F]
