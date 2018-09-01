@@ -1,3 +1,4 @@
+!!python/unicode '.htaccess': [!!python/unicode 'base.j2']
 !!python/unicode '.hyde_deps': [!!python/unicode 'base.j2']
 !!python/unicode 'about.html': [!!python/unicode 'base.j2']
 !!python/unicode 'blarg/2017/gnocchi-3.1-release': [blog.j2, base.j2, analytics.j2]
