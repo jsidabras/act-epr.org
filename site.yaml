@@ -1,5 +1,6 @@
 base_url: /
 simple_copy:
+  - FeFeHydrogenase.html
   - media/*
   - stuff/*
 media_root: media # Relative path from content folder.
